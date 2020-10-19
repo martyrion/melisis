@@ -35,6 +35,7 @@
     <!-- --------------------------------------------->
     <!-- LOCAL LINKS (only for this webpage) -->
     <link rel="stylesheet" href="css/hrm_personellList.css" type="text/css" />
+    <script type="text/javascript" src="../dataFromDB.js"></script>
     <!-- --------------------------------------------->
   </head>
 
@@ -126,7 +127,8 @@
     <script>
          //Build Tabulator main
          var table = new Tabulator("#dataTable", {
-           resizableColumns: false,
+           data: theData,
+          resizableColumns: false,
            tooltips: true,
            layout: "fitDataFill",
 
