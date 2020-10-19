@@ -87,7 +87,9 @@
           >filter</span
         >
 
-        <span id="printBtn" class="material-icons" onclick="printTable()">print</span>
+        <span id="printBtn" class="material-icons" onclick="printTable()"
+          >print</span
+        >
         <btn id="addBtn" class="mainContentAdd">Add</btn>
         <input
           type="text"
@@ -125,152 +127,162 @@
     ></div>
 
     <script>
+      //Build Tabulator main
+      var headerMenu = [
+        {
+          label: "<i class='material-cons'>print</i> Hide Column",
+          action: function (e, column) {
+            column.hide();
+          },
+        },
+      ];
 
-               //Build Tabulator main
-         var table = new Tabulator("#dataTable", {
-          data: theDataset,
-          resizableColumns: false,
-           tooltips: true,
-           layout: "fitDataFill",
+      var table = new Tabulator("#dataTable", {
+        data: theDataset,
+        resizableColumns: false,
+        tooltips: true,
+        layout: "fitDataFill",
 
-           columns: [
-             { title: "id", field: "id", cssClass: "id", visible: false },
-             { title: "Bαθμός", field: "rankName", cssClass: "rankName" },
-             {
-               title: "rankId",
-               field: "rankId",
-               cssClass: "rankId",
-               visible: false,
-             },
-             {
-               title: "Ειδ.",
-               field: "specialtyName",
-               cssClass: "specialtyName",
-               hozAlign: "center",
-             },
-             {
-               title: "specialtyId",
-               field: "specialtyId",
-               cssClass: "specialtyId",
-               visible: false,
-             },
+        columns: [
+          { title: "id", field: "id", cssClass: "id", visible: false },
+          { title: "Bαθμός", field: "rankName", cssClass: "rankName", headerMenu:headerMenu },
+          {
+            title: "rankId",
+            field: "rankId",
+            cssClass: "rankId",
+            visible: false,
+          },
+          {
+            title: "Ειδ.",
+            field: "specialtyName",
+            cssClass: "specialtyName",
+            hozAlign: "center",
+          },
+          {
+            title: "specialtyId",
+            field: "specialtyId",
+            cssClass: "specialtyId",
+            visible: false,
+          },
 
-             {
-               title: "Όνομα",
-               field: "first_name",
-               cssClass: "first_name",
-             },
-             {
-               title: "Επώνυμο",
-               field: "last_name",
-               cssClass: "last_name",
-             },
-             {
-               title: "Φύλο",
-               field: "gender",
-               cssClass: "gender",
-             },
+          {
+            title: "Όνομα",
+            field: "first_name",
+            cssClass: "first_name",
+          },
+          {
+            title: "Επώνυμο",
+            field: "last_name",
+            cssClass: "last_name",
+          },
+          {
+            title: "Φύλο",
+            field: "gender",
+            cssClass: "gender",
+          },
 
-             {
-               title: "Τηλέφωνο",
-               field: "mobileNumber",
-               widthGrow: 1,
-               cssClass: "mobileNumber",
-             },
+          {
+            title: "Τηλέφωνο",
+            field: "mobileNumber",
+            widthGrow: 1,
+            cssClass: "mobileNumber",
+          },
 
-             {
-               title: "",
-               field: "details",
+          {
+            title: "",
+            field: "details",
 
-               formatter: function (cell, formatterParams) {
-                 return "<span class='material-icons'>more_horiz</span>";
-               },
-               hozAlign: "right",
-               cssClass: "details",
-               headerSort: false,
-             },
-           ],
-         });
+            formatter: function (cell, formatterParams) {
+              return "<span class='material-icons'>more_horiz</span>";
+            },
+            hozAlign: "right",
+            cssClass: "details",
+            headerSort: false,
+          },
+        ],
+      });
 
+      // Print Table
+      function printTable() {
+        table.print(false, true);
+      }
 
-         // Print Table
-         function printTable(){
-         table.print(false, true);
-         }
+      // Filter name - function params = theTableVar, theField, theOperator, theSearchBoxId
+      document
+        .getElementById("searchBox")
+        .addEventListener("input", function () {
+          searchTable(table, "first_name", "like", "searchBox");
+        });
 
-         // Filter name - function params = theTableVar, theField, theOperator, theSearchBoxId
-         document
-           .getElementById("searchBox")
-           .addEventListener("input", function(){searchTable(table,"first_name","like","searchBox")});
+      // Clear Filter
+      document
+        .getElementById("closeBtn")
+        .addEventListener("click", function () {
+          clearSearchBox(table, "first_name", "like", "searchBox");
+        });
 
-           // Clear Filter
-         document
-           .getElementById("closeBtn")
-           .addEventListener("click", function(){clearSearchBox(table,"first_name","like","searchBox")});
+      var groupArray = [];
+      //function to execute when clicking on right modal table cells.!
+      var selectGrouping = function (e, cell) {
+        var rowIndex = cell.getRow().getIndex(); // get id of the row
+        var cssSelector =
+          ".tabulator-row:nth-child(" +
+          rowIndex +
+          ") .tabulator-cell span.rightModaltableBtn"; // get the .css selection for the clicked item
+        var selector = document.querySelector(cssSelector);
+        var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
 
+        var field = rowValue.groupingField; // get groupingField of row object
+        addRemoveValue(groupArray, field); // add or remove the selected field from the array
+        table.setGroupBy(groupArray);
 
-         var groupArray = [];
-         //function to execute when clicking on right modal table cells.!
-         var selectGrouping = function (e, cell) {
-           var rowIndex = cell.getRow().getIndex(); // get id of the row
-           var cssSelector =
-             ".tabulator-row:nth-child(" +
-             rowIndex +
-             ") .tabulator-cell span.rightModaltableBtn"; // get the .css selection for the clicked item
-           var selector = document.querySelector(cssSelector);
-           var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
+        var state = selector.innerHTML; // get the inner html for the clicked item
 
-           var field = rowValue.groupingField; // get groupingField of row object
-           addRemoveValue(groupArray, field); // add or remove the selected field from the array
-           table.setGroupBy(groupArray);
+        if (state === "check_box") {
+          // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
+          selector.innerHTML = "check_box_outline_blank";
+          selector.classList.remove("active");
+        } else {
+          // the opposite
+          selector.innerHTML = "check_box";
+          selector.classList.add("active");
+        }
+      };
 
-           var state = selector.innerHTML; // get the inner html for the clicked item
+      // Tabulator table with the columns available in main table as rows.
+      const columnTitles = [
+        {
+          id: 1,
+          groupingTitle: "Βαθμός",
+          groupingField: "rankName",
+        },
+        {
+          id: 2,
+          groupingTitle: "Φύλο",
+          groupingField: "gender",
+        },
+      ];
+      var rightModalTable = new Tabulator("#rightModalTable", {
+        data: columnTitles,
+        resizableColumns: false,
+        columns: [
+          {
+            title: "",
+            field: "selected",
+            formatter: function (cell, formatterParams) {
+              return "<span class='material-icons rightModaltableBtn'>check_box_outline_blank</span>"; // present a checkbox
+            },
 
-           if (state === "check_box") {
-             // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
-             selector.innerHTML = "check_box_outline_blank";
-             selector.classList.remove("active");
-           } else {
-             // the opposite
-             selector.innerHTML = "check_box";
-             selector.classList.add("active");
-           }
-         };
-
-         // Tabulator table with the columns available in main table as rows.
-         const columnTitles = [
-           {
-             id: 1,
-             groupingTitle: "Βαθμός",
-             groupingField: "rankName",
-           },
-           {
-             id: 2,
-             groupingTitle: "Φύλο",
-             groupingField: "gender",
-           },
-         ];
-         var rightModalTable = new Tabulator("#rightModalTable", {
-           data: columnTitles,
-           resizableColumns: false,
-           columns: [
-             {
-               title: "",
-               field: "selected",
-               formatter: function (cell, formatterParams) {
-                 return "<span class='material-icons rightModaltableBtn'>check_box_outline_blank</span>"; // present a checkbox
-               },
-
-               width: 50,
-               cellClick: selectGrouping,
-             },
-             {
-               title: "",
-               field: "groupingTitle",
-               width: 150,
-             },
-           ],
-         });
+            width: 50,
+            cellClick: selectGrouping,
+          },
+          {
+            title: "",
+            field: "groupingTitle",
+            width: 150,
+          },
+        ],
+      });
     </script>
   </body>
 </html>
