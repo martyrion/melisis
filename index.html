@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Software</title>
+
+  <style>
+    body {
+
+      background: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff;
+      font-family: "ubuntu";
+      color: #7445a6;
+
+    }
+
+    .loginWrapper{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      height: 420px;
+      background-color: #ffffff;
+      border-radius: 4px;
+      margin-top: 24px;
+     box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .title{
+    font-size: 48px;
+    }
+
+    .version{
+      line-height: 48px;
+      width: 240px;
+      
+      text-align: center;
+      
+    }
+
+    .username{
+      grid-row: 4
+
+    }
+
+    .password{
+      grid-row: 5;
+    }
+
+    .login{
+      margin-top:36px;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: repeat(8, 36px);
+      row-gap: 16px;
+      justify-items: center;
+    }
+    .loginBtn{
+      display: flex;
+      padding: 12px 24px;
+      grid-row: 7;
+      background-color: #7545a6;
+      color: #ffffff;
+      border-radius: 4px;
+      font-size: 18px;
+      align-items: center;
+      text-decoration: none;
+
+
+    }
+
+    input{
+     
+      width: 240px;
+      height: 32px;
+      border-radius: 2px;
+      padding-left: 6px;
+      border: 1px solid #7445a6;
+      font-size: 14px;
+
+  
+    }
+
+    input::placeholder{
+      
+      color: gray;
+    }
+  </style>
+</head>
+
+<body>
+
+    
+    <div class="loginWrapper"> 
+      <div class="login">
+      <div class="title">ΜΕΛΗΣΙΣ</div>
+    <div class="version">1.0.0</div>
+    <input type="text" class="username" placeholder="όνομα χρήστη">
+      <input type="text" class="password" placeholder="κωδικός">
+      <a class="loginBtn" href="app_modules/hrm/hrm_personellList.html">ΕΙΣΟΔΟΣ</a>
+    </div>
+    </div>
+
+
+   
+  
+
+</body>
+
+</html>
