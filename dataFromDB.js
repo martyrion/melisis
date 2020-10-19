@@ -1,7 +1,4 @@
-
-
-
-var theData = [
+var theDataset = [
     {
       "id": 1,
       "first_name": "Kimberlyn",

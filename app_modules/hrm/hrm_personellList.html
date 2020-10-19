@@ -125,40 +125,10 @@
     ></div>
 
     <script>
-         //Build Tabulator main
 
-        
-
-
+               //Build Tabulator main
          var table = new Tabulator("#dataTable", {
-          data: [{
-      "id": 999,
-      "first_name": "Norby",
-      "last_name": "Odlin",
-      "gender": "Male",
-      "asma": 2805,
-      "rankId": 8,
-      "rankName": "Ανθ. Γ'",
-      "specialtyId": 11,
-      "specialtyName": "ΤΕΑ",
-      "mobileNumber": 99789974,
-      "idNumber": 963941,
-      "idIssue": "02/02/2019"
-    },
-    {
-      "id": 1000,
-      "first_name": "Austina",
-      "last_name": "Adair",
-      "gender": "Female",
-      "asma": 3276,
-      "rankId": 5,
-      "rankName": "Ανθσγός",
-      "specialtyId": 9,
-      "specialtyName": "ΣΛ",
-      "mobileNumber": 99874570,
-      "idNumber": 327181,
-      "idIssue": "22/06/2019"
-    }],
+          data: theDataset,
           resizableColumns: false,
            tooltips: true,
            layout: "fitDataFill",
