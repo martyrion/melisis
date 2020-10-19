@@ -128,15 +128,21 @@
 
     <script>
       //Build Tabulator main
-      var headerMenu = [
-        {
-          label: "<i class='material-cons'>print</i> Hide Column",
-          action: function (e, column) {
-            column.hide();
-          },
-        },
-      ];
-
+      // var headerMenu = [
+      //   {
+      //     label: "<i class='material-icons'>print</i> Hide Column",
+      //     action: function (e, column) {
+      //       column.hide();
+      //     },
+      //   },
+      //   {
+      //     label: "<i class='material-icons'>sort</i> Hide Column",
+      //     action: function (e, column) {
+      //       column.hide();
+      //     },
+      //   },
+      // ];
+    
       var table = new Tabulator("#dataTable", {
         data: theDataset,
         resizableColumns: false,
@@ -145,7 +151,11 @@
 
         columns: [
           { title: "id", field: "id", cssClass: "id", visible: false },
-          { title: "Bαθμός", field: "rankName", cssClass: "rankName", headerMenu:headerMenu },
+          {
+            title: "Bαθμός",
+            field: "rankName",
+            cssClass: "rankName",
+                   },
           {
             title: "rankId",
             field: "rankId",
