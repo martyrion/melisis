@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>MELISIS</title>
+
+    <!-- --------------------------------------------->
+    <!-- GLOBAL LINKS -->
+    <link
+      rel="stylesheet"
+      href="../../app_css/backgroundSVG.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../../app_css/materialIconFont.css"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
+    <!--          Custom JS functions -->
+    <script
+      type="text/javascript"
+      src="../../app_js/customFunctions.js"
+    ></script>
+    <!--          Tabulator references-->
+    <link
+      href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css"
+      rel="stylesheet"
+    />
+    <script
+      type="text/javascript"
+      src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"
+    ></script>
+    <!-- --------------------------------------------->
+    <!-- LOCAL LINKS (only for this webpage) -->
+    <link rel="stylesheet" href="css/hrm_personellList.css" type="text/css" />
+    <!-- --------------------------------------------->
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <!-- Contains topNav , leftNav, main, footer, extraContent -->
+      <nav class="topNav">
+        <nav class="moduleBtns">
+          <div class="topBtn activeModule">
+            <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
+            <div class="topIcon material-icons">perm_identity</div>
+            <div class="topText">Προσωπικό</div>
+          </div>
+          <div class="topBtn">
+            <div class="topIcon material-icons">import_contacts</div>
+            <div class="topText">Επαφές</div>
+          </div>
+          <div class="topRightButtons">
+            <span id="notifications" class="topRightBtn material-icons"
+              >notifications</span
+            >
+            <span id="menu" class="topRightBtn material-icons">menu</span>
+          </div>
+        </nav>
+      </nav>
+      <nav class="leftNav">
+        <div class="leftBtn activeSubmodule">
+          <!-- add 'activeSubmodule' class next to 'leftBtn' class to indicate this module as active -->
+          <i class="leftIcon material-icons">list</i>Κατάλογος
+        </div>
+        <div class="leftBtn">
+          <i class="leftIcon material-icons">info</i>Λεπτ/ρειες
+        </div>
+        <div class="leftBtn">
+          <i class="leftIcon material-icons">airline_seat_individual_suite</i
+          >Απόντες
+        </div>
+        <div class="leftBtn">
+          <i class="leftIcon material-icons">bar_chart</i>Στατιστικά
+        </div>
+      </nav>
+      <section id="mainSection" class="main">
+        <!-- Top line items -->
+        <span class="title">Κατάλογος Προσωπικού</span>
+        <span
+          onclick="toggleRightModal()"
+          id="groupBtn"
+          class="material-icons tableBtn"
+          >filter</span
+        >
+
+        <span id="printBtn" class="material-icons" onclick="printTable()">print</span>
+        <btn id="addBtn" class="mainContentAdd">Add</btn>
+        <input
+          type="text"
+          id="searchBox"
+          placeholder="όνομα, επώνυμο, βαθμός"
+        />
+        <span id="closeBtn" class="material-icons searchLense">search</span>
+        <!-- --------------------------------------------- -->
+        <div id="dataTable" class="dataTable"></div>
+      </section>
+      <section class="footer"></section>
+      <section class="extraContent">
+        Extra information in case of HD display
+      </section>
+
+      <div class="modal"></div>
+    </div>
+
+    <!-- Right Modal Window -->
+    <div id="rightModal" class="rightModal closed">
+      <span id="rightModalTitle">Grouping</span>
+      <span
+        onclick="toggleRightModal()"
+        id="closeRightModalBtn"
+        class="material-icons tableBtn"
+        >close</span
+      >
+      <div id="rightModalTable"></div>
+      <div id="rightModalTable2"></div>
+    </div>
+    <div
+      onclick="toggleRightModal()"
+      id="modalOverlay"
+      class="modalOverlay closed"
+    ></div>
+
+    <script>
+         //Build Tabulator main
+         var table = new Tabulator("#dataTable", {
+           resizableColumns: false,
+           tooltips: true,
+           layout: "fitDataFill",
+
+           columns: [
+             { title: "id", field: "id", cssClass: "id", visible: false },
+             { title: "Bαθμός", field: "rankName", cssClass: "rankName" },
+             {
+               title: "rankId",
+               field: "rankId",
+               cssClass: "rankId",
+               visible: false,
+             },
+             {
+               title: "Ειδ.",
+               field: "specialtyName",
+               cssClass: "specialtyName",
+               hozAlign: "center",
+             },
+             {
+               title: "specialtyId",
+               field: "specialtyId",
+               cssClass: "specialtyId",
+               visible: false,
+             },
+
+             {
+               title: "Όνομα",
+               field: "first_name",
+               cssClass: "first_name",
+             },
+             {
+               title: "Επώνυμο",
+               field: "last_name",
+               cssClass: "last_name",
+             },
+             {
+               title: "Φύλο",
+               field: "gender",
+               cssClass: "gender",
+             },
+
+             {
+               title: "Τηλέφωνο",
+               field: "mobileNumber",
+               widthGrow: 1,
+               cssClass: "mobileNumber",
+             },
+
+             {
+               title: "",
+               field: "details",
+
+               formatter: function (cell, formatterParams) {
+                 return "<span class='material-icons'>more_horiz</span>";
+               },
+               hozAlign: "right",
+               cssClass: "details",
+               headerSort: false,
+             },
+           ],
+         });
+
+
+         // Print Table
+
+         function printTable(){
+         table.print(false, true);
+         }
+
+         // Filter name - function params = theTableVar, theField, theOperator, theSearchBoxId
+         document
+           .getElementById("searchBox")
+           .addEventListener("input", function(){searchTable(table,"first_name","like","searchBox")});
+
+           // Clear Filter
+         document
+           .getElementById("closeBtn")
+           .addEventListener("click", function(){clearSearchBox(table,"first_name","like","searchBox")});
+
+         //trigger AJAX load on "Load Data via AJAX" button click
+         document.getElementById("addBtn").addEventListener("click", function () {
+           table.setDataFromLocalFile();
+         });
+
+         var groupArray = [];
+         //function to execute when clicking on right modal table cells.!
+         var selectGrouping = function (e, cell) {
+           var rowIndex = cell.getRow().getIndex(); // get id of the row
+           var cssSelector =
+             ".tabulator-row:nth-child(" +
+             rowIndex +
+             ") .tabulator-cell span.rightModaltableBtn"; // get the .css selection for the clicked item
+           var selector = document.querySelector(cssSelector);
+           var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
+
+           var field = rowValue.groupingField; // get groupingField of row object
+           addRemoveValue(groupArray, field); // add or remove the selected field from the array
+           table.setGroupBy(groupArray);
+
+           var state = selector.innerHTML; // get the inner html for the clicked item
+
+           if (state === "check_box") {
+             // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
+             selector.innerHTML = "check_box_outline_blank";
+             selector.classList.remove("active");
+           } else {
+             // the opposite
+             selector.innerHTML = "check_box";
+             selector.classList.add("active");
+           }
+         };
+
+         // Tabulator table with the columns available in main table as rows.
+         const columnTitles = [
+           {
+             id: 1,
+             groupingTitle: "Βαθμός",
+             groupingField: "rankName",
+           },
+           {
+             id: 2,
+             groupingTitle: "Φύλο",
+             groupingField: "gender",
+           },
+         ];
+         var rightModalTable = new Tabulator("#rightModalTable", {
+           data: columnTitles,
+           resizableColumns: false,
+           columns: [
+             {
+               title: "",
+               field: "selected",
+               formatter: function (cell, formatterParams) {
+                 return "<span class='material-icons rightModaltableBtn'>check_box_outline_blank</span>"; // present a checkbox
+               },
+
+               width: 50,
+               cellClick: selectGrouping,
+             },
+             {
+               title: "",
+               field: "groupingTitle",
+               width: 150,
+             },
+           ],
+         });
+    </script>
+  </body>
+</html>
