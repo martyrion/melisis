@@ -231,38 +231,43 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
   //Tabulator Configuration - for all tables
 
   .tabulator {
-    background: none;
+    background-color: transparent !important;
     .tabulator-tableHolder {
       overflow-x: hidden; /* no horizontal scrolling */
-      background: none;
+      background-color: transparent !important;
     }
     .tabulator-header {
       padding: 0px;
       margin: 0px;
       font-weight: normal;
-      background: none;
+      background-color: transparent !important;
     }
 
     .tabulator-headers{
       padding: 0px;
       margin: 0px;  
-      background: none;
+      background-color: transparent !important;
     }
     .tabulator-cell{
       padding: 12px 0px 0px 6px;
       margin: 0px;
-      background: none;
+      background-color: transparent !important;
     }
     .tabulator-col-content{  
       padding: 12px 0px 0px 6px;
       margin: 0px;
       color: grey;
       font-weight: 300;
-      background: none;
+      background-color: transparent !important;
     }
 
+    .tabulator-col{
+      background-color: transparent !important;
+      
+      }
+    
     .tabulator-sortable{
-      background: none;
+      background-color: transparent !important;
     }
     .tabulator-group{ /* the grouping row */
       align-content: center;
@@ -278,6 +283,7 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
       right: 12px;
     }
   }
+ 
 
   //INPUT BOX Styling
 
@@ -303,13 +309,13 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
   .searchLense {
     color: #bdbdbd !important;
   }
-}
 
 
 // Highlight Styling
-
 mark {
   background:none;
   color: $colorPurple;
   font-weight: 600;
   }
+
+p{}

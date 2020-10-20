@@ -3,12 +3,12 @@
 // Style conversion file, bootstrap to tabulator
 
 //Main Theme Variables
-$backgroundColor:none !default; //background color of tabulator //FKIARAS changed it from #ffffff
+$backgroundColor:transparent  !default; //background color of tabulator //FKIARAS changed it from #ffffff
 $borderColor:$table-border-color !default; //border to tabulator
 $textSize:16px !default; //table text size
 
 //header themeing
-$headerBackgroundColor:#fff !default; //border to tabulator
+$headerBackgroundColor: transparent !default; //border to tabulator //FKIARAS changed it from #ffffff
 $headerSeperatorColor:$table-border-color !default; //header bottom seperator color
 
 $cellPadding:15px !default; //padding round header

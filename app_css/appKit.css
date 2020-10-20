@@ -253,77 +253,78 @@
     border-bottom: 2px solid #a6a6a6;
   }
   .tabulator {
-    background: none;
+    background-color: transparent !important;
   }
   .tabulator .tabulator-tableHolder {
     overflow-x: hidden;
     /* no horizontal scrolling */
-    background: none;
+    background-color: transparent !important;
   }
   .tabulator .tabulator-header {
     padding: 0px;
     margin: 0px;
     font-weight: normal;
-    background: none;
+    background-color: transparent !important;
   }
   .tabulator .tabulator-headers {
     padding: 0px;
     margin: 0px;
-    background: none;
+    background-color: transparent !important;
   }
   .tabulator .tabulator-cell {
     padding: 12px 0px 0px 6px;
     margin: 0px;
-    background: none;
+    background-color: transparent !important;
   }
   .tabulator .tabulator-col-content {
     padding: 12px 0px 0px 6px;
     margin: 0px;
     color: grey;
     font-weight: 300;
-    background: none;
+    background-color: transparent !important;
   }
-  .tabulator .tabulator-sortable {
-    background: none;
-  }
-  .tabulator .tabulator-group {
+  .tabulator-group {
     /* the grouping row */
     -ms-flex-line-pack: center;
         align-content: center;
   }
-  .tabulator .tabulator-group span {
+  .tabulator-group span {
     /* the grouping row record count*/
     color: black;
   }
-  .tabulator .tabulator-group-level-1 {
+  .tabulator-group-level-1 {
     font-style: italic;
     padding-left: 48px;
   }
-  .tabulator .tabulator-col-sorter {
+  .tabulator-col-sorter {
     right: 12px;
   }
-  input[type="text"],
-  textarea {
-    outline: none;
-    border-radius: 4px;
-    border: 1px solid #bdbdbd;
-    -webkit-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out;
-  }
-  input[type="text"]:hover,
-  textarea:hover {
-    border: 1px solid #262626;
-  }
-  input[type="text"]:focus,
-  textarea:focus {
-    -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-    border: 1px solid #7445a6;
-    border-radius: 4px;
-  }
-  .searchLense {
-    color: #bdbdbd !important;
-  }
+}
+
+input[type="text"],
+textarea {
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #bdbdbd;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+input[type="text"]:hover,
+textarea:hover {
+  border: 1px solid #262626;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid #7445a6;
+  border-radius: 4px;
+}
+
+.searchLense {
+  color: #bdbdbd !important;
 }
 
 mark {
