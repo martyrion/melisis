@@ -260,6 +260,10 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
       font-weight: 300;
       background: none;
     }
+
+    .tabulator-sortable{
+      background: none;
+    }
     .tabulator-group{ /* the grouping row */
       align-content: center;
       span{ /* the grouping row record count*/

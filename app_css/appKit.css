@@ -283,6 +283,9 @@
     font-weight: 300;
     background: none;
   }
+  .tabulator .tabulator-sortable {
+    background: none;
+  }
   .tabulator .tabulator-group {
     /* the grouping row */
     -ms-flex-line-pack: center;
