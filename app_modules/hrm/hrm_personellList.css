@@ -1,11 +1,9 @@
 /* Tabulator specific for this layout */
 
-
 #dataTable.tabulator {
   grid-column: 1/-1;
   grid-row: 3/-1;
   background: none;
-
 }
 
 .tabulator .tabulator-tableHolder {
@@ -21,7 +19,6 @@
   grid-template-rows: 48px;
   column-gap: 12px;
   background: none;
-  
 }
 
 .tabulator .tabulator-header{
@@ -29,14 +26,11 @@
   margin: 0px;
   font-weight: normal;
   background: none;
-  
 }
 
 .tabulator .tabulator-cell{
   padding: 12px 0px 0px 6px;
   margin: 0px;
-
-
 }
 
 #dataTable.tabulator .tabulator-col-content{  
@@ -44,7 +38,6 @@
   margin: 0px;
   color: grey;
   font-weight: 300;
-
 }
 
 #dataTable.tabulator .tabulator-col{
@@ -53,7 +46,6 @@
 
 #dataTable.tabulator .tabulator-col-sorter{ 
   right: 12px;
-
 }
 
 #dataTable.tabulator div.tabulator-row{
@@ -80,49 +72,37 @@
 
 
 .rankName{
-
 grid-column: 1; 
 width:100% !important;
-
 }
 
 .specialtyName{
   grid-column: 2;
   width:100% !important;
-
-
 }
 
 .first_name{
   grid-column-start: 3;
   grid-column-end: 5;
   width:100% !important;
- 
-
-
-}
+ }
 
 .last_name{
   grid-column-start:5 ;
   grid-column-end: 7;
   width:100% !important;
-
 }
 
 .gender{
   grid-column-start:7;
   grid-column-end: 8;
   width:100% !important;
-
-
 }
 
 .mobileNumber{
   grid-column-start:9;
   grid-column-end: 9;
   width:100% !important;
-
-
 }
 
 .details{
@@ -133,14 +113,11 @@ width:100% !important;
 }
 
 .details:hover{
-
   color: #7545a6;
-
 }
 
 
 #rightModalTable{
-
   grid-row: 2;
   width: 200px;
 }
@@ -157,19 +134,15 @@ width:100% !important;
 }
 
 #rightModalTable.tabulator .tabulator-cell{
-
-  
   height: 48px!important;
   align-self: center;
- 
-}
+ }
 
 #rightModalTable.tabulator .tabulator-row{
   border: none;
 }
 
 .rightModaltableBtn.active{
-
   color: #7445a6;
 }
 
@@ -228,4 +201,16 @@ width:100% !important;
   color: #7445a6;
 }
 
+
+
+#rightModalTitle {
+  grid-row: 1;
+
+  padding-left: 12px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 48px;
+  color: #262626;
+  border-bottom: 2px solid #a6a6a6;
+}
 

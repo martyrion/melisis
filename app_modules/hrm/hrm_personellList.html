@@ -39,9 +39,9 @@
           <div class="text">Επαφές</div>
         </div>
         <div class="app-buttons">
-        <span id="notifications" class="module-button material-icons">notifications</span>
-        <span id="app-menu" class="module-button material-icons">menu</span>
-      </div>
+          <span id="notifications" class="module-button material-icons">notifications</span>
+          <span id="app-menu" class="module-button material-icons">menu</span>
+        </div>
       </nav>
       <nav class="submodules-nav">
         <div class="submodule-button active">
@@ -59,36 +59,38 @@
         </div>
       </nav>
       <section id="mainSection" class="main">
+        
         <!-- Top line items -->
         <span class="title">Κατάλογος Προσωπικού</span>
         <span onclick="toggleRightModal()" id="groupBtn" class="material-icons tableBtn">filter</span>
 
         <span id="printBtn" class="material-icons" onclick="printTable()">print</span>
-        <btn id="addBtn" class="mainContentAdd">Add</btn>
         <input type="text" id="searchBox" placeholder="όνομα, επώνυμο, βαθμός" />
         <span id="closeBtn" class="material-icons searchLense">search</span>
-        <!-- --------------------------------------------- -->
+        <btn id="addBtn" class="mainContentAdd">Add</btn>
+        <!-- ----------------------------------------------->
+
         <div id="dataTable" class="dataTable"></div>
       </section>
+
       <section class="footer"></section>
       <section class="extraContent">
         Extra information in case of HD display
       </section>
 
-      <div class="modal"></div>
-    </div>
+      <!-- Right Modal Window -->
+      <div id="rightModal" class="rightModal closed">
+        <span id="rightModalTitle">Oμαδοποίηση</span>
+        <span onclick="toggleRightModal()" id="closeRightModalBtn" class="material-icons tableBtn">close</span>
+        <div id="rightModalTable"></div>
+        <div id="rightModalTable2"></div>
+      </div>
+      <div onclick="toggleRightModal()" id="modalOverlay" class="modalOverlay closed"></div>
+  </body>
 
-    <!-- Right Modal Window -->
-    <div id="rightModal" class="rightModal closed">
-      <span id="rightModalTitle">Oμαδοποίηση</span>
-      <span onclick="toggleRightModal()" id="closeRightModalBtn" class="material-icons tableBtn">close</span>
-      <div id="rightModalTable"></div>
-      <div id="rightModalTable2"></div>
-    </div>
-    <div onclick="toggleRightModal()" id="modalOverlay" class="modalOverlay closed"></div>
+  <script>
 
-    <script>
-      //Build Tabulator main
+     //Build Tabulator main
       // var headerMenu = [
       //   {
       //     label: "<i class='material-icons'>print</i> Hide Column",
@@ -219,9 +221,14 @@
           selector.classList.add("active");
         }
       };
-
+      
+      
       // Tabulator table with the columns available in main table as rows.
-      const columnTitles = [
+ 
+      // Tabulator table with the columns available in main table as rows.
+
+      var rightModalTable = new Tabulator("#rightModalTable", {
+        data: [
         {
           id: 1,
           groupingTitle: "Βαθμός",
@@ -232,9 +239,7 @@
           groupingTitle: "Φύλο",
           groupingField: "gender",
         },
-      ];
-      var rightModalTable = new Tabulator("#rightModalTable", {
-        data: columnTitles,
+      ],
         resizableColumns: false,
         columns: [
           {
@@ -254,7 +259,7 @@
           },
         ],
       });
-    </script>
-  </body>
+
+  </script>
 
 </html>

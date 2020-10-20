@@ -59,7 +59,7 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 
   &:hover {
     border-radius: 2px;
-    background-color: yellow; 
+    background-color:$colorWhite005; 
   }
   &:active {
    @include active-module;
@@ -230,40 +230,34 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
   border-bottom: 2px solid $colorGrey1;
 }
 
-#rightModalTitle {
-  grid-row: 1;
 
-  padding-left: 12px;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 48px;
-  color: $colorBlack;
-  border-bottom: 2px solid $colorGrey1;
+//Tabulator Configuration
+
+
+
+
+//INPUT BOX Styling 
+
+input[type="text"],
+textarea {
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #bdbdbd;
+  transition: all 0.2s ease-in-out;
+}
+input[type="text"]:hover,
+textarea:hover {
+  border: 1px solid #262626;
 }
 
-// Tabulator Configuration
+input[type="text"]:focus,
+textarea:focus {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid $colorPurple;
+  border-radius: 4px;
+}
 
-// INPUT BOX Styling 
-
-// input[type="text"],
-// textarea {
-//   outline: none;
-//   border-radius: 4px;
-//   border: 1px solid #bdbdbd;
-//   transition: all 0.2s ease-in-out;
-// }
-// input[type="text"]:hover,
-// textarea:hover {
-//   border: 1px solid #262626;
-// }
-
-// input[type="text"]:focus,
-// textarea:focus {
-//   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-//   border: 1px solid $colorPurple;
-//   border-radius: 4px;
-// }
-
-// .searchLense{
-//   color: #bdbdbd !important;
-// }
+.searchLense{
+  color: #bdbdbd !important;
+}
+}
