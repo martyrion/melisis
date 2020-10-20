@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
@@ -7,95 +8,64 @@
 
     <!-- --------------------------------------------->
     <!-- GLOBAL LINKS -->
-    <link
-      rel="stylesheet"
-      href="../../app_css/backgroundSVG.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../app_css/materialIconFont.css"
-      type="text/css"
-    />
+    <link rel="stylesheet" href="../../app_css/backgroundSVG.css" type="text/css" />
+    <link rel="stylesheet" href="../../app_css/materialIconFont.css" type="text/css" />
     <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
     <!--          Custom JS functions -->
-    <script
-      type="text/javascript"
-      src="../../app_js/customFunctions.js"
-    ></script>
+    <script type="text/javascript" src="../../app_js/customFunctions.js"></script>
     <!--          Tabulator references-->
-    <link
-      href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css"
-      rel="stylesheet"
-    />
-    <script
-      type="text/javascript"
-      src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"
-    ></script>
+    <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
+    <script type="text/javascript" src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
     <!-- --------------------------------------------->
     <!-- LOCAL LINKS (only for this webpage) -->
-    <link rel="stylesheet" href="css/hrm_personellList.css" type="text/css" />
+    <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
     <script type="text/javascript" src="../../dataFromDB.js"></script>
     <!-- --------------------------------------------->
   </head>
 
   <body>
     <div class="wrapper">
-      <!-- Contains topNav , leftNav, main, footer, extraContent -->
-      <nav class="topNav">
-        <nav class="moduleBtns">
-          <div class="topBtn activeModule">
-            <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
-            <div class="topIcon material-icons">perm_identity</div>
-            <div class="topText">Προσωπικό</div>
-          </div>
-          <div class="topBtn">
-            <div class="topIcon material-icons">import_contacts</div>
-            <div class="topText">Επαφές</div>
-          </div>
-          <div class="topRightButtons">
-            <span id="notifications" class="topRightBtn material-icons"
-              >notifications</span
-            >
-            <span id="menu" class="topRightBtn material-icons">menu</span>
-          </div>
-        </nav>
+      <!-- Contains moduleNav , subModuleNav, main, footer, extraContent -->
+      <nav class="modules-nav">
+        <div></div>
+        <div class="module-button active">
+          <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
+          <div class="material-icons">perm_identity</div>
+          <div class="text">Προσωπικό</div>
+        </div>
+        <div class="module-button">
+          <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
+          <div class="material-icons">import_contacts</div>
+          <div class="text">Επαφές</div>
+        </div>
+        <div class="app-buttons">
+        <span id="notifications" class="module-button material-icons">notifications</span>
+        <span id="app-menu" class="module-button material-icons">menu</span>
+      </div>
       </nav>
-      <nav class="leftNav">
-        <div class="leftBtn activeSubmodule">
+      <nav class="submodules-nav">
+        <div class="submodule-button active">
           <!-- add 'activeSubmodule' class next to 'leftBtn' class to indicate this module as active -->
-          <i class="leftIcon material-icons">list</i>Κατάλογος
+          <i class="material-icons">list</i>Κατάλογος
         </div>
-        <div class="leftBtn">
-          <i class="leftIcon material-icons">info</i>Λεπτ/ρειες
+        <div class="submodule-button">
+          <i class="material-icons">info</i>Λεπτ/ρειες
         </div>
-        <div class="leftBtn">
-          <i class="leftIcon material-icons">airline_seat_individual_suite</i
-          >Απόντες
+        <div class="submodule-button">
+          <i class="material-icons">airline_seat_individual_suite</i>Απόντες
         </div>
-        <div class="leftBtn">
-          <i class="leftIcon material-icons">bar_chart</i>Στατιστικά
+        <div class="submodule-button">
+          <i class="material-icons">bar_chart</i>Στατιστικά
         </div>
       </nav>
       <section id="mainSection" class="main">
         <!-- Top line items -->
         <span class="title">Κατάλογος Προσωπικού</span>
-        <span
-          onclick="toggleRightModal()"
-          id="groupBtn"
-          class="material-icons tableBtn"
-          >filter</span
-        >
+        <span onclick="toggleRightModal()" id="groupBtn" class="material-icons tableBtn">filter</span>
 
-        <span id="printBtn" class="material-icons" onclick="printTable()"
-          >print</span
-        >
+        <span id="printBtn" class="material-icons" onclick="printTable()">print</span>
         <btn id="addBtn" class="mainContentAdd">Add</btn>
-        <input
-          type="text"
-          id="searchBox"
-          placeholder="όνομα, επώνυμο, βαθμός"
-        />
+        <input type="text" id="searchBox" placeholder="όνομα, επώνυμο, βαθμός" />
         <span id="closeBtn" class="material-icons searchLense">search</span>
         <!-- --------------------------------------------- -->
         <div id="dataTable" class="dataTable"></div>
@@ -111,20 +81,11 @@
     <!-- Right Modal Window -->
     <div id="rightModal" class="rightModal closed">
       <span id="rightModalTitle">Oμαδοποίηση</span>
-      <span
-        onclick="toggleRightModal()"
-        id="closeRightModalBtn"
-        class="material-icons tableBtn"
-        >close</span
-      >
+      <span onclick="toggleRightModal()" id="closeRightModalBtn" class="material-icons tableBtn">close</span>
       <div id="rightModalTable"></div>
       <div id="rightModalTable2"></div>
     </div>
-    <div
-      onclick="toggleRightModal()"
-      id="modalOverlay"
-      class="modalOverlay closed"
-    ></div>
+    <div onclick="toggleRightModal()" id="modalOverlay" class="modalOverlay closed"></div>
 
     <script>
       //Build Tabulator main
@@ -142,7 +103,7 @@
       //     },
       //   },
       // ];
-    
+
       var table = new Tabulator("#dataTable", {
         data: theDataset,
         resizableColumns: false,
@@ -155,7 +116,7 @@
             title: "Bαθμός",
             field: "rankName",
             cssClass: "rankName",
-                   },
+          },
           {
             title: "rankId",
             field: "rankId",
@@ -295,4 +256,5 @@
       });
     </script>
   </body>
+
 </html>

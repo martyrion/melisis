@@ -8,6 +8,8 @@ $colorFullWhite: #ffffff !default;
 $colorOtherWhite: #fafafa !default;
 $colorSoftWhite: rgba(255, 255, 255, 0.8) !default;
 $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff !default;
+$colorWhite005: rgba(255, 255, 255, 0.05)!default;
+$colorWhite010: rgba(255, 255, 255, 0.1) !default;
 
 // Layout
 .body {
@@ -32,17 +34,75 @@ $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff
   box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.1);
 }
 
-.topNav {
-  grid-area: topNav; /* parent grid */
+// MODULES component - START
+@mixin active-module{
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modules-nav {
+  grid-area: topNav;
   display: grid;
-  grid-template-columns: subgrid;
-  grid-template-rows: subgrid;
-  grid-template-areas: "empty buttons";
+  grid-template-columns: 196px repeat(10, 1fr);
+  column-gap: 12px;
+  padding-right: 36px; //--?
   background: $colorGradientMain;
   box-shadow: 0px 8px 16px rgba(56, 42, 89, 0.2);
 }
 
-.leftNav {
+.module-button {
+  display: grid;
+  justify-items: center;
+  width: 100%;
+  height: 100%;
+  color: $colorSoftWhite;
+
+  &:hover {
+    border-radius: 2px;
+    background-color: yellow; 
+  }
+  &:active {
+   @include active-module;
+  }
+}
+
+.module-button.active {
+  @include active-module;
+}
+
+.module-button .material-icons {
+  margin-top: 24px;
+  margin-bottom: -6px;
+  color: $colorSoftWhite;
+}
+
+.app-buttons {
+  grid-column: 11/11;
+  grid-row: 1/1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 84px;
+
+  span {
+    padding: 6px;
+    height: 24px;
+    width: 24px;
+    margin-top: 24px;
+  }
+}
+// MODULES component - END
+
+// SUB MODULES component - START
+@mixin active-submodule {
+  background-color: $colorPurple010;
+  border-radius: 4px 0px 0px 4px;
+  color: $colorBlack;
+  .material-icons {
+    color: $colorPurple;
+  }
+}
+
+.submodules-nav {
   grid-area: leftNav; /* parent grid */
   background: #fafafa;
   box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.1);
@@ -52,6 +112,35 @@ $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff
   align-items: center;
 }
 
+.submodule-button {
+  display: flex;
+  height: 36px;
+  padding-left: 12px;
+  align-content: center;
+  align-items: center;
+  color: $colorGrey1;
+
+  .material-icons {
+    padding-right: 12px;
+    color: $colorGrey1;
+  }
+  &:hover {
+    background-color: $colorPurple005;
+    border-radius: 0px 0px 2px 2px;
+  }
+
+  &:active {
+    @include active-submodule;
+  }
+}
+
+.submodule-button.active {
+  @include active-submodule;
+  border-right: 2px solid $colorPurple;
+}
+// SUB MODULES component - END
+
+// MAIN component - START
 .main {
   grid-area: main; /* parent grid */
   display: grid;
@@ -62,7 +151,14 @@ $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff
   padding: 36px 0px 0px 0px;
   z-index: -1;
 }
+.title {
+  grid-column: 1 / 6;
+  font-weight: bold;
+  font-size: 36px;
+  color: $colorBlack;
+}
 
+// MAIN component - END
 .footer {
   grid-area: footer;
   display: grid;
@@ -76,121 +172,7 @@ $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff
   text-align: center;
 }
 
-.moduleBtns {
-  grid-area: buttons; /* parent grid */
-  display: grid;
-  column-gap: 12px;
-  grid-template-columns: repeat(10, 1fr);
-  grid-row: 84px;
-  align-items: center;
-  justify-items: center;
-  list-style: none;
-}
 
-.topRightButtons {
-  grid-column-start: 10;
-  color: $colorSoftWhite;
-  justify-self: end;
-}
-
-.topRightBtn {
-  padding: 6px 6px;
-}
-
-
-.title {
-  grid-column: 1 / 6;
-  font-weight: bold;
-  font-size: 36px;
-  color: $colorBlack;
-}
-
-.leftIcon.material-icons {
-  padding-right: 12px;
-  color: $colorGrey1;
-}
-
-.leftBtn:active .leftIcon.material-icons {
-  color: $colorPurple;
-}
-
-.leftBtn {
-  display: flex;
-  height: 36px;
-  padding-left: 12px;
-  align-content: center;
-  align-items: center;
-  color: $colorGrey1;
-}
-
-.leftBtn:hover {
-  background-color: $colorPurple005;
-  border-radius: 0px 0px 2px 2px;
-}
-
-.leftBtn:active {
-  background-color: $colorPurple010;
-  border-radius: 4px 0px 0px 4px;
-  color: $colorPurple;
-}
-
-.activeModule{
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-  font-weight: 500;  
-}
-
-.activeSubmodule {
-  background-color: $colorPurple010;
-  border-radius: 4px 0px 0px 4px;
-  border-right: 2px solid $colorPurple;
-  color: $colorBlack;
-
-  & .leftIcon{
-    color: $colorPurple;
-  }
-  
-}
-
-.leftBtnViewNow .leftIcon.material-icons {
-  color: $colorPurple;
-}
-
-
-.topBtn {
-  display: grid;
-  justify-items: center;
-  width: 100%;
-  height: 100%;
-  color: $colorSoftWhite;
-}
-
-.topBtn:hover {
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.topBtn:active {
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-  font-weight: 600;
-}
-
-.topIcon.material-icons {
-  margin-top: 24px;
-  margin-bottom: -6px;
-  color: $colorSoftWhite;
-}
-
-.topRightBtn:hover {
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-.topRightBtn:active {
-  border-radius: 4px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
 
 @media only screen and (min-width: 1600px) {
   .wrapper {
@@ -208,15 +190,8 @@ $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff
     padding-top: 48px;
   }
 
- 
-  .topRightButtons {
-    display: block;
-    position: absolute;
-    right: 60px;
-  }
-}
-
-// Modal
+  
+// RIGHT HAND MODAL
 
 .rightModal {
   display: grid;
@@ -228,11 +203,10 @@ $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff
   height: calc(100vh - 162px);
   width: 250px;
   align-items: center;
-  background: #FFFFFF;
-box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.25);
-z-index: 999;
-
-font-family: "ubuntu";
+  background: #ffffff;
+  box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  font-family: "ubuntu";
 }
 
 .modalOverlay {
@@ -243,62 +217,53 @@ font-family: "ubuntu";
   height: 100%;
   z-index: 900;
   background: #000000;
-opacity: 0.25;
+  opacity: 0.25;
 }
 
-.closed{
-
+.closed {
   display: none;
 }
 
-#closeRightModalBtn{
-
+#closeRightModalBtn {
   grid-row: 1;
   line-height: 48px;
   border-bottom: 2px solid $colorGrey1;
-
 }
 
-#rightModalTitle{
-
+#rightModalTitle {
   grid-row: 1;
-  
+
   padding-left: 12px;
   font-weight: bold;
-font-size: 20px;
-line-height: 48px;
-color: $colorBlack;
-border-bottom: 2px solid $colorGrey1;
+  font-size: 20px;
+  line-height: 48px;
+  color: $colorBlack;
+  border-bottom: 2px solid $colorGrey1;
 }
-
-
 
 // Tabulator Configuration
 
+// INPUT BOX Styling 
 
+// input[type="text"],
+// textarea {
+//   outline: none;
+//   border-radius: 4px;
+//   border: 1px solid #bdbdbd;
+//   transition: all 0.2s ease-in-out;
+// }
+// input[type="text"]:hover,
+// textarea:hover {
+//   border: 1px solid #262626;
+// }
 
-// Input boxes
+// input[type="text"]:focus,
+// textarea:focus {
+//   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+//   border: 1px solid $colorPurple;
+//   border-radius: 4px;
+// }
 
-input[type=text], textarea {
-   outline: none;
-  border-radius: 4px;
-  border: 1px solid #BDBDBD;
-  transition: all 0.20s ease-in-out;
-}
-input[type=text]:hover, textarea:hover {
-  border: 1px solid #262626;
-
-}
- 
-input[type=text]:focus, textarea:focus {
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  border: 1px solid $colorPurple;
-  border-radius: 4px;
-}
-
-
-.searchLense{
-  color: #BDBDBD !important;
-}
-
-
+// .searchLense{
+//   color: #bdbdbd !important;
+// }
