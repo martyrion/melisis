@@ -62,6 +62,8 @@ width:100% !important;
 
 .details:hover{
   color: #7545a6;
+  font-style: bold;
+  font-size: 18px;
 }
 
 
