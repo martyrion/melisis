@@ -41,3 +41,31 @@ function clearSearchBox(theTableVar, theField, theOperator, theSearchBoxId) {
   theButton.innerHTML = "search"; // id hardcoded
   theButton.classList.add("searchLense");
 }
+
+
+// Highlight 
+
+function highlight(text,tabulator_field_name) {
+
+  var inputText = document.querySelectorAll(tabulator_field_name);
+  var innerHTML = '';
+  var index = '';
+  var length = '';
+
+  inputText.forEach(function (entry, i) {
+    if (i === 0) {
+      return;
+    }
+
+    innerHTML = entry.innerHTML
+      .replace(/<mark[^>]+\?>/i, "")
+      .replace(/<\/mark>/i, "")
+      .replace(/<[//]{0,1}(MARK|mark)[^><]*>/g, "");
+
+    index = innerHTML.toLowerCase().indexOf(text);
+    length = index + text.length;
+    if (index != -1) {
+      innerHTML = innerHTML.substring(0, index) + "<mark>" + innerHTML.substring(index, length) + "</mark>" + innerHTML.substring(length);
+      entry.innerHTML = innerHTML;
+    }
+  });}

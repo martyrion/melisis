@@ -325,4 +325,10 @@
     color: #bdbdbd !important;
   }
 }
+
+mark {
+  background: none;
+  color: #7445a6;
+  font-weight: 600;
+}
 /*# sourceMappingURL=appKit.css.map */

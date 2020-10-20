@@ -304,3 +304,12 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
     color: #bdbdbd !important;
   }
 }
+
+
+// Highlight Styling
+
+mark {
+  background:none;
+  color: $colorPurple;
+  font-weight: 600;
+  }
