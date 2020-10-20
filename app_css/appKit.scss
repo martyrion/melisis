@@ -8,7 +8,7 @@ $colorFullWhite: #ffffff !default;
 $colorOtherWhite: #fafafa !default;
 $colorSoftWhite: rgba(255, 255, 255, 0.8) !default;
 $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff !default;
-$colorWhite005: rgba(255, 255, 255, 0.05)!default;
+$colorWhite005: rgba(255, 255, 255, 0.05) !default;
 $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 
 // Layout
@@ -35,7 +35,7 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 }
 
 // MODULES component - START
-@mixin active-module{
+@mixin active-module {
   border-radius: 4px;
   background-color: rgba(255, 255, 255, 0.1);
 }
@@ -59,10 +59,10 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 
   &:hover {
     border-radius: 2px;
-    background-color:$colorWhite005; 
+    background-color: $colorWhite005;
   }
   &:active {
-   @include active-module;
+    @include active-module;
   }
 }
 
@@ -172,8 +172,6 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
   text-align: center;
 }
 
-
-
 @media only screen and (min-width: 1600px) {
   .wrapper {
     grid-template-columns: 172px 1fr 172px;
@@ -190,74 +188,115 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
     padding-top: 48px;
   }
 
-  
-// RIGHT HAND MODAL
+  // RIGHT HAND MODAL
 
-.rightModal {
-  display: grid;
-  grid-template-rows: repeat(8, 48px);
-  position: fixed;
-  padding: 42px 12px 0px 36px;
-  top: 102px;
-  right: 20px;
-  height: calc(100vh - 162px);
-  width: 250px;
-  align-items: center;
-  background: #ffffff;
-  box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.25);
-  z-index: 999;
-  font-family: "ubuntu";
-}
+  .rightModal {
+    display: grid;
+    grid-template-rows: repeat(8, 48px);
+    position: fixed;
+    padding: 42px 12px 0px 36px;
+    top: 102px;
+    right: 20px;
+    height: calc(100vh - 162px);
+    width: 250px;
+    align-items: center;
+    background: #ffffff;
+    box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15),
+      0px 0px 4px rgba(0, 0, 0, 0.25);
+    z-index: 999;
+    font-family: "ubuntu";
+  }
 
-.modalOverlay {
-  position: fixed;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  height: 100%;
-  z-index: 900;
-  background: #000000;
-  opacity: 0.25;
-}
+  .modalOverlay {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 900;
+    background: #000000;
+    opacity: 0.25;
+  }
 
-.closed {
-  display: none;
-}
+  .closed {
+    display: none;
+  }
 
-#closeRightModalBtn {
-  grid-row: 1;
-  line-height: 48px;
-  border-bottom: 2px solid $colorGrey1;
-}
+  #closeRightModalBtn {
+    grid-row: 1;
+    line-height: 48px;
+    border-bottom: 2px solid $colorGrey1;
+  }
 
+  //Tabulator Configuration - for all tables
 
-//Tabulator Configuration
+  .tabulator {
+    background: none;
+    .tabulator-tableHolder {
+      overflow-x: hidden; /* no horizontal scrolling */
+      background: none;
+    }
+    .tabulator-header {
+      padding: 0px;
+      margin: 0px;
+      font-weight: normal;
+      background: none;
+    }
 
+    .tabulator-headers{
+      padding: 0px;
+      margin: 0px;  
+      background: none;
+    }
+    .tabulator-cell{
+      padding: 12px 0px 0px 6px;
+      margin: 0px;
+      background: none;
+    }
+    .tabulator-col-content{  
+      padding: 12px 0px 0px 6px;
+      margin: 0px;
+      color: grey;
+      font-weight: 300;
+      background: none;
+    }
+    .tabulator-group{ /* the grouping row */
+      align-content: center;
+      span{ /* the grouping row record count*/
+        color: black;
+      }
+    }
+    .tabulator-group-level-1{
+      font-style: italic;
+      padding-left: 48px;
+    }
+    .tabulator-col-sorter{ 
+      right: 12px;
+    }
+  }
 
+  //INPUT BOX Styling
 
+  input[type="text"],
+  textarea {
+    outline: none;
+    border-radius: 4px;
+    border: 1px solid #bdbdbd;
+    transition: all 0.2s ease-in-out;
+  }
+  input[type="text"]:hover,
+  textarea:hover {
+    border: 1px solid #262626;
+  }
 
-//INPUT BOX Styling 
+  input[type="text"]:focus,
+  textarea:focus {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid $colorPurple;
+    border-radius: 4px;
+  }
 
-input[type="text"],
-textarea {
-  outline: none;
-  border-radius: 4px;
-  border: 1px solid #bdbdbd;
-  transition: all 0.2s ease-in-out;
-}
-input[type="text"]:hover,
-textarea:hover {
-  border: 1px solid #262626;
-}
-
-input[type="text"]:focus,
-textarea:focus {
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-  border: 1px solid $colorPurple;
-  border-radius: 4px;
-}
-
-.searchLense{
-  color: #bdbdbd !important;
-}
+  .searchLense {
+    color: #bdbdbd !important;
+  }
 }

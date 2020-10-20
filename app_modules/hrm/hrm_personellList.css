@@ -3,49 +3,13 @@
 #dataTable.tabulator {
   grid-column: 1/-1;
   grid-row: 3/-1;
-  background: none;
-}
-
-.tabulator .tabulator-tableHolder {
-  overflow-x: hidden; /* no horizontal scrolling */
-  background: none;
 }
 
 #dataTable.tabulator .tabulator-headers{
-  padding: 0px;
-  margin: 0px;
   display: grid;
   grid-template-columns: repeat(10, minmax(60px, 1fr));
   grid-template-rows: 48px;
   column-gap: 12px;
-  background: none;
-}
-
-.tabulator .tabulator-header{
-  padding: 0px;
-  margin: 0px;
-  font-weight: normal;
-  background: none;
-}
-
-.tabulator .tabulator-cell{
-  padding: 12px 0px 0px 6px;
-  margin: 0px;
-}
-
-#dataTable.tabulator .tabulator-col-content{  
-  padding: 12px 0px 0px 6px;
-  margin: 0px;
-  color: grey;
-  font-weight: 300;
-}
-
-#dataTable.tabulator .tabulator-col{
-  background: none;
-}
-
-#dataTable.tabulator .tabulator-col-sorter{ 
-  right: 12px;
 }
 
 #dataTable.tabulator div.tabulator-row{
@@ -55,27 +19,11 @@
   column-gap: 12px;
 }
 
-#dataTable.tabulator .tabulator-group{ /* the grouping row */
-  align-content: center;
-}
-
-#dataTable.tabulator .tabulator-group span{ /* the grouping row record count*/
-  color: black;
-}
-
-#dataTable.tabulator .tabulator-group-level-1{
-
-  font-style: italic;
-  padding-left: 48px;
-}
-
-
 
 .rankName{
 grid-column: 1; 
 width:100% !important;
 }
-
 .specialtyName{
   grid-column: 2;
   width:100% !important;
@@ -202,10 +150,7 @@ width:100% !important;
 }
 
 
-
-#rightModalTitle {
-  grid-row: 1;
-
+.rightModalTitle {
   padding-left: 12px;
   font-weight: bold;
   font-size: 20px;
@@ -213,4 +158,15 @@ width:100% !important;
   color: #262626;
   border-bottom: 2px solid #a6a6a6;
 }
+
+#first-title{
+ grid-row: 1;
+}
+
+#second-title{
+  grid-row: 5;
+ }
+ 
+
+
 

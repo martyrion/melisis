@@ -252,6 +252,53 @@
     line-height: 48px;
     border-bottom: 2px solid #a6a6a6;
   }
+  .tabulator {
+    background: none;
+  }
+  .tabulator .tabulator-tableHolder {
+    overflow-x: hidden;
+    /* no horizontal scrolling */
+    background: none;
+  }
+  .tabulator .tabulator-header {
+    padding: 0px;
+    margin: 0px;
+    font-weight: normal;
+    background: none;
+  }
+  .tabulator .tabulator-headers {
+    padding: 0px;
+    margin: 0px;
+    background: none;
+  }
+  .tabulator .tabulator-cell {
+    padding: 12px 0px 0px 6px;
+    margin: 0px;
+    background: none;
+  }
+  .tabulator .tabulator-col-content {
+    padding: 12px 0px 0px 6px;
+    margin: 0px;
+    color: grey;
+    font-weight: 300;
+    background: none;
+  }
+  .tabulator .tabulator-group {
+    /* the grouping row */
+    -ms-flex-line-pack: center;
+        align-content: center;
+  }
+  .tabulator .tabulator-group span {
+    /* the grouping row record count*/
+    color: black;
+  }
+  .tabulator .tabulator-group-level-1 {
+    font-style: italic;
+    padding-left: 48px;
+  }
+  .tabulator .tabulator-col-sorter {
+    right: 12px;
+  }
   input[type="text"],
   textarea {
     outline: none;

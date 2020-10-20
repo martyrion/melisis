@@ -80,9 +80,10 @@
 
       <!-- Right Modal Window -->
       <div id="rightModal" class="rightModal closed">
-        <span id="rightModalTitle">Oμαδοποίηση</span>
+        <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
         <span onclick="toggleRightModal()" id="closeRightModalBtn" class="material-icons tableBtn">close</span>
-        <div id="rightModalTable"></div>
+        <div  id="rightModalTable"></div>
+        <span id="second-title"class="rightModalTitle">Φίλτρα</span>
         <div id="rightModalTable2"></div>
       </div>
       <div onclick="toggleRightModal()" id="modalOverlay" class="modalOverlay closed"></div>
@@ -222,9 +223,7 @@
         }
       };
       
-      
-      // Tabulator table with the columns available in main table as rows.
- 
+  
       // Tabulator table with the columns available in main table as rows.
 
       var rightModalTable = new Tabulator("#rightModalTable", {
@@ -259,6 +258,12 @@
           },
         ],
       });
+
+
+     
+
+
+
 
   </script>
 
