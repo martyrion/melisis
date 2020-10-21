@@ -305,6 +305,10 @@ textarea:focus {
   color: #bdbdbd !important;
 }
 
+.active-checkbox {
+  color: #7445a6;
+}
+
 mark {
   background: none;
   color: #7445a6;
@@ -312,19 +316,12 @@ mark {
 }
 
 .modal-right {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-rows: (36px)[10];
-      grid-template-rows: repeat(10, 36px);
   position: fixed;
   padding: 42px 12px 0px 36px;
   top: 102px;
   right: 20px;
   height: calc(100vh - 162px);
   width: 250px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   background: #ffffff;
   -webkit-box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.25);
           box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.25);
@@ -350,7 +347,7 @@ mark {
 #closeRightModalBtn {
   -ms-grid-row: 1;
   grid-row: 1;
-  line-height: 48px;
+  line-height: 36px;
   border-bottom: 2px solid #a6a6a6;
 }
 /*# sourceMappingURL=appKit.css.map */

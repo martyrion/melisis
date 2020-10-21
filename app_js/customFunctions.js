@@ -1,4 +1,4 @@
-// Add or remove from Array
+// Add or remove value from Array
 function addRemoveValue(theArray, theValue) {
   var index = theArray.indexOf(theValue);
   if (index > -1) {
@@ -9,11 +9,6 @@ function addRemoveValue(theArray, theValue) {
   }
 }
 
-// Toggle Right Modal - id need to be #rightModal, #modalOverlay
-// function toggleRightModal() {
-//   document.getElementById("rightModal").classList.toggle("closed");
-//   document.getElementById("modalOverlay").classList.toggle("closed");
-// }
 
 // Search Table
 function toggleLense(theSearchBoxId) {

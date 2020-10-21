@@ -278,6 +278,11 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
   }
 
 
+// Checkbox Styling
+.active-checkbox{
+  color: #7445a6;
+}
+
 // Highlight Styling
 mark {
   background:none;
@@ -289,15 +294,13 @@ mark {
 
 // MODAL right hand
 .modal-right {
-  display: grid;
-  grid-template-rows: repeat(10, 36px);
   position: fixed;
   padding: 42px 12px 0px 36px;
   top: 102px;
   right: 20px;
   height: calc(100vh - 162px);
   width: 250px;
-  align-items: center;
+  // align-items: center;
   background: #ffffff;
   box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15),
     0px 0px 4px rgba(0, 0, 0, 0.25);
@@ -326,10 +329,9 @@ mark {
 
 #closeRightModalBtn {
   grid-row: 1;
-  line-height: 48px;
+  line-height: 36px;
   border-bottom: 2px solid $colorGrey1;
 }
-
 
 // Generic
 
