@@ -187,8 +187,18 @@
       .getElementById("searchBox")
       .addEventListener("input", function () {
         var valueEl = document.getElementById("searchBox");
+        var searchString = valueEl.value;
         searchTable(table, "last_name", "like", "searchBox");
-        highlight(valueEl.value,"[tabulator-field='last_name']" ); // run also highlight function (param1= searchbox value, param2 = field to search)
+
+
+        table.setFilter([
+    {field:"", type:"", }, //filter by age greater than 52
+    [
+        {field:"first_name", type:"like", value:searchString}, //with a height of less than 142
+        {field:"last_name", type:"like", value:searchString},
+    ]
+]);
+        highlight(searchString,"[tabulator-field='first_name']"); // run also highlight function (param1= searchbox value, param2 = field to search)
       });
 
     // Clear Filter
