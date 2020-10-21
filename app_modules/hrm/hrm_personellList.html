@@ -73,7 +73,9 @@
       <div id="dataTable" class="dataTable"></div>
     </section>
 
-    <section class="footer"></section>
+    <section class="footer">
+      <div id="row-count"></div>
+    </section>
     <section class="extraContent">
       Extra information in case of HD display
     </section>
@@ -101,6 +103,7 @@
     var filterModalcontainer = document.getElementById("modal-filters-container"); // filter modal window cont
     var overlay = document.getElementById("modal-overlay");
     var filtersIndicator = document.getElementById("filters-indicator");
+    var rowCount = document.getElementById("row-count");
 
     // Init Vars
     var groupArray = [];
@@ -149,6 +152,9 @@
       }else{
         filtersIndicator.classList.add("no-visibility");
       }
+
+      // Set total rows epxression
+      rowCount.innerHTML = table.getRows("active").length+" από "+table.getRows("all").length;
     }
 
     // Search the main table (first and last name)
@@ -421,7 +427,9 @@
         //group - the group component for the group
         return value;
       },
-
+      tableBuilt:function(){ // Set total rows epxression
+      rowCount.innerHTML = table.getRows("active").length+" από "+table.getRows("all").length;
+    },
     });
 
 

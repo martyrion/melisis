@@ -13,6 +13,12 @@
 
 }
 
+#row-count{
+  display: flex;
+  justify-self: end;
+  margin-top: 18px;
+  margin-right: 16px;
+}
 
 
 /* Tabulator specific for this layout */

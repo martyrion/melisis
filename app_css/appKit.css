@@ -187,6 +187,8 @@
   grid-area: footer;
   display: -ms-grid;
   display: grid;
+  border-top: 2px solid #E0E0E0;
+  margin-top: -18px;
   z-index: -1;
   background: #fafafa;
 }
@@ -217,12 +219,20 @@
 
 .tabulator {
   background-color: transparent !important;
+  height: 100%;
 }
 
 .tabulator .tabulator-tableHolder {
   overflow-x: hidden;
   /* no horizontal scrolling */
   background-color: transparent !important;
+  height: 100% !important;
+  padding: 0px !important;
+}
+
+.tabulator .tabulator-table {
+  height: 100% !important;
+  padding: 0px !important;
 }
 
 .tabulator .tabulator-header {
@@ -241,6 +251,7 @@
 .tabulator .tabulator-cell {
   padding: 12px 0px 0px 6px;
   margin: 0px;
+  height: 100% !important;
   background-color: transparent !important;
 }
 
@@ -252,8 +263,20 @@
   background-color: transparent !important;
 }
 
+.tabulator .tabulator-paginator {
+  height: 0px !important;
+}
+
 .tabulator .tabulator-col {
   background-color: transparent !important;
+}
+
+.tabulator .tabulator-row {
+  border: none;
+}
+
+.tabulator .tabulator-footer {
+  height: 0px;
 }
 
 .tabulator .tabulator-sortable {

@@ -4,6 +4,7 @@ $colorPurple005: rgba(117, 69, 166, 0.05) !default;
 $colorPurple010: rgba(117, 69, 166, 0.1) !default;
 $colorBlack: #262626 !default;
 $colorGrey1: #a6a6a6 !default;
+$borderGrey: #E0E0E0;
 $colorFullWhite: #ffffff !default;
 $colorOtherWhite: #fafafa !default;
 $colorSoftWhite: rgba(255, 255, 255, 0.8) !default;
@@ -168,6 +169,8 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 .footer {
   grid-area: footer;
   display: grid;
+  border-top: 2px solid $borderGrey;
+  margin-top: -18px;
   z-index: -1;
   background: $colorOtherWhite;
 }
@@ -200,9 +203,17 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 
   .tabulator {
     background-color: transparent !important;
+    height: 100%;
     .tabulator-tableHolder {
       overflow-x: hidden; /* no horizontal scrolling */
       background-color: transparent !important;
+      height: 100% !important;
+      padding: 0px !important;
+    }
+
+    .tabulator-table{
+      height: 100% !important;
+      padding: 0px !important;
     }
     .tabulator-header {
       padding: 0px;
@@ -219,6 +230,7 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
     .tabulator-cell{
       padding: 12px 0px 0px 6px;
       margin: 0px;
+      height: 100% !important;
       background-color: transparent !important;
     }
     .tabulator-col-content{  
@@ -228,10 +240,21 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
       font-weight: 300;
       background-color: transparent !important;
     }
+.tabulator-paginator{
+  height: 0px !important;
+}
 
     .tabulator-col{
       background-color: transparent !important;
       
+      }
+
+      .tabulator-row{
+        border: none;
+      }
+
+      .tabulator-footer{
+        height: 0px;
       }
     
     .tabulator-sortable{
