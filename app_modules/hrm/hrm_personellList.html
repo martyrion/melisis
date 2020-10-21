@@ -62,8 +62,9 @@
 
       <!-- Top line items -->
       <span class="title">Κατάλογος Προσωπικού</span>
-      <span id="groupBtn" class="material-icons" onclick="toggleRightModal()">group</span>
+      <span id="filters-btn" class="material-icons" onclick="toggleRightModal()">filter_list</span>
       <span id="printBtn" class="material-icons" onclick="printTable()">print</span>
+      <div id="filters-indicator" class="no-visibility"></div>
       <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
       <span id="searchbox-btn" class="material-icons grey-icon" onclick="clearSearchBox()">search</span>
       <btn id="addBtn" class="mainContentAdd">Add</btn>
@@ -99,6 +100,7 @@
     var clearSearchBoxBtn = document.getElementById("searchbox-btn"); // searchbox clear button
     var filterModalcontainer = document.getElementById("modal-filters-container"); // filter modal window cont
     var overlay = document.getElementById("modal-overlay");
+    var filtersIndicator = document.getElementById("filters-indicator");
 
     // Init Vars
     var groupArray = [];
@@ -141,7 +143,12 @@
       highlight(searchBoxString, "[tabulator-field='first_name']");
       highlight(searchBoxString, "[tabulator-field='last_name']");
 
-      console.log(table.getFilters());
+      // Toggle visibility of filters-indicator
+      if(table.getFilters().length > 1){
+        filtersIndicator.classList.remove("no-visibility");
+      }else{
+        filtersIndicator.classList.add("no-visibility");
+      }
     }
 
     // Search the main table (first and last name)
