@@ -10,17 +10,14 @@ function addRemoveValue(theArray, theValue) {
 }
 
 // Toggle Right Modal - id need to be #rightModal, #modalOverlay
-function toggleRightModal() {
-  var modal = document.getElementById("rightModal");
-  modal.classList.toggle("closed");
-  var overlay = document.getElementById("modalOverlay");
-  overlay.classList.toggle("closed");
-}
+// function toggleRightModal() {
+//   document.getElementById("rightModal").classList.toggle("closed");
+//   document.getElementById("modalOverlay").classList.toggle("closed");
+// }
 
 // Search Table
-function searchTable(theTableVar, theField, theOperator, theSearchBoxId) {
+function toggleLense(theSearchBoxId) {
   var searchString = document.getElementById(theSearchBoxId).value;
-  theTableVar.setFilter(theField, theOperator, searchString);
   var theButton = document.getElementById("closeBtn");
   // if nothing is inside searchbox hide "X" and show "glass"
   if (searchString == "") {
