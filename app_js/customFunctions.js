@@ -37,7 +37,7 @@ function clearSearchBox(theTableVar, theField, theOperator, theSearchBoxId) {
 
 // Highlight 
 
-function highlight(text,tabulator_field_name) {
+function highlight(text, tabulator_field_name) {
 
   var inputText = document.querySelectorAll(tabulator_field_name);
   var innerHTML = '';
@@ -60,4 +60,20 @@ function highlight(text,tabulator_field_name) {
       innerHTML = innerHTML.substring(0, index) + "<mark>" + innerHTML.substring(index, length) + "</mark>" + innerHTML.substring(length);
       entry.innerHTML = innerHTML;
     }
-  });}
+  });
+}
+
+
+// Create a non-visible modal
+var Modal = function (type, content) {
+
+  var div = document.createElement('div');
+  div.textContent = content;
+  div.setAttribute('class', type);
+  document.body.appendChild(div);
+
+  // create here another div as container....
+  // give it class&id
+
+
+}
