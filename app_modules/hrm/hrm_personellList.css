@@ -148,6 +148,7 @@ width:100% !important;
   display: flex;
   align-content: center;
   line-height: 36px;
+  background-color: transparent !important;
 }
 
 
