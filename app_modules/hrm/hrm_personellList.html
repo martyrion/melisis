@@ -29,33 +29,33 @@
     <!-- Contains moduleNav , subModuleNav, main, footer, extraContent-->
     <nav class="modules-nav">
       <div></div>
-      <div class="module-button active">
+      <div class="module-button btn active">
         <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
         <div class="material-icons">perm_identity</div>
         <div class="text">Προσωπικό</div>
       </div>
       <div class="module-button">
         <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
-        <div class="material-icons">import_contacts</div>
+        <div class="material-icons btn">import_contacts</div>
         <div class="text">Επαφές</div>
       </div>
       <div class="app-buttons">
-        <span id="notifications" class="module-button material-icons">notifications</span>
-        <span id="app-menu" class="module-button material-icons">menu</span>
+        <span id="notifications" class="module-button material-icons btn">notifications</span>
+        <span id="app-menu" class="module-button material-icons btn">menu</span>
       </div>
     </nav>
     <nav class="submodules-nav">
-      <div id="sub-first" class="submodule-button active">
+      <div id="sub-first" class="submodule-button btn active">
         <!-- add 'activeSubmodule' class next to 'leftBtn' class to indicate this module as active -->
         <i class="material-icons">list</i>Κατάλογος
       </div>
-      <div  id="sub-second" class="submodule-button">
+      <div  id="sub-second" class="submodule-button btn">
         <i class="material-icons">info</i>Λεπτ/ρειες
       </div>
-      <div id="sub-third" class="submodule-button">
+      <div id="sub-third" class="submodule-button btn">
         <i class="material-icons">airline_seat_individual_suite</i>Απόντες
       </div>
-      <div id="sub-fourth" class="submodule-button">
+      <div id="sub-fourth" class="submodule-button btn">
         <i class="material-icons">bar_chart</i>Στατιστικά
       </div>
     </nav>
@@ -63,12 +63,12 @@
 
       <!-- Top line items -->
       <span class="title">Κατάλογος Προσωπικού</span>
-      <span id="filters-btn" class="material-icons" onclick="toggleRightModal()">filter_list</span>
-      <span id="printBtn" class="material-icons" onclick="printTable()">print</span>
+      <span id="filters-btn" class="material-icons btn" onclick="toggleRightModal()">filter_list</span>
+      <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
       <div id="filters-indicator" class="no-visibility"></div>
       <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
       <span id="searchbox-btn" class="material-icons grey-icon" onclick="clearSearchBox()">search</span>
-      <btn id="addBtn" class="mainContentAdd">Add</btn>
+      <btn id="addBtn" class="mainContentAdd btn">Add</btn>
       <!-- ----------------------------------------------->
 
       <div id="dataTable" class="dataTable"></div>

@@ -373,4 +373,8 @@ mark {
   line-height: 36px;
   border-bottom: 2px solid #a6a6a6;
 }
+
+.btn {
+  cursor: pointer !important;
+}
 /*# sourceMappingURL=appKit.css.map */
