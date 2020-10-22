@@ -332,6 +332,13 @@
         },
 
       ],
+      groupHeader: function (value, count, data, group) {
+        //value - the value all members of this group share
+        //count - the number of rows in this group
+        //data - an array of all the row data objects in this group
+        //group - the group component for the group
+        return value+" :"+"&nbsp&nbsp&nbsp&nbsp"+count+" εγγραφές";
+      }
     });
 
     // Create a table with the some columns of first, as rows -- to use as grouping selection
