@@ -20,6 +20,13 @@
   margin-right: 16px;
 }
 
+#row-count.moved{
+  justify-self: start;
+  margin-left: 12px;
+ 
+
+}
+
 
 /* Tabulator specific for this layout */
 
