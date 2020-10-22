@@ -67,7 +67,7 @@
       <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
       <div id="filters-indicator" class="no-visibility"></div>
       <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
-      <span id="searchbox-btn" class="material-icons grey-icon" onclick="clearSearchBox()">search</span>
+      <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
       <btn id="addBtn" class="mainContentAdd btn">Add</btn>
       <!-- ----------------------------------------------->
 
@@ -166,9 +166,12 @@
       if (searchBoxString == "") {
         clearSearchBoxBtn.innerHTML = "search"; // id hardcoded
         clearSearchBoxBtn.classList.add("grey-icon");
+        clearSearchBoxBtn.classList.remove("btn");
+  
       } else {
         clearSearchBoxBtn.innerHTML = "close"; // id hardcoded
         clearSearchBoxBtn.classList.remove("grey-icon");
+        clearSearchBoxBtn.classList.add("btn");
       }
 
       //Set filters of table
