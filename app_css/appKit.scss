@@ -4,14 +4,13 @@ $colorPurple005: rgba(117, 69, 166, 0.05) !default;
 $colorPurple010: rgba(117, 69, 166, 0.1) !default;
 $colorBlack: #262626 !default;
 $colorGrey1: #a6a6a6 !default;
-$borderGrey: #E0E0E0;
+$borderGrey: #e0e0e0;
 $colorFullWhite: #ffffff !default;
 $colorOtherWhite: #fafafa !default;
 $colorSoftWhite: rgba(255, 255, 255, 0.8) !default;
 $colorGradientMain: linear-gradient(90.29deg, #6a3dd3 0%, #764ba2 100%), #ffffff !default;
 $colorWhite005: rgba(255, 255, 255, 0.05) !default;
 $colorWhite010: rgba(255, 255, 255, 0.1) !default;
-
 
 // Layout
 .body {
@@ -191,124 +190,121 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
     box-shadow: 0px 0px 8px 4px rgba(0, 0, 0, 0.1);
     padding-top: 48px;
   }
-
 }
 
-  //Tabulator Configuration - for all tables
+//Tabulator Configuration - for all tables
 
-  .tabulator {
+.tabulator {
+  background-color: transparent !important;
+  height: 100%;
+  .tabulator-tableHolder {
+    overflow-x: hidden; /* no horizontal scrolling */
     background-color: transparent !important;
-    height: 100%;
-    .tabulator-tableHolder {
-      overflow-x: hidden; /* no horizontal scrolling */
-      background-color: transparent !important;
-      height: 100% !important;
-      padding: 0px !important;
-    }
+    height: 100% !important;
+    padding: 0px !important;
+  }
 
-    .tabulator-table{
-      height: 100% !important;
-      padding: 0px !important;
-    }
-    .tabulator-header {
-      padding: 0px;
-      margin: 0px;
-      font-weight: normal;
-      background-color: transparent !important;
-    }
+  .tabulator-table {
+    height: 100% !important;
+    padding: 0px !important;
+  }
+  .tabulator-header {
+    padding: 0px;
+    margin: 0px;
+    font-weight: normal;
+    background-color: transparent !important;
+  }
 
-    .tabulator-headers{
-      padding: 0px;
-      margin: 0px;  
-      background-color: transparent !important;
+  .tabulator-headers {
+    padding: 0px;
+    margin: 0px;
+    background-color: transparent !important;
+  }
+  .tabulator-cell {
+    padding: 12px 0px 0px 6px;
+    margin: 0px;
+    height: 100% !important;
+    background-color: transparent !important;
+  }
+  .tabulator-col-content {
+    padding: 12px 0px 0px 6px;
+    margin: 0px;
+    color: grey;
+    font-weight: 300;
+    background-color: transparent !important;
+  }
+  .tabulator-paginator {
+    height: 0px !important;
+  }
+
+  .tabulator-col {
+    background-color: transparent !important;
+  }
+
+  .tabulator-row {
+    border: none;
+  }
+
+  .tabulator-footer {
+    height: 0px;
+  }
+
+  .tabulator-sortable {
+    background-color: transparent !important;
+  }
+  .tabulator-group {
+    /* the grouping row */
+    align-content: center;
+    span {
+      /* the grouping row record count*/
+      color: black;
     }
-    .tabulator-cell{
-      padding: 12px 0px 0px 6px;
-      margin: 0px;
-      height: 100% !important;
-      background-color: transparent !important;
-    }
-    .tabulator-col-content{  
-      padding: 12px 0px 0px 6px;
-      margin: 0px;
-      color: grey;
-      font-weight: 300;
-      background-color: transparent !important;
-    }
-.tabulator-paginator{
-  height: 0px !important;
+  }
+  .tabulator-group-level-1 {
+    font-style: italic;
+    padding-left: 48px;
+  }
+  .tabulator-col-sorter {
+    right: 12px;
+  }
 }
 
-    .tabulator-col{
-      background-color: transparent !important;
-      
-      }
+//INPUT BOX Styling
 
-      .tabulator-row{
-        border: none;
-      }
+input[type="text"],
+textarea {
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #bdbdbd;
+  transition: all 0.2s ease-in-out;
+}
+input[type="text"]:hover,
+textarea:hover {
+  border: 1px solid #262626;
+}
 
-      .tabulator-footer{
-        height: 0px;
-      }
-    
-    .tabulator-sortable{
-      background-color: transparent !important;
-    }
-    .tabulator-group{ /* the grouping row */
-      align-content: center;
-      span{ /* the grouping row record count*/
-        color: black;
-      }
-    }
-    .tabulator-group-level-1{
-      font-style: italic;
-      padding-left: 48px;
-    }
-    .tabulator-col-sorter{ 
-      right: 12px;
-    }
-  }
- 
+input[type="text"]:focus,
+textarea:focus {
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+  border: 1px solid $colorPurple;
+  border-radius: 4px;
+}
 
-  //INPUT BOX Styling
-
-  input[type="text"],textarea {
-    outline: none;
-    border-radius: 4px;
-    border: 1px solid #bdbdbd;
-    transition: all 0.2s ease-in-out;
-  }
-  input[type="text"]:hover,
-  textarea:hover {
-    border: 1px solid #262626;
-  }
-
-  input[type="text"]:focus,
-  textarea:focus {
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-    border: 1px solid $colorPurple;
-    border-radius: 4px;
-  }
-
-  .grey-icon {
-    color: #bdbdbd !important;
-  }
-
+.grey-icon {
+  color: #bdbdbd !important;
+}
 
 // Checkbox Styling
-.active-checkbox{
+.active-checkbox {
   color: #7445a6;
 }
 
 // Highlight Styling
 mark {
-  background:none;
+  background: none;
   color: $colorPurple;
-  font-weight: 600; 
+  font-weight: 600;
 }
-
-
 
 // MODAL right hand
 .modal-right {
@@ -320,13 +316,10 @@ mark {
   width: 250px;
   // align-items: center;
   background: #ffffff;
-  box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15),
-    0px 0px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.15), 0px 0px 4px rgba(0, 0, 0, 0.25);
   z-index: 999;
   font-family: "ubuntu";
-  
 }
-
 
 .modal-overlay {
   position: fixed;
@@ -339,20 +332,34 @@ mark {
   opacity: 0.25;
 }
 
-
-.no-visibility {
-  display: none !important;
-}
-
-
 #closeRightModalBtn {
   grid-row: 1;
   line-height: 36px;
   border-bottom: 2px solid $colorGrey1;
 }
 
+// Modal Middle Medium
+
+.modal-middle-medium {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 554px;
+  height: 180px;
+  background: #ffffff;
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index: 999;
+  font-family: "ubuntu";
+}
+
 // Generic
 
-.btn{
+.btn {
   cursor: pointer !important;
+}
+
+.no-visibility {
+  display: none !important;
 }

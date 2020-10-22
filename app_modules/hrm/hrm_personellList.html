@@ -82,7 +82,7 @@
     </section>
   </div>
 
-  <!-- Right Modal Window & overlay -->
+  <!-- Right Modal Window -->
   <div id="modal-filters-container" class="modal-right no-visibility">
     <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
     <span onclick="toggleRightModal()" id="closeRightModalBtn" class="material-icons">close</span>
@@ -90,7 +90,12 @@
     <span id="second-title" class="rightModalTitle">Φίλτρα</span>
     <div id="filters-table"></div>
   </div>
-  <div onclick="toggleRightModal()" id="modal-overlay" class="modal-overlay no-visibility"></div>
+  <!-- Print dialoge Modal -->
+  <div id="modal-print-info" class="modal-middle-medium no-visibility">
+    <span id="first-title">Διαμόρφωση εκτύπωσης</span>
+  </div>
+
+  <div id="modal-overlay" class="modal-overlay no-visibility"></div>
 
 
   <script>
@@ -102,6 +107,7 @@
     var theSearchbox = document.getElementById("search-box"); // searchbox element
     var clearSearchBoxBtn = document.getElementById("searchbox-btn"); // searchbox clear button
     var filterModalcontainer = document.getElementById("modal-filters-container"); // filter modal window cont
+    var middleModal = document.getElementById("modal-print-info");
     var overlay = document.getElementById("modal-overlay");
     var filtersIndicator = document.getElementById("filters-indicator");
     var rowCount = document.getElementById("row-count");
@@ -113,6 +119,7 @@
     var checkboxFilter = {};
     var checkBoxRanks = [];
     var checkBoxGender = [];
+    
 
 
 
@@ -191,9 +198,24 @@
       rowCount.classList.toggle("moved"); // adds class to row count, to move the indication so it is not overshadowd by modal
     }
 
+    // // Close Modals
+    // function closeModals() {
+    //   filterModalcontainer.classList.add("no-visibility");
+    //   middleModal.classList.add("no-visibility");
+    //   overlay.classList.add("no-visibility");
+    //   rowCount.classList.remove("moved"); // adds class to row count, to move the indication so it is not overshadowd by modal
+    // }
+
+
     // Print Table
     function printTable() {
-      table.print(false, true);
+      middleModal.classList.toggle("no-visibility");
+      overlay.classList.toggle("no-visibility");
+      // table.print(false, true);
+    }
+    // Set print Title
+    function printTitle(){
+      return "<h1>Κατάλογος προσωπικού</h1>"
     }
 
     // Group main table data (called from group-table row checkboxes)
@@ -270,6 +292,8 @@
       data: theDataset,
       resizableColumns: false,
       tooltips: true,
+      printAsHtml:true, //enable html table printing
+      printHeader:printTitle(), // set header content on printed table
       layout: "fitDataFill",
 
       columns: [
