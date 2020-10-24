@@ -42,9 +42,3 @@ class SubModulesHRM extends HTMLElement {
 }
 customElements.define('sub-modules-hrm', SubModulesHRM);
 
-
-
-function navToDetails(){
-  window.location ="hrm_personellDetails.html";
-  console.log("hi");
-}
