@@ -27,9 +27,6 @@ class SubModulesHRM extends HTMLElement {
     <a id="sub-first" class="submodule-button btn" href="hrm_personellList.html">
     <i class="material-icons">list</i>Κατάλογος
   </a>
-  <a id="sub-second" class="submodule-button btn" onclick="navToDetails()">
-    <i class="material-icons">info</i>Λεπτ/ρειες
-  </a>
   <a id="sub-third" class="submodule-button btn" href="hrm_personellAbsence.html">
     <i class="material-icons">airline_seat_individual_suite</i>Απόντες
   </a>
@@ -41,4 +38,5 @@ class SubModulesHRM extends HTMLElement {
   }
 }
 customElements.define('sub-modules-hrm', SubModulesHRM);
+
 

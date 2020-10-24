@@ -75,7 +75,7 @@
     document.getElementById("sub-second").classList.add("active");
     var recId = localStorage.getItem("record");
     var theRecord = theDataset.filter(e => e.id == recId);
-    var name = theRecord.first_name;
+    document.getElementById("full-name").innerHTML = theRecord[0].first_name + "&nbsp" + theRecord[0].last_name;
    }
 
 

@@ -404,6 +404,22 @@ mark {
   font-family: "ubuntu";
 }
 
+.modal-personell-details {
+  position: absolute;
+  left: 230px;
+  top: 203px;
+  width: calc(100vw - 292px);
+  height: calc(100vh - 316px);
+  display: -ms-grid;
+  display: grid;
+  background: #ffffff;
+  -webkit-box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.15);
+          box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  z-index: 999;
+  font-family: "ubuntu";
+}
+
 .btn {
   cursor: pointer !important;
 }
