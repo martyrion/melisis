@@ -73,7 +73,12 @@
    window.onload=function(){
     document.getElementById("mod-first").classList.add("active");
     document.getElementById("sub-second").classList.add("active");
+    var recId = localStorage.getItem("record");
+    var theRecord = theDataset.filter(e => e.id == recId);
+    var name = theRecord.first_name;
    }
+
+
 
   </script>
 </body>
