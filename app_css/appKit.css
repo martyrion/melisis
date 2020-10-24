@@ -121,6 +121,7 @@
       -ms-flex-align: center;
           align-items: center;
   color: #a6a6a6;
+  text-decoration: none;
 }
 
 .submodule-button .material-icons {

@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
     <!--          Custom JS functions -->
     <script src="../../app_js/customFunctions.js"></script>
-    <script src="../../app_js/navigation.js"></script>
     <!--          Web components -->
     <script src="../../app_js/web_components/parts.js" type="text/javascript" defer></script>
     <!--          Tabulator references-->
@@ -27,36 +26,20 @@
   <body>
     <div class="wrapper">
       <!-- Contains moduleNav , subModuleNav, main, footer, extraContent-->
-      <modules-nav class="modules-nav"></modules-nav>
-      <nav class="submodules-nav">
-        <div id="sub-first" class="submodule-button btn active">
-          <!-- add 'activeSubmodule' class next to 'leftBtn' class to indicate this module as active -->
-          <i class="material-icons">list</i>Κατάλογος
-        </div>
-        <div id="sub-second" class="submodule-button btn">
-          <i class="material-icons">info</i>Λεπτ/ρειες
-        </div>
-        <div id="sub-third" class="submodule-button btn">
-          <i class="material-icons">airline_seat_individual_suite</i>Απόντες
-        </div>
-        <div id="sub-fourth" class="submodule-button btn">
-          <i class="material-icons">bar_chart</i>Στατιστικά
-        </div>
-      </nav>
-      <section id="mainSection" class="main">
-        <!-- Top line items -->
-        <span class="title">Κατάλογος Προσωπικού</span>
-        <span id="filters-btn" class="material-icons btn" onclick="toggleRightModal()">filter_list</span>
-        <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
-        <div id="filters-indicator" class="no-visibility"></div>
-        <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
-        <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
-        <btn id="addBtn" class="mainContentAdd btn">Προσθήκη</btn>
-        <!-- ----------------------------------------------->
-
-        <div id="dataTable" class="dataTable"></div>
+      <modules-nav class="modules-nav"></modules-nav> 
+      <sub-modules-hrm class="submodules-nav"></sub-modules-hrm>
+       <section id="mainSection" class="main">
+            <!-- Top line items -->
+            <span class="title">Κατάλογος Προσωπικού</span>
+            <span id="filters-btn" class="material-icons btn" onclick="toggleRightModal()">filter_list</span>
+            <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
+           <div id="filters-indicator" class="no-visibility"></div>
+           <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
+           <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
+            <btn id="addBtn" class="mainContentAdd btn">Προσθήκη</btn>
+            <!-- ----------------------------------------------->
+            <div id="dataTable" class="dataTable"></div>
       </section>
-
       <section class="footer">
         <div id="row-count"></div>
       </section>
@@ -105,7 +88,12 @@
       var checkBoxGender = [];
 
       // var myModal = new Modal ("modal-middle-medium","hello");
+      window.onload = function (){
+        document.getElementById("mod-first").classList.add("active");
+        document.getElementById("sub-first").classList.add("active");
 
+      }
+    
       //======================
       //  FUNCTIONS
       //======================
@@ -116,6 +104,7 @@
       // - toggle right modal
 
       // - setFilters to table (called when searchbox is updated and also when checkbox is selected in filters)
+
 
       function setTableFilters() {
         //extract arrays from checkboxFilters Array

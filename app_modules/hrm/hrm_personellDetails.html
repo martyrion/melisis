@@ -13,6 +13,8 @@
   <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
   <!--          Custom JS functions -->
   <script src="../../app_js/customFunctions.js"></script>
+  <!--          Web components -->
+    <script src="../../app_js/web_components/parts.js" type="text/javascript" defer></script>
   <!--          Tabulator references-->
   <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
   <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
@@ -26,38 +28,8 @@
 <body>
   <div class="wrapper">
     <!-- Contains moduleNav , subModuleNav, main, footer, extraContent-->
-    <nav class="modules-nav">
-      <div></div>
-      <div class="module-button active">
-        <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
-        <div class="material-icons">perm_identity</div>
-        <div class="text">Προσωπικό</div>
-      </div>
-      <div class="module-button">
-        <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
-        <div class="material-icons">import_contacts</div>
-        <div class="text">Επαφές</div>
-      </div>
-      <div class="app-buttons">
-        <span id="notifications" class="module-button material-icons">notifications</span>
-        <span id="app-menu" class="module-button material-icons">menu</span>
-      </div>
-    </nav>
-    <nav class="submodules-nav">
-      <div class="submodule-button">
-        
-        <i class="material-icons">list</i>Κατάλογος
-      </div>
-      <div class="submodule-button active"><!-- add 'activeSubmodule' class next to 'leftBtn' class to indicate this module as active -->
-        <i class="material-icons">info</i>Λεπτ/ρειες
-      </div>
-      <div class="submodule-button">
-        <i class="material-icons">airline_seat_individual_suite</i>Απόντες
-      </div>
-      <div class="submodule-button">
-        <i class="material-icons">bar_chart</i>Στατιστικά
-      </div>
-    </nav>
+    <modules-nav class="modules-nav"></modules-nav> 
+      <sub-modules-hrm class="submodules-nav"></sub-modules-hrm>
     <section id="mainSection" class="main">
 
      <!-- Top Line Items -->
@@ -98,7 +70,10 @@
 
 
   <script>
-   
+   window.onload=function(){
+    document.getElementById("mod-first").classList.add("active");
+    document.getElementById("sub-second").classList.add("active");
+   }
 
   </script>
 </body>
