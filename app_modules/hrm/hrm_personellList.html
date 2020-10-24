@@ -1,475 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
-  <title>MELISIS</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>MELISIS</title>
 
+    <!-- GLOBAL LINKS -->
+    <link rel="stylesheet" href="../../app_css/backgroundSVG.css" type="text/css" />
+    <link rel="stylesheet" href="../../app_css/materialIconFont.css" type="text/css" />
+    <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
+    <!--          Custom JS functions -->
+    <script src="../../app_js/customFunctions.js"></script>
+    <script src="../../app_js/navigation.js"></script>
+    <!--          Web components -->
+    <script src="../../app_js/web_components/parts.js" type="text/javascript" defer></script>
+    <!--          Tabulator references-->
+    <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
+    <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
 
-  <!-- GLOBAL LINKS -->
-  <link rel="stylesheet" href="../../app_css/backgroundSVG.css" type="text/css" />
-  <link rel="stylesheet" href="../../app_css/materialIconFont.css" type="text/css" />
-  <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
-  <!--          Custom JS functions -->
-  <script src="../../app_js/customFunctions.js"></script>
-  <script src="../../app_js/navigation.js"></script>
-  <!--          Tabulator references-->
-  <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
-  <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
+    <!-- LOCAL LINKS (only for this webpage) -->
+    <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
+    <script src="../../dataFromDB.js"></script>
+  </head>
 
-  <!-- LOCAL LINKS (only for this webpage) -->
-  <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
-  <script src="../../dataFromDB.js"></script>
+  <body>
+    <div class="wrapper">
+      <!-- Contains moduleNav , subModuleNav, main, footer, extraContent-->
+      <modules-nav class="modules-nav"></modules-nav>
+      <nav class="submodules-nav">
+        <div id="sub-first" class="submodule-button btn active">
+          <!-- add 'activeSubmodule' class next to 'leftBtn' class to indicate this module as active -->
+          <i class="material-icons">list</i>Κατάλογος
+        </div>
+        <div id="sub-second" class="submodule-button btn">
+          <i class="material-icons">info</i>Λεπτ/ρειες
+        </div>
+        <div id="sub-third" class="submodule-button btn">
+          <i class="material-icons">airline_seat_individual_suite</i>Απόντες
+        </div>
+        <div id="sub-fourth" class="submodule-button btn">
+          <i class="material-icons">bar_chart</i>Στατιστικά
+        </div>
+      </nav>
+      <section id="mainSection" class="main">
+        <!-- Top line items -->
+        <span class="title">Κατάλογος Προσωπικού</span>
+        <span id="filters-btn" class="material-icons btn" onclick="toggleRightModal()">filter_list</span>
+        <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
+        <div id="filters-indicator" class="no-visibility"></div>
+        <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
+        <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
+        <btn id="addBtn" class="mainContentAdd btn">Προσθήκη</btn>
+        <!-- ----------------------------------------------->
 
-</head>
+        <div id="dataTable" class="dataTable"></div>
+      </section>
 
-<body>
-  <div class="wrapper">
-    <!-- Contains moduleNav , subModuleNav, main, footer, extraContent-->
-    <nav class="modules-nav">
-      <div></div>
-      <div class="module-button btn active">
-        <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
-        <div class="material-icons">perm_identity</div>
-        <div class="text">Προσωπικό</div>
-      </div>
-      <div class="module-button">
-        <!-- add 'activeModule' class next to 'topBtn' class to indicate this module as active -->
-        <div class="material-icons btn">import_contacts</div>
-        <div class="text">Επαφές</div>
-      </div>
-      <div class="app-buttons">
-        <span id="notifications" class="module-button material-icons btn">notifications</span>
-        <span id="app-menu" class="module-button material-icons btn">menu</span>
-      </div>
-    </nav>
-    <nav class="submodules-nav">
-      <div id="sub-first" class="submodule-button btn active">
-        <!-- add 'activeSubmodule' class next to 'leftBtn' class to indicate this module as active -->
-        <i class="material-icons">list</i>Κατάλογος
-      </div>
-      <div  id="sub-second" class="submodule-button btn">
-        <i class="material-icons">info</i>Λεπτ/ρειες
-      </div>
-      <div id="sub-third" class="submodule-button btn">
-        <i class="material-icons">airline_seat_individual_suite</i>Απόντες
-      </div>
-      <div id="sub-fourth" class="submodule-button btn">
-        <i class="material-icons">bar_chart</i>Στατιστικά
-      </div>
-    </nav>
-    <section id="mainSection" class="main">
+      <section class="footer">
+        <div id="row-count"></div>
+      </section>
+      <section class="extraContent">
+        Extra information in case of HD display
+      </section>
+    </div>
 
-      <!-- Top line items -->
-      <span class="title">Κατάλογος Προσωπικού</span>
-      <span id="filters-btn" class="material-icons btn" onclick="toggleRightModal()">filter_list</span>
-      <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
-      <div id="filters-indicator" class="no-visibility"></div>
-      <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
-      <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
-      <btn id="addBtn" class="mainContentAdd btn">Προσθήκη</btn>
-      <!-- ----------------------------------------------->
+    <!-- Right Modal Window -->
+    <div id="modal-filters-container" class="modal-right no-visibility">
+      <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
+      <span onclick="toggleRightModal()" id="closeRightModalBtn" class="material-icons">close</span>
+      <div id="groups-table"></div>
+      <span id="second-title" class="rightModalTitle">Φίλτρα</span>
+      <div id="filters-table"></div>
+    </div>
+    <!-- Print dialoge Modal -->
+    <div id="modal-print-info" class="modal-middle-medium no-visibility">
+      <span id="first-title">Διαμόρφωση εκτύπωσης</span>
+    </div>
 
-      <div id="dataTable" class="dataTable"></div>
-    </section>
+    <div id="modal-overlay" class="modal-overlay no-visibility"></div>
 
-    <section class="footer">
-      <div id="row-count"></div>
-    </section>
-    <section class="extraContent">
-      Extra information in case of HD display
-    </section>
-  </div>
+    <script>
+      //======================
+      //  GLOBAL VARS
+      //======================
 
-  <!-- Right Modal Window -->
-  <div id="modal-filters-container" class="modal-right no-visibility">
-    <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
-    <span onclick="toggleRightModal()" id="closeRightModalBtn" class="material-icons">close</span>
-    <div id="groups-table"></div>
-    <span id="second-title" class="rightModalTitle">Φίλτρα</span>
-    <div id="filters-table"></div>
-  </div>
-  <!-- Print dialoge Modal -->
-  <div id="modal-print-info" class="modal-middle-medium no-visibility">
-    <span id="first-title">Διαμόρφωση εκτύπωσης</span>
-  </div>
+      // Elements
+      var theSearchbox = document.getElementById("search-box"); // searchbox element
+      var clearSearchBoxBtn = document.getElementById("searchbox-btn"); // searchbox clear button
+      var filterModalcontainer = document.getElementById(
+        "modal-filters-container"
+      ); // filter modal window cont
+      var middleModal = document.getElementById("modal-print-info");
+      var overlay = document.getElementById("modal-overlay");
+      var filtersIndicator = document.getElementById("filters-indicator");
+      var rowCount = document.getElementById("row-count");
 
-  <div id="modal-overlay" class="modal-overlay no-visibility"></div>
+      // Init Vars
+      var groupArray = [];
+      var searchBoxString = "";
+      var checkboxFilters = [];
+      var checkboxFilter = {};
+      var checkBoxRanks = [];
+      var checkBoxGender = [];
 
+      // var myModal = new Modal ("modal-middle-medium","hello");
 
-  <script>
-    //======================
-    //  GLOBAL VARS
-    //======================
+      //======================
+      //  FUNCTIONS
+      //======================
 
-    // Elements
-    var theSearchbox = document.getElementById("search-box"); // searchbox element
-    var clearSearchBoxBtn = document.getElementById("searchbox-btn"); // searchbox clear button
-    var filterModalcontainer = document.getElementById("modal-filters-container"); // filter modal window cont
-    var middleModal = document.getElementById("modal-print-info");
-    var overlay = document.getElementById("modal-overlay");
-    var filtersIndicator = document.getElementById("filters-indicator");
-    var rowCount = document.getElementById("row-count");
+      // - setFilters to table
+      // - search table by name, surname & highlight match
+      // - clear filters
+      // - toggle right modal
 
-    // Init Vars
-    var groupArray = [];
-    var searchBoxString = "";
-    var checkboxFilters = [];
-    var checkboxFilter = {};
-    var checkBoxRanks = [];
-    var checkBoxGender = [];
-    
+      // - setFilters to table (called when searchbox is updated and also when checkbox is selected in filters)
 
-    var myModal = new Modal ("modal-middle-medium","hello");
-
-    //======================
-    //  FUNCTIONS
-    //======================
-
-    // - setFilters to table
-    // - search table by name, surname & highlight match
-    // - clear filters
-    // - toggle right modal
-
-
-    // - setFilters to table (called when searchbox is updated and also when checkbox is selected in filters)
-
-    function setTableFilters() {
-      //extract arrays from checkboxFilters Array
-      checkBoxRanks = checkboxFilters.filter(x => x.field === "rankName");
-      checkBoxGender = checkboxFilters.filter(x => x.field === "gender");
-      table.clearFilter();
-      table.setFilter(
-        [
+      function setTableFilters() {
+        //extract arrays from checkboxFilters Array
+        checkBoxRanks = checkboxFilters.filter((x) => x.field === "rankName");
+        checkBoxGender = checkboxFilters.filter((x) => x.field === "gender");
+        table.clearFilter();
+        table.setFilter([
           [
             { field: "first_name", type: "like", value: searchBoxString }, //
-            { field: "last_name", type: "like", value: searchBoxString } //
+            { field: "last_name", type: "like", value: searchBoxString }, //
           ],
-          checkBoxRanks, checkBoxGender
+          checkBoxRanks,
+          checkBoxGender,
+        ]);
+        // Highlight appropriately
+        highlight(searchBoxString, "[tabulator-field='first_name']");
+        highlight(searchBoxString, "[tabulator-field='last_name']");
 
-        ]
-      );
-      // Highlight appropriately
-      highlight(searchBoxString, "[tabulator-field='first_name']");
-      highlight(searchBoxString, "[tabulator-field='last_name']");
-
-      // Toggle visibility of filters-indicator
-      if(table.getFilters().length > 1){
-        filtersIndicator.classList.remove("no-visibility");
-      }else{
-        filtersIndicator.classList.add("no-visibility");
-      }
-
-      // Set total rows epxression
-      rowCount.innerHTML = table.getRows("active").length+" από "+table.getRows("all").length;
-    }
-
-    // Search the main table (first and last name)
-    function alterSearchBox() {
-      searchBoxString = theSearchbox.value; // searchbox string
-
-      // if nothing is inside searchbox change "X" to "lense"
-      if (searchBoxString == "") {
-        clearSearchBoxBtn.innerHTML = "search"; // id hardcoded
-        clearSearchBoxBtn.classList.add("grey-icon");
-        clearSearchBoxBtn.classList.remove("btn");
-  
-      } else {
-        clearSearchBoxBtn.innerHTML = "close"; // id hardcoded
-        clearSearchBoxBtn.classList.remove("grey-icon");
-        clearSearchBoxBtn.classList.add("btn");
-      }
-
-      //Set filters of table
-      setTableFilters();
-    }
-
-    // Perform searchbox alteration function with empty string
-    function clearSearchBox() {
-      theSearchbox.value = "";
-      alterSearchBox();
-    }
-
-    // Toggle right modal
-    function toggleRightModal() {
-      filterModalcontainer.classList.toggle("no-visibility");
-      overlay.classList.toggle("no-visibility");
-      rowCount.classList.toggle("moved"); // adds class to row count, to move the indication so it is not overshadowd by modal
-    }
-
-    // // Close Modals
-    // function closeModals() {
-    //   filterModalcontainer.classList.add("no-visibility");
-    //   middleModal.classList.add("no-visibility");
-    //   overlay.classList.add("no-visibility");
-    //   rowCount.classList.remove("moved"); // adds class to row count, to move the indication so it is not overshadowd by modal
-    // }
-
-
-    // Print Table
-    function printTable() {
-      middleModal.classList.toggle("no-visibility");
-      overlay.classList.toggle("no-visibility");
-      // table.print(false, true);
-    }
-    // Set print Title
-    function printTitle(){
-      return "<h1>Κατάλογος προσωπικού</h1>"
-    }
-
-    // Group main table data (called from group-table row checkboxes)
-    var selectGrouping = function (e, cell) {
-      var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
-      var checkbox = row.firstChild;
-      var checkbox = checkbox.firstChild; // checkbox element is two levels down from row
-      var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
-      var field = rowValue.groupingField; // get groupingField of row object
-      addRemoveValue(groupArray, field); // add or remove the selected field from the array
-      table.setGroupBy(groupArray);
-      var state = checkbox.innerHTML; // get the inner html for the clicked item
-
-      if (state === "check_box") {
-        // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
-        checkbox.innerHTML = "check_box_outline_blank";
-        checkbox.classList.remove("active-checkbox");
-      } else {
-        // the opposite
-        checkbox.innerHTML = "check_box";
-        checkbox.classList.add("active-checkbox");
-      }
-    };
-
-
-    // Filter main table data (called from filter-table row checkboxes)
-
-    var selectFilter = function (e, cell) {
-
-      var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
-      var checkbox = row.firstChild;
-      var checkbox = checkbox.firstChild; // checkbox element is two levels down from row
-      var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
-      var field = rowValue.filterField; // get filterField of row object
-      var value = rowValue.filterLabel;
-      checkboxFilter = { field: field, type: "=", value: value };
-
-      var state = checkbox.innerHTML; // get the inner html for the clicked item
-
-      if (state === "check_box") {
-        // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
-        checkbox.innerHTML = "check_box_outline_blank";
-        checkbox.classList.remove("active-checkbox");
-        var index = checkboxFilters.findIndex(x => x.value === value && x.field === field); // index of object when conditions meet
-        checkboxFilters.splice(index, 1); // remove object
-      } else {
-        // the opposite
-        checkbox.innerHTML = "check_box";
-        checkbox.classList.add("active-checkbox");
-        checkboxFilters.push(checkboxFilter); // add object
-      }
-
-      //Set filters of table
-      setTableFilters();
-
-    };
-
-
-
-
-    // Click details in row
-
-    var rowDetails = function (e, cell) {
-      var rowValue = cell.getData();
-
-    }
-
-    //======================
-    //  TABLES
-    //======================
-
-    // Create main table
-    var table = new Tabulator("#dataTable", {
-      data: theDataset,
-      resizableColumns: false,
-      tooltips: true,
-      printAsHtml:true, //enable html table printing
-      printHeader:printTitle(), // set header content on printed table
-      layout: "fitDataFill",
-
-      columns: [
-        { title: "id", field: "id", cssClass: "id", visible: false },
-        {
-          title: "Bαθμός",
-          field: "rankName",
-          cssClass: "rankName",
-        },
-        {
-          title: "rankId",
-          field: "rankId",
-          cssClass: "rankId",
-          visible: false,
-        },
-        {
-          title: "Ειδ.",
-          field: "specialtyName",
-          cssClass: "specialtyName",
-          hozAlign: "center",
-        },
-        {
-          title: "specialtyId",
-          field: "specialtyId",
-          cssClass: "specialtyId",
-          visible: false,
-        },
-
-        {
-          title: "Όνομα",
-          field: "first_name",
-          cssClass: "first_name",
-        },
-        {
-          title: "Επώνυμο",
-          field: "last_name",
-          cssClass: "last_name",
-        },
-        {
-          title: "Φύλο",
-          field: "gender",
-          cssClass: "gender",
-        },
-
-        {
-          title: "Τηλέφωνο",
-          field: "mobileNumber",
-          widthGrow: 1,
-          cssClass: "mobileNumber",
-        },
-
-        {
-          title: "",
-          field: "details",
-
-          formatter: function (cell, formatterParams) {
-            return "<span class='material-icons'>more_horiz</span>";
-          },
-          hozAlign: "right",
-          cssClass: "details",
-          headerSort: false,
-          cellClick: rowDetails,
-        },
-
-      ],
-      groupHeader: function (value, count, data, group) {
-        //value - the value all members of this group share
-        //count - the number of rows in this group
-        //data - an array of all the row data objects in this group
-        //group - the group component for the group
-        return value+" :"+"<span>"+count+" εγγραφές"+"</span>";
-      }
-    });
-
-    // Create a table with the some columns of first, as rows -- to use as grouping selection
-    var groupsTable = new Tabulator("#groups-table", {
-      data: [
-        {
-          id: 1,
-          groupingTitle: "Βαθμός",
-          groupingField: "rankName",
-        },
-        {
-          id: 2,
-          groupingTitle: "Φύλο",
-          groupingField: "gender",
-        },
-      ],
-      resizableColumns: false,
-      columns: [
-        {
-          title: "",
-          field: "selected",
-          formatter: function (cell, formatterParams) {
-            return "<span class='material-icons rightModaltableBtn'>check_box_outline_blank</span>"; // present a checkbox
-          },
-
-          width: 50,
-          cellClick: selectGrouping,
-        },
-        {
-          title: "",
-          field: "groupingTitle",
-          width: 150,
-        },
-      ],
-    });
-
-    // Create a table with filters
-    var filtersTable = new Tabulator("#filters-table", {
-      data: [
-        {
-          id: 1,
-          filterLabel: "Επγός",
-          filterField: "rankName",
-          filterHeader: "Βαθμός"
-        },
-        {
-          id: 2,
-          filterLabel: "Σγός",
-          filterField: "rankName",
-          filterHeader: "Βαθμός"
-        },
-        {
-          id: 3,
-          filterLabel: "Υπσγός",
-          filterField: "rankName",
-          filterHeader: "Βαθμός"
-        },
-        {
-          id: 4,
-          filterLabel: "Male",
-          filterField: "gender",
-          filterHeader: "Φύλο"
-        },
-        {
-          id: 5,
-          filterLabel: "Female",
-          filterField: "gender",
-          filterHeader: "Φύλο"
+        // Toggle visibility of filters-indicator
+        if (table.getFilters().length > 1) {
+          filtersIndicator.classList.remove("no-visibility");
+        } else {
+          filtersIndicator.classList.add("no-visibility");
         }
-      ],
-      resizableColumns: false,
-      groupBy: "filterHeader",
-      columns: [
-        {
-          title: "",
-          field: "selected",
-          formatter: function (cell, formatterParams) {
-            return "<span class='material-icons filter-checkbox'>check_box_outline_blank</span>"; // present a checkbox
+
+        // Set total rows epxression
+        rowCount.innerHTML =
+          table.getRows("active").length +
+          " από " +
+          table.getRows("all").length;
+      }
+
+      // Search the main table (first and last name)
+      function alterSearchBox() {
+        searchBoxString = theSearchbox.value; // searchbox string
+
+        // if nothing is inside searchbox change "X" to "lense"
+        if (searchBoxString == "") {
+          clearSearchBoxBtn.innerHTML = "search"; // id hardcoded
+          clearSearchBoxBtn.classList.add("grey-icon");
+          clearSearchBoxBtn.classList.remove("btn");
+        } else {
+          clearSearchBoxBtn.innerHTML = "close"; // id hardcoded
+          clearSearchBoxBtn.classList.remove("grey-icon");
+          clearSearchBoxBtn.classList.add("btn");
+        }
+
+        //Set filters of table
+        setTableFilters();
+      }
+
+      // Perform searchbox alteration function with empty string
+      function clearSearchBox() {
+        theSearchbox.value = "";
+        alterSearchBox();
+      }
+
+      // Toggle right modal
+      function toggleRightModal() {
+        filterModalcontainer.classList.toggle("no-visibility");
+        overlay.classList.toggle("no-visibility");
+        rowCount.classList.toggle("moved"); // adds class to row count, to move the indication so it is not overshadowd by modal
+      }
+
+      // // Close Modals
+      // function closeModals() {
+      //   filterModalcontainer.classList.add("no-visibility");
+      //   middleModal.classList.add("no-visibility");
+      //   overlay.classList.add("no-visibility");
+      //   rowCount.classList.remove("moved"); // adds class to row count, to move the indication so it is not overshadowd by modal
+      // }
+
+      // Print Table
+      function printTable() {
+        middleModal.classList.toggle("no-visibility");
+        overlay.classList.toggle("no-visibility");
+        // table.print(false, true);
+      }
+      // Set print Title
+      function printTitle() {
+        return "<h1>Κατάλογος προσωπικού</h1>";
+      }
+
+      // Group main table data (called from group-table row checkboxes)
+      var selectGrouping = function (e, cell) {
+        var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
+        var checkbox = row.firstChild;
+        var checkbox = checkbox.firstChild; // checkbox element is two levels down from row
+        var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
+        var field = rowValue.groupingField; // get groupingField of row object
+        addRemoveValue(groupArray, field); // add or remove the selected field from the array
+        table.setGroupBy(groupArray);
+        var state = checkbox.innerHTML; // get the inner html for the clicked item
+
+        if (state === "check_box") {
+          // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
+          checkbox.innerHTML = "check_box_outline_blank";
+          checkbox.classList.remove("active-checkbox");
+        } else {
+          // the opposite
+          checkbox.innerHTML = "check_box";
+          checkbox.classList.add("active-checkbox");
+        }
+      };
+
+      // Filter main table data (called from filter-table row checkboxes)
+
+      var selectFilter = function (e, cell) {
+        var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
+        var checkbox = row.firstChild;
+        var checkbox = checkbox.firstChild; // checkbox element is two levels down from row
+        var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
+        var field = rowValue.filterField; // get filterField of row object
+        var value = rowValue.filterLabel;
+        checkboxFilter = { field: field, type: "=", value: value };
+
+        var state = checkbox.innerHTML; // get the inner html for the clicked item
+
+        if (state === "check_box") {
+          // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
+          checkbox.innerHTML = "check_box_outline_blank";
+          checkbox.classList.remove("active-checkbox");
+          var index = checkboxFilters.findIndex(
+            (x) => x.value === value && x.field === field
+          ); // index of object when conditions meet
+          checkboxFilters.splice(index, 1); // remove object
+        } else {
+          // the opposite
+          checkbox.innerHTML = "check_box";
+          checkbox.classList.add("active-checkbox");
+          checkboxFilters.push(checkboxFilter); // add object
+        }
+
+        //Set filters of table
+        setTableFilters();
+      };
+
+      // Click details in row
+
+      var rowDetails = function (e, cell) {
+        var rowValue = cell.getData();
+      };
+
+      //======================
+      //  TABLES
+      //======================
+
+      // Create main table
+      var table = new Tabulator("#dataTable", {
+        data: theDataset,
+        resizableColumns: false,
+        tooltips: true,
+        printAsHtml: true, //enable html table printing
+        printHeader: printTitle(), // set header content on printed table
+        layout: "fitDataFill",
+
+        columns: [
+          { title: "id", field: "id", cssClass: "id", visible: false },
+          {
+            title: "Bαθμός",
+            field: "rankName",
+            cssClass: "rankName",
+          },
+          {
+            title: "rankId",
+            field: "rankId",
+            cssClass: "rankId",
+            visible: false,
+          },
+          {
+            title: "Ειδ.",
+            field: "specialtyName",
+            cssClass: "specialtyName",
+            hozAlign: "center",
+          },
+          {
+            title: "specialtyId",
+            field: "specialtyId",
+            cssClass: "specialtyId",
+            visible: false,
           },
 
-          width: 50,
-          cellClick: selectFilter,
+          {
+            title: "Όνομα",
+            field: "first_name",
+            cssClass: "first_name",
+          },
+          {
+            title: "Επώνυμο",
+            field: "last_name",
+            cssClass: "last_name",
+          },
+          {
+            title: "Φύλο",
+            field: "gender",
+            cssClass: "gender",
+          },
+
+          {
+            title: "Τηλέφωνο",
+            field: "mobileNumber",
+            widthGrow: 1,
+            cssClass: "mobileNumber",
+          },
+
+          {
+            title: "",
+            field: "details",
+
+            formatter: function (cell, formatterParams) {
+              return "<span class='material-icons'>more_horiz</span>";
+            },
+            hozAlign: "right",
+            cssClass: "details",
+            headerSort: false,
+            cellClick: rowDetails,
+          },
+        ],
+        groupHeader: function (value, count, data, group) {
+          //value - the value all members of this group share
+          //count - the number of rows in this group
+          //data - an array of all the row data objects in this group
+          //group - the group component for the group
+          return value + " :" + "<span>" + count + " εγγραφές" + "</span>";
         },
-        {
-          title: "",
-          field: "filterLabel",
-          width: 150,
+      });
 
+      // Create a table with the some columns of first, as rows -- to use as grouping selection
+      var groupsTable = new Tabulator("#groups-table", {
+        data: [
+          {
+            id: 1,
+            groupingTitle: "Βαθμός",
+            groupingField: "rankName",
+          },
+          {
+            id: 2,
+            groupingTitle: "Φύλο",
+            groupingField: "gender",
+          },
+        ],
+        resizableColumns: false,
+        columns: [
+          {
+            title: "",
+            field: "selected",
+            formatter: function (cell, formatterParams) {
+              return "<span class='material-icons rightModaltableBtn'>check_box_outline_blank</span>"; // present a checkbox
+            },
+
+            width: 50,
+            cellClick: selectGrouping,
+          },
+          {
+            title: "",
+            field: "groupingTitle",
+            width: 150,
+          },
+        ],
+      });
+
+      // Create a table with filters
+      var filtersTable = new Tabulator("#filters-table", {
+        data: [
+          {
+            id: 1,
+            filterLabel: "Επγός",
+            filterField: "rankName",
+            filterHeader: "Βαθμός",
+          },
+          {
+            id: 2,
+            filterLabel: "Σγός",
+            filterField: "rankName",
+            filterHeader: "Βαθμός",
+          },
+          {
+            id: 3,
+            filterLabel: "Υπσγός",
+            filterField: "rankName",
+            filterHeader: "Βαθμός",
+          },
+          {
+            id: 4,
+            filterLabel: "Male",
+            filterField: "gender",
+            filterHeader: "Φύλο",
+          },
+          {
+            id: 5,
+            filterLabel: "Female",
+            filterField: "gender",
+            filterHeader: "Φύλο",
+          },
+        ],
+        resizableColumns: false,
+        groupBy: "filterHeader",
+        columns: [
+          {
+            title: "",
+            field: "selected",
+            formatter: function (cell, formatterParams) {
+              return "<span class='material-icons filter-checkbox'>check_box_outline_blank</span>"; // present a checkbox
+            },
+
+            width: 50,
+            cellClick: selectFilter,
+          },
+          {
+            title: "",
+            field: "filterLabel",
+            width: 150,
+          },
+        ],
+        groupHeader: function (value, count, data, group) {
+          //value - the value all members of this group share
+          //count - the number of rows in this group
+          //data - an array of all the row data objects in this group
+          //group - the group component for the group
+          return value;
         },
-      ],
-      groupHeader: function (value, count, data, group) {
-        //value - the value all members of this group share
-        //count - the number of rows in this group
-        //data - an array of all the row data objects in this group
-        //group - the group component for the group
-        return value;
-      },
-      tableBuilt:function(){ // Set total rows epxression
-      rowCount.innerHTML = table.getRows("active").length+" από "+table.getRows("all").length;
-    },
-    });
-
-
-  </script>
-</body>
+        tableBuilt: function () {
+          // Set total rows epxression
+          rowCount.innerHTML =
+            table.getRows("active").length +
+            " από " +
+            table.getRows("all").length;
+        },
+      });
+    </script>
+  </body>
 
 </html>
