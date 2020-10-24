@@ -1,0 +1,226 @@
+#filters-indicator {
+  grid-column: 7/7;
+  grid-row: 1/1;
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  margin-top: 14px;
+  margin-right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: red;
+}
+
+#row-count {
+  display: flex;
+  justify-self: end;
+  margin-top: 18px;
+  margin-right: 16px;
+
+  &.moved {
+    justify-self: start;
+    margin-left: 12px;
+  }
+}
+
+/* Tabulator specific for this layout */
+
+#dataTable.tabulator {
+  grid-column: 1/-1;
+  grid-row: 3/-1;
+
+  .tabulator-headers,
+  div.tabulator-row {
+    margin: 0px;
+    display: grid;
+    grid-template-columns: repeat(10, minmax(60px, 1fr));
+    grid-template-rows: 48px;
+    column-gap: 12px;
+  }
+
+    .rankName {
+      grid-column: 1;
+    }
+    .specialtyName {
+      grid-column: 2;
+    }
+
+   .first_name {
+      grid-column: 3;
+    }
+
+    .last_name {
+      grid-column: 4;
+    }
+
+   .gender {
+      grid-column: 6;
+  
+    }
+
+    .mobileNumber {
+      grid-column: 8;
+    }
+   .details {
+      grid-column-start: 10;
+      margin-right: 18px;
+      color: grey;
+    }
+  
+}
+
+// Tabulator alternate
+
+#dataTable.tabulator.alt {
+    grid-column: 1/5;
+    grid-row: 3/-1;
+  
+    .tabulator-headers,
+    div.tabulator-row {
+      margin: 0px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(60px, 1fr));
+      grid-template-rows: 48px;
+      column-gap: 12px;
+    }
+  
+      .rankName {
+        grid-column: 1;
+      }
+      .specialtyName {
+        grid-column: 2;
+      }
+  
+     .first_name {
+        grid-column: 3;
+      }
+  
+      .last_name {
+        grid-column: 4;
+      }
+    
+     .details {
+        grid-column-start: 5;
+        color: grey;
+      }
+    
+  }
+
+
+.details:hover {
+  color: #7545a6;
+  font-style: bold;
+  font-size: 18px;
+}
+
+#first-title {
+  grid-row: 1;
+}
+
+#groups-table.tabulator {
+  grid-row: 2;
+  width: 200px;
+}
+
+#second-title {
+  grid-row: 3;
+}
+
+#filters-table.tabulator {
+  grid-row: 4;
+  width: 200px;
+}
+
+.modal-right {
+  display: grid;
+  grid-template-rows: 36px 96px 36px 1fr;
+  grid-template-columns: 200px;
+}
+
+.rightModalTitle {
+  padding-left: 12px;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 36px;
+  color: #262626;
+  border-bottom: 2px solid #a6a6a6;
+}
+
+#groups-table.tabulator .tabulator-header,
+#filters-table.tabulator .tabulator-header {
+  display: none;
+  height: 0px;
+  border: 0px;
+}
+
+#groups-table.tabulator .tabulator-cell,
+#filters-table.tabulator .tabulator-cell {
+  height: 36px !important;
+  align-self: center;
+}
+
+#groups-table.tabulator .tabulator-row,
+#filters-table.tabulator .tabulator-row {
+  border: none;
+}
+#groups-table.tabulator .tabulator-group,
+#filters-table.tabulator .tabulator-group {
+  display: flex;
+  align-content: center;
+  line-height: 36px;
+  background-color: transparent !important;
+}
+
+#printBtn {
+  padding: 6px;
+  grid-column: 7/7;
+  grid-row: 1/1;
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  margin-right: 40px;
+}
+
+#filters-btn {
+  padding: 6px;
+  grid-column: 7/7;
+  grid-row: 1/1;
+  display: flex;
+  align-items: center;
+  justify-self: end;
+}
+
+#addBtn {
+  background-color: #7445a6;
+  grid-column: 10/10;
+  grid-row: 1/1;
+  height: 36px;
+  margin: 6px 6px 6px 0px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-self: end;
+  width: 100%;
+  min-width: 80px;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+#search-box {
+  grid-column: 8/10;
+  grid-row: 1/1;
+  padding-left: 6px;
+  margin: 6px 0px;
+  z-index: -1;
+}
+
+#searchbox-btn {
+  grid-column: 9/10;
+  grid-row: 1/1;
+  align-self: center;
+  justify-self: right;
+  margin-right: 12px;
+  padding: 6px;
+  color: #7445a6;
+}

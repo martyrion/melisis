@@ -251,9 +251,17 @@
 
       var navToDetails = function (e, cell) {
         var rowData = cell.getRow().getData();
+        var theRow = cell.getRow();
         var theId = rowData.id;     
-        toggleModal('personell-modal');
-        document.getElementById("details").innerHTML = theId;
+        // toggleModal('personell-modal');
+        // document.getElementById("details").innerHTML = theId;
+        var tableEl = document.getElementById("dataTable");
+        table.hideColumn ("gender");
+        table.hideColumn ("mobileNumber");
+        tableEl.classList.toggle("alt");
+        table.deselectRow();
+        theRow.toggleSelect();
+        
       }
 
 
