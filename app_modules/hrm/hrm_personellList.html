@@ -66,7 +66,8 @@
 
     <!-- Personell Details -->
     <div id="personell-modal" class="modal-personell-details no-visibility">
-      <span onclick="toggleModal('personell-modal')" id="closeRightModalBtn" class="material-icons">close</span>
+      <span onclick="toggleModal('personell-modal')" class="material-icons">close</span>
+      <span id="details"></span>
 
 
     </div>
@@ -112,8 +113,6 @@
       // - toggle right modal
 
       // - setFilters to table (called when searchbox is updated and also when checkbox is selected in filters)
-
-
       function setTableFilters() {
         //extract arrays from checkboxFilters Array
         checkBoxRanks = checkboxFilters.filter((x) => x.field === "rankName");
@@ -173,9 +172,12 @@
       // Toggle  modal
       function toggleModal(modalEl) {
         var theModal = document.getElementById(modalEl)
-       theModal.classList.toggle("no-visibility");
+        theModal.classList.toggle("no-visibility");
         overlay.classList.toggle("no-visibility");
-        // rowCount.classList.toggle("moved"); 
+        if(modelEl = 'modal-filters-container'){
+          rowCount.classList.toggle("moved");  
+        }
+       
       }
 
    
@@ -249,16 +251,9 @@
 
       var navToDetails = function (e, cell) {
         var rowData = cell.getRow().getData();
-        var theId = rowData.id;
-        localStorage.setItem("record", theId);
-        // window.location = "hrm_personellDetails.html";
-        var personellDetails= document.getElementById("personell-modal")
-        personellDetails.classList.toggle("no-visibility");
-        overlay.classList.toggle("no-visibility");
-
-
-       
-
+        var theId = rowData.id;     
+        toggleModal('personell-modal');
+        document.getElementById("details").innerHTML = theId;
       }
 
 

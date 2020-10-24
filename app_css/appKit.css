@@ -362,7 +362,7 @@ mark {
   height: 100%;
   z-index: 900;
   background: #000000;
-  opacity: 0.25;
+  opacity: 0.5;
 }
 
 #closeRightModalBtn {
