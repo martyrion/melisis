@@ -276,6 +276,10 @@
   border: none;
 }
 
+.tabulator .tabulator-row.tabulator-selected {
+  background-color: rgba(117, 69, 166, 0.1) !important;
+}
+
 .tabulator .tabulator-footer {
   height: 0px;
 }

@@ -30,9 +30,8 @@
       <sub-modules-hrm class="submodules-nav"></sub-modules-hrm>
       <section id="mainSection" class="main">
         <!-- Top line items -->
-        <span class="title">Κατάλογος Προσωπικού</span>
+        <span id="module-title" class="title">Κατάλογος Προσωπικού</span>
          <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
-         <span id="splitBtn" class="material-icons btn">vertical_split</span>
          <span id="filters-btn" class="material-icons btn" onclick="toggleModal('modal-filters-container')">filter_list</span>
        
         <div id="filters-indicator" class="no-visibility"></div>
@@ -41,6 +40,10 @@
         <btn id="addBtn" class="mainContentAdd btn">Προσθήκη</btn>
         <!-- ----------------------------------------------->
         <div id="dataTable" class="dataTable"></div>
+        <div id="details-wrapper" class="details-wrapper no-visibility">
+          <span id="details-title">Hello</span>
+
+        </div>
       </section>
       <section class="footer">
         <div id="row-count"></div>
@@ -89,6 +92,9 @@
       var overlay = document.getElementById("modal-overlay");
       var filtersIndicator = document.getElementById("filters-indicator");
       var rowCount = document.getElementById("row-count");
+      var detailsWrapper = document.getElementById("details-wrapper");
+      var tableEl = document.getElementById("dataTable");
+      var moduleTitle = document.getElementById("module-title");
 
       // Init Vars
       var groupArray = [];
@@ -251,22 +257,41 @@
 
       // Click details in row
 
-      var navToDetails = function (e, cell) {
+      var moreButton = function (e, cell) {
         var rowData = cell.getRow().getData();
         var theRow = cell.getRow();
         var theId = rowData.id;     
-        // toggleModal('personell-modal');
-        // document.getElementById("details").innerHTML = theId;
-        var tableEl = document.getElementById("dataTable");
-        table.hideColumn ("gender");
-        table.hideColumn ("mobileNumber");
+        table.toggleColumn ("gender");
+        table.toggleColumn ("mobileNumber");
+        table.toggleColumn("details");
         tableEl.classList.toggle("alt");
-        table.deselectRow();
-        theRow.toggleSelect();
-        
+        detailsWrapper.classList.toggle('no-visibility');
+       
       }
 
 
+      var navToDetails = function () {
+        table.hideColumn ("gender");
+        table.hideColumn ("mobileNumber");
+        table.hideColumn("details");
+        tableEl.classList.add("alt");
+        detailsWrapper.classList.remove('no-visibility');
+        moduleTitle.innerHTML = "Λεπτομέρειες στελεχών"
+        document.getElementById("sub-second").classList.add("active");
+        document.getElementById("sub-first").classList.remove("active"); 
+      }
+
+      var navToList = function () {
+        table.showColumn ("gender");
+        table.showColumn ("mobileNumber");
+        table.showColumn("details");
+        tableEl.classList.remove("alt");
+        detailsWrapper.classList.add('no-visibility');
+        moduleTitle.innerHTML = "Κατάλογος προσωπικού";
+     
+        document.getElementById("sub-first").classList.add("active");
+        document.getElementById("sub-second").classList.remove("active");
+      }
 
 
 
@@ -286,6 +311,7 @@
         printAsHtml: true, //enable html table printing
         printHeader: printTitle(), // set header content on printed table
         layout: "fitDataFill",
+        selectable:1,
 
         columns: [
           { title: "id", field: "id", cssClass: "id", visible: false },
@@ -346,7 +372,6 @@
             hozAlign: "right",
             cssClass: "details",
             headerSort: false,
-            cellClick: navToDetails,
           },
         ],
         groupHeader: function (value, count, data, group) {

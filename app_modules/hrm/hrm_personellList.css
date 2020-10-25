@@ -52,6 +52,16 @@
           column-gap: 12px;
 }
 
+#dataTable.tabulator .tabulator-headers .details > span,
+#dataTable.tabulator div.tabulator-row .details > span {
+  display: none;
+}
+
+#dataTable.tabulator .tabulator-headers.tabulator-selected .details > span,
+#dataTable.tabulator div.tabulator-row.tabulator-selected .details > span {
+  display: block;
+}
+
 #dataTable.tabulator .rankName {
   -ms-grid-column: 1;
   grid-column: 1;
@@ -85,7 +95,6 @@
 #dataTable.tabulator .details {
   -ms-grid-column: 10;
       grid-column-start: 10;
-  margin-right: 18px;
   color: grey;
 }
 
@@ -101,8 +110,8 @@
   margin: 0px;
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (minmax(60px, 1fr))[5];
-      grid-template-columns: repeat(5, minmax(60px, 1fr));
+  -ms-grid-columns: (minmax(60px, 1fr))[4];
+      grid-template-columns: repeat(4, minmax(60px, 1fr));
   -ms-grid-rows: 48px;
       grid-template-rows: 48px;
   -webkit-column-gap: 12px;
@@ -129,10 +138,26 @@
   grid-column: 4;
 }
 
-#dataTable.tabulator.alt .details {
-  -ms-grid-column: 5;
-      grid-column-start: 5;
-  color: grey;
+.details-wrapper {
+  grid-column: 5/-1;
+  grid-row: 3/-1;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(60px, 1fr))[6];
+      grid-template-columns: repeat(6, minmax(60px, 1fr));
+  -ms-grid-rows: 48px;
+      grid-template-rows: 48px;
+  -webkit-column-gap: 12px;
+          column-gap: 12px;
+}
+
+#details-title {
+  -ms-grid-row: 1;
+  grid-row: 1;
+  grid-column: 1/-1;
+  border-bottom: 1px solid grey;
+  font-size: 16px;
+  padding: 15px;
 }
 
 .details:hover {

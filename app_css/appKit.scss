@@ -244,6 +244,10 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 
   .tabulator-row {
     border: none;
+
+    &.tabulator-selected{
+      background-color: $colorPurple010 !important;
+    }
   }
 
   .tabulator-footer {
@@ -261,6 +265,8 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
       color: black;
     }
   }
+
+ 
   .tabulator-group-level-1 {
     font-style: italic;
     padding-left: 48px;
