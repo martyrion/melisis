@@ -191,6 +191,10 @@
   justify-self: end;
 }
 
+#splitBtn{
+  transform: rotate(90deg);
+}
+
 #addBtn {
   background-color: #7445a6;
   grid-column: 10/10;

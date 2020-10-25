@@ -31,8 +31,10 @@
       <section id="mainSection" class="main">
         <!-- Top line items -->
         <span class="title">Κατάλογος Προσωπικού</span>
-        <span id="filters-btn" class="material-icons btn" onclick="toggleModal('modal-filters-container')">filter_list</span>
-        <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
+         <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
+         <span id="splitBtn" class="material-icons btn">vertical_split</span>
+         <span id="filters-btn" class="material-icons btn" onclick="toggleModal('modal-filters-container')">filter_list</span>
+       
         <div id="filters-indicator" class="no-visibility"></div>
         <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
         <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
