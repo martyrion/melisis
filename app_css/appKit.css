@@ -224,7 +224,7 @@
 }
 
 .tabulator .tabulator-tableHolder {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   /* no horizontal scrolling */
   background-color: transparent !important;
   height: 100% !important;

@@ -138,26 +138,47 @@
   grid-column: 4;
 }
 
-.details-wrapper {
+#details-wrapper {
   grid-column: 5/-1;
   grid-row: 3/-1;
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (minmax(60px, 1fr))[6];
       grid-template-columns: repeat(6, minmax(60px, 1fr));
-  -ms-grid-rows: 48px;
-      grid-template-rows: 48px;
+  -ms-grid-rows: 49px (48px)[auto-fill];
+      grid-template-rows: 49px repeat(auto-fill, 48px);
   -webkit-column-gap: 12px;
           column-gap: 12px;
 }
 
-#details-title {
-  -ms-grid-row: 1;
-  grid-row: 1;
-  grid-column: 1/-1;
+#details-wrapper .header-row {
   border-bottom: 1px solid grey;
   font-size: 16px;
-  padding: 15px;
+  padding: 15px 0px;
+  grid-column: 1/-1;
+  grid-row: 1 span 1;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: subgrid;
+      grid-template-columns: subgrid;
+}
+
+#details-wrapper .header-row #optionA {
+  grid-column: -4;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+#details-wrapper .header-row #optionB {
+  grid-column: -3;
+  -ms-grid-row: 1;
+  grid-row: 1;
+}
+
+#details-wrapper .header-row #optionC {
+  grid-column: -1;
+  -ms-grid-row: 1;
+  grid-row: 1;
 }
 
 .details:hover {

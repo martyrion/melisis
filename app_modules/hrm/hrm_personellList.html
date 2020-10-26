@@ -1,21 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
     <title>MELISIS</title>
 
     <!-- GLOBAL LINKS -->
-    <link rel="stylesheet" href="../../app_css/backgroundSVG.css" type="text/css" />
-    <link rel="stylesheet" href="../../app_css/materialIconFont.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="../../app_css/backgroundSVG.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../../app_css/materialIconFont.css"
+      type="text/css"
+    />
     <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
     <!--          Custom JS functions -->
     <script src="../../app_js/customFunctions.js"></script>
     <!--          Web components -->
-    <script src="../../app_js/web_components/parts.js" type="text/javascript" defer></script>
+    <script
+      src="../../app_js/web_components/parts.js"
+      type="text/javascript"
+      defer
+    ></script>
     <!--          Tabulator references-->
-    <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
+    <link
+      href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css"
+      rel="stylesheet"
+    />
     <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
 
     <!-- LOCAL LINKS (only for this webpage) -->
@@ -31,18 +45,38 @@
       <section id="mainSection" class="main">
         <!-- Top line items -->
         <span id="module-title" class="title">Κατάλογος Προσωπικού</span>
-         <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
-         <span id="filters-btn" class="material-icons btn" onclick="toggleModal('modal-filters-container')">filter_list</span>
-       
+        <span id="printBtn" class="material-icons btn" onclick="printTable()"
+          >print</span
+        >
+        <span
+          id="filters-btn"
+          class="material-icons btn"
+          onclick="toggleModal('modal-filters-container')"
+          >filter_list</span
+        >
+
         <div id="filters-indicator" class="no-visibility"></div>
-        <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
-        <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
+        <input
+          type="text"
+          id="search-box"
+          placeholder="όνομα ή επώνυμο"
+          oninput="alterSearchBox()"
+        />
+        <span
+          id="searchbox-btn"
+          class="material-icons btn grey-icon"
+          onclick="clearSearchBox()"
+          >search</span
+        >
         <btn id="addBtn" class="mainContentAdd btn">Προσθήκη</btn>
         <!-- ----------------------------------------------->
         <div id="dataTable" class="dataTable"></div>
-        <div id="details-wrapper" class="details-wrapper no-visibility">
-          <span id="details-title">Hello</span>
-
+        <div id="details-wrapper" class="submodule-wrapper no-visibility">
+          <div class="header-row">
+          <span id="optionA">Γενικά</span>
+          <span id="optionB">Άπουσίες</span>
+          <span id="optionC">Θέσεις</span>
+        </div>
         </div>
       </section>
       <section class="footer">
@@ -56,7 +90,12 @@
     <!-- Right Modal Window -->
     <div id="modal-filters-container" class="modal-right no-visibility">
       <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
-      <span onclick="toggleModal('modal-filters-container')" id="closeRightModalBtn" class="material-icons">close</span>
+      <span
+        onclick="toggleModal('modal-filters-container')"
+        id="closeRightModalBtn"
+        class="material-icons"
+        >close</span
+      >
       <div id="groups-table"></div>
       <span id="second-title" class="rightModalTitle">Φίλτρα</span>
       <div id="filters-table"></div>
@@ -68,13 +107,12 @@
 
     <div id="modal-overlay" class="modal-overlay no-visibility"></div>
 
-
     <!-- Personell Details -->
     <div id="personell-modal" class="modal-personell-details no-visibility">
-      <span onclick="toggleModal('personell-modal')" class="material-icons">close</span>
+      <span onclick="toggleModal('personell-modal')" class="material-icons"
+        >close</span
+      >
       <span id="details"></span>
-
-
     </div>
 
     <script>
@@ -103,13 +141,13 @@
       var checkboxFilter = {};
       var checkBoxRanks = [];
       var checkBoxGender = [];
+      var activeSubmodule = "sub-first";
 
       // var myModal = new Modal ("modal-middle-medium","hello");
       window.onload = function () {
         document.getElementById("mod-first").classList.add("active");
-        document.getElementById("sub-first").classList.add("active");
-
-      }
+        document.getElementById(activeSubmodule).classList.add("active");
+      };
 
       //======================
       //  FUNCTIONS
@@ -179,16 +217,13 @@
 
       // Toggle  modal
       function toggleModal(modalEl) {
-        var theModal = document.getElementById(modalEl)
+        var theModal = document.getElementById(modalEl);
         theModal.classList.toggle("no-visibility");
         overlay.classList.toggle("no-visibility");
-        if(modelEl = 'modal-filters-container'){
-          rowCount.classList.toggle("moved");  
+        if ((modelEl = "modal-filters-container")) {
+          rowCount.classList.toggle("moved");
         }
-       
       }
-
-   
 
       // Print Table
       function printTable() {
@@ -196,6 +231,7 @@
         overlay.classList.toggle("no-visibility");
         // table.print(false, true);
       }
+      
       // Set print Title
       function printTitle() {
         return "<h1>Κατάλογος προσωπικού</h1>";
@@ -224,7 +260,6 @@
       };
 
       // Filter main table data (called from filter-table row checkboxes)
-
       var selectFilter = function (e, cell) {
         var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
         var checkbox = row.firstChild;
@@ -255,49 +290,37 @@
         setTableFilters();
       };
 
-      // Click details in row
-
-      var moreButton = function (e, cell) {
-        var rowData = cell.getRow().getData();
-        var theRow = cell.getRow();
-        var theId = rowData.id;     
-        table.toggleColumn ("gender");
-        table.toggleColumn ("mobileNumber");
-        table.toggleColumn("details");
-        tableEl.classList.toggle("alt");
-        detailsWrapper.classList.toggle('no-visibility');
-       
+      // Squeeze or Expand parameters (main table)
+      function mainTableAdjust(type) {
+        if (type === "squeeze") {
+          table.hideColumn("gender");
+          table.hideColumn("mobileNumber");
+          table.hideColumn("details");
+          tableEl.classList.add("alt");
+          tableEl.classList.remove("no-visibility");
+        } else if (type === "expand") {
+          table.showColumn("gender");
+          table.showColumn("mobileNumber");
+          table.showColumn("details");
+          tableEl.classList.remove("alt");
+          tableEl.classList.remove("no-visibility");
+        } else if (type === "hide") {
+          tableEl.classList.remove("alt");
+          tableEl.classList.add("no-visibility");
+        }
       }
 
-
-      var navToDetails = function () {
-        table.hideColumn ("gender");
-        table.hideColumn ("mobileNumber");
-        table.hideColumn("details");
-        tableEl.classList.add("alt");
-        detailsWrapper.classList.remove('no-visibility');
-        moduleTitle.innerHTML = "Λεπτομέρειες στελεχών"
-        document.getElementById("sub-second").classList.add("active");
-        document.getElementById("sub-first").classList.remove("active"); 
-      }
-
-      var navToList = function () {
-        table.showColumn ("gender");
-        table.showColumn ("mobileNumber");
-        table.showColumn("details");
-        tableEl.classList.remove("alt");
-        detailsWrapper.classList.add('no-visibility');
-        moduleTitle.innerHTML = "Κατάλογος προσωπικού";
-     
-        document.getElementById("sub-first").classList.add("active");
-        document.getElementById("sub-second").classList.remove("active");
-      }
-
-
-
-
-
-
+      // Navigate to sub-module
+      var navigation = function (subModule, type, title, wrapperId) {
+        mainTableAdjust(type);
+        document.getElementById(activeSubmodule).classList.remove("active");
+        activeSubmodule = subModule;
+        document.getElementById(activeSubmodule).classList.add("active");
+        moduleTitle.innerHTML = title;
+        document.querySelector(".submodule-wrapper").className +=
+          "submodule-wrapper no-visibility";
+        document.getElementById(wrapperId).classList.remove("no-visibility");
+      };
 
       //======================
       //  TABLES
@@ -311,7 +334,7 @@
         printAsHtml: true, //enable html table printing
         printHeader: printTitle(), // set header content on printed table
         layout: "fitDataFill",
-        selectable:1,
+        selectable: 1,
 
         columns: [
           { title: "id", field: "id", cssClass: "id", visible: false },
@@ -373,6 +396,18 @@
             cssClass: "details",
             headerSort: false,
           },
+          { title: "", field: "absence1", },
+          { title: "", field: "absence2", },
+          { title: "", field: "absence3", },
+          { title: "", field: "absence4", },
+          { title: "", field: "absence5", },
+          { title: "", field: "absence6", },
+          { title: "", field: "absence7", },
+          { title: "", field: "absence8", },
+          { title: "", field: "absence9", },
+          { title: "", field: "absence10", },
+          { title: "", field: "absence11", },
+          { title: "", field: "absence12", },
         ],
         groupHeader: function (value, count, data, group) {
           //value - the value all members of this group share
@@ -487,5 +522,4 @@
       });
     </script>
   </body>
-
 </html>

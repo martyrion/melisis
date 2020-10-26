@@ -24,16 +24,16 @@ customElements.define('modules-nav', ModuleNav);
 class SubModulesHRM extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-    <a id="sub-first" class="submodule-button btn" onclick="navToList()">
+    <a id="sub-first" class="submodule-button btn" onclick="navigation('sub-first', 'expand','Κατάλογος Προσωπικού','1')">
     <i class="material-icons">list</i>Κατάλογος
   </a>
-  <a id="sub-second" class="submodule-button btn" onclick="navToDetails()">
+  <a id="sub-second" class="submodule-button btn" onclick="navigation('sub-second', 'squeeze','Λεπτομέρειες Προσωπικού','details-wrapper')">
     <i class="material-icons">list</i>Λεπτ/ρειες
   </a>
-  <a id="sub-third" class="submodule-button btn">
+  <a id="sub-third" class="submodule-button btn" onclick="navigation('sub-third', 'squeeze','Απουσιολόγιο','1')">
     <i class="material-icons">airline_seat_individual_suite</i>Απόντες
   </a>
-  <a id="sub-fourth" class="submodule-button btn">
+  <a id="sub-fourth" class="submodule-button btn" onclick="navigation('sub-fourth', 'hide','Στατιστικά','1')">
     <i class="material-icons">bar_chart</i>Στατιστικά
   </a>
           `;
