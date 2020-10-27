@@ -28,13 +28,16 @@ class SubModulesHRM extends HTMLElement {
     <i class="material-icons">list</i>Κατάλογος
   </a>
   <a id="sub-second" class="submodule-button btn" onclick="navigation('sub-second', 'squeeze','Λεπτομέρειες Προσωπικού','details-wrapper')">
-    <i class="material-icons">list</i>Λεπτ/ρειες
+    <i class="material-icons">info</i>Λεπτ/ρειες
   </a>
   <a id="sub-third" class="submodule-button btn" onclick="navigation('sub-third', 'absence','Απουσιολόγιο','1')">
-    <i class="material-icons">airline_seat_individual_suite</i>Απόντες
+    <i class="material-icons">person_remove_alt_1</i>Απόντες
   </a>
   <a id="sub-fourth" class="submodule-button btn" onclick="navigation('sub-fourth', 'hide','Στατιστικά','1')">
     <i class="material-icons">bar_chart</i>Στατιστικά
+  </a>
+  <a id="sub-fifth" class="submodule-button btn" onclick="navigation('sub-fifth', 'hide','Χάρτης','1')">
+    <i class="material-icons">map</i>Χάρτης
   </a>
           `;
 

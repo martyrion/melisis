@@ -303,11 +303,11 @@
 
 .tabulator .tabulator-group-level-1 {
   font-style: italic;
-  padding-left: 48px;
+  padding-left: 48px !important;
 }
 
 .tabulator .tabulator-col-sorter {
-  right: 12px;
+  right: 12px !important;
 }
 
 .tabulator-col-sorter {

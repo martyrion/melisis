@@ -274,10 +274,10 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
  
   .tabulator-group-level-1 {
     font-style: italic;
-    padding-left: 48px;
+    padding-left: 48px !important;
   }
   .tabulator-col-sorter {
-    right: 12px;
+    right: 12px !important;
   }
 }
 
