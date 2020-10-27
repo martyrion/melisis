@@ -196,6 +196,8 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 //Tabulator Configuration - for all tables
 
 .tabulator {
+  
+
   background-color: transparent !important;
   height: 100%;
   .tabulator-tableHolder {
@@ -208,6 +210,7 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
   .tabulator-table {
     height: 100% !important;
     padding: 0px !important;
+    width: 100% !important;
   }
   .tabulator-header {
     padding: 0px;
@@ -222,13 +225,13 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
     background-color: transparent !important;
   }
   .tabulator-cell {
-    padding: 12px 0px 0px 6px;
+    padding: 12px 0px 0px 0px !important;
     margin: 0px;
     height: 100% !important;
     background-color: transparent !important;
   }
   .tabulator-col-content {
-    padding: 12px 0px 0px 6px;
+    padding: 12px 0px 0px 0px !important;
     margin: 0px;
     color: grey;
     font-weight: 300;
@@ -240,6 +243,7 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
 
   .tabulator-col {
     background-color: transparent !important;
+    width: 100% !important;
   }
 
   .tabulator-row {
@@ -264,8 +268,9 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
       /* the grouping row record count*/
       color: black;
     }
-  }
 
+    
+  }
  
   .tabulator-group-level-1 {
     font-style: italic;
@@ -274,6 +279,10 @@ $colorWhite010: rgba(255, 255, 255, 0.1) !default;
   .tabulator-col-sorter {
     right: 12px;
   }
+}
+
+.tabulator-col-sorter{
+  right: 0px !important;
 }
 
 //INPUT BOX Styling

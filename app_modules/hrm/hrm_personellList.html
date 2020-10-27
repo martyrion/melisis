@@ -143,6 +143,7 @@
       var checkBoxGender = [];
       var activeSubmodule = "sub-first";
 
+
       // var myModal = new Modal ("modal-middle-medium","hello");
       window.onload = function () {
         document.getElementById("mod-first").classList.add("active");
@@ -259,6 +260,16 @@
         }
       };
 
+      var selectDate = function (e, cell){
+        var rowValue = cell.getData(); // get data of whole row;
+        var name = rowValue.first_name;
+        var surname = rowValue.last_name;
+        var dateId = cell.getField();
+        var cell = cell.getValue();
+       
+        alert("You have clicked on "+name+" "+surname+", on date: "+dateId+". On this date the absence reason is: "+cell);
+      }
+
       // Filter main table data (called from filter-table row checkboxes)
       var selectFilter = function (e, cell) {
         var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
@@ -317,6 +328,9 @@
           tableEl.classList.remove("no-visibility");
           tableEl.classList.add("absence");
           toggleAbsenceColumns("show");
+          table.hideColumn("gender");
+          table.hideColumn("mobileNumber");
+          table.hideColumn("details");
         }
       }
 
@@ -373,7 +387,7 @@
         tooltips: true,
         printAsHtml: true, //enable html table printing
         printHeader: printTitle(), // set header content on printed table
-        layout: "fitDataFill",
+        // layout: "fitColumns",
         selectable: 1,
 
         columns: [
@@ -382,7 +396,7 @@
             title: "Bαθμός",
             field: "rankName",
             cssClass: "rankName",
-          },
+                 },
           {
             title: "rankId",
             field: "rankId",
@@ -390,10 +404,12 @@
             visible: false,
           },
           {
-            title: "Ειδ.",
+            title: "Ειδικότητα",
             field: "specialtyName",
             cssClass: "specialtyName",
-            hozAlign: "center",
+            headerHozAlign: "left",
+            // hozAlign: "center",
+       
           },
           {
             title: "specialtyId",
@@ -406,28 +422,32 @@
             title: "Όνομα",
             field: "first_name",
             cssClass: "first_name",
+      
           },
           {
             title: "Επώνυμο",
             field: "last_name",
             cssClass: "last_name",
+       
           },
           {
             title: "Φύλο",
             field: "gender",
             cssClass: "gender",
+      
           },
 
           {
             title: "Τηλέφωνο",
             field: "mobileNumber",
-            widthGrow: 1,
-            cssClass: "mobileNumber",
+           cssClass: "mobileNumber",
+        
           },
 
           {
             title: "",
             field: "details",
+       
 
             formatter: function (cell, formatterParams) {
               return "<span class='material-icons'>more_horiz</span>";
@@ -437,19 +457,20 @@
             headerSort: false,
           },
           {title:"Dates",
-          
-          columns:[ { title: "", field: "absence1",visible: false,cssClass: "dates", },
-          { title: "", field: "absence2",visible: false,cssClass: "dates", },
-          { title: "", field: "absence3",visible: false,cssClass: "dates", },
-          { title: "", field: "absence4",visible: false, cssClass: "dates",},
-          { title: "", field: "absence5",visible: false,cssClass: "dates", },
-          { title: "", field: "absence6",visible: false,cssClass: "dates", },
-          { title: "", field: "absence7",visible: false,cssClass: "dates", },
-          { title: "", field: "absence8",visible: false, cssClass: "dates",},
-          { title: "", field: "absence9",visible: false,cssClass: "dates", },
-          { title: "", field: "absence10",visible: false, cssClass: "dates",},
-          { title: "", field: "absence11",visible: false,cssClass: "dates", },
-          { title: "", field: "absence12",visible: false,cssClass: "dates", },],
+          cssClas:"date-title",
+          columns:[ 
+          { title: "", field: "absence1",visible: false,cssClass: "dates",cellClick: selectDate,},
+          { title: "", field: "absence2",visible: false,cssClass: "dates",cellClick: selectDate, },
+          { title: "", field: "absence3",visible: false,cssClass: "dates",cellClick: selectDate, },
+          { title: "", field: "absence4",visible: false, cssClass: "dates",cellClick: selectDate,},
+          { title: "", field: "absence5",visible: false,cssClass: "dates", cellClick: selectDate,},
+          { title: "", field: "absence6",visible: false,cssClass: "dates",cellClick: selectDate, },
+          { title: "", field: "absence7",visible: false,cssClass: "dates",cellClick: selectDate, },
+          { title: "", field: "absence8",visible: false, cssClass: "dates",cellClick: selectDate,},
+          { title: "", field: "absence9",visible: false,cssClass: "dates",cellClick: selectDate, },
+          { title: "", field: "absence10",visible: false, cssClass: "dates",cellClick: selectDate,},
+          { title: "", field: "absence11",visible: false,cssClass: "dates",cellClick: selectDate,},
+          { title: "", field: "absence12",visible: false,cssClass: "dates",cellClick: selectDate,},],
         
         }
          
@@ -462,6 +483,9 @@
           return value + " :" + "<span>" + count + " εγγραφές" + "</span>";
         },
       });
+
+
+      
 
       // Create a table with the some columns of first, as rows -- to use as grouping selection
       var groupsTable = new Tabulator("#groups-table", {

@@ -70,10 +70,9 @@
 #row-count {
   display: flex;
   justify-self: start;
-  margin-left:12px;
+  margin-left: 12px;
   margin-top: 18px;
 }
-
 
 // 2. Tabulator specific for this layout
 
@@ -85,7 +84,7 @@
   div.tabulator-row {
     margin: 0px;
     padding-left: 0px !important;
-    display: grid !important;
+    display: grid ;
     grid-template-columns: repeat(10, minmax(60px, 1fr));
     grid-template-rows: 48px;
     column-gap: 12px;
@@ -103,30 +102,30 @@
   }
 
   .rankName {
-    grid-column: 1 !important;
+    grid-column: 1 ;
   }
 
   .specialtyName {
-    grid-column: 2 !important;
+    grid-column: 2 ;
   }
 
   .first_name {
-    grid-column: 3 !important;
+    grid-column: 3 ;
   }
 
   .last_name {
-    grid-column: 4 !important;
+    grid-column: 4 ;
   }
 
   .gender {
-    grid-column: 6 !important;
+    grid-column: 6 ;
   }
 
   .mobileNumber {
-    grid-column: 8 !important;
+    grid-column: 8 ;
   }
   .details {
-    grid-column-start: 10 !important;
+    grid-column-start: 10 ;
     color: grey;
   }
 }
@@ -162,42 +161,85 @@
   }
 }
 
-
 // 4. Absence sheet Tabulator
 #dataTable.tabulator.absence {
- 
+  grid-column: 1/-1;
+  grid-row: 3/-1;
+
   .tabulator-headers,
   div.tabulator-row {
     margin: 0px;
-    padding-left: 0px !important;
-    display: grid !important;
-    grid-template-columns: 120px 120px 120px 120px repeat(12, 1fr);
+    padding-left: 0px;
+    display: grid ;
+    grid-template-columns: 120px 12px 120px 12px 120px 12px 120px repeat(12, 1fr) !important;
     grid-template-rows: 48px;
     column-gap: 0px;
-
   }
-  .tabulator-col.tabulator-col-group.dates{
+  .tabulator-col.tabulator-col-group.dates {
     grid-column: 5/-1;
     margin-left: 200px;
   }
 
-  .dates{
+.rankName {
+    grid-column: 1;
+  }
+  .specialtyName {
+    grid-column: 3;
+  }
+
+  .first_name {
+    grid-column: 5;
+  }
+
+  .last_name {
+    grid-column: 7;
+  }
+
+
+  .tabulator-cell.dates{
+    width: 100% !important;
+  }
+
+
+  .dates {
     display: flex;
     align-content: center;
     justify-content: center;
-    border: 1px  solid #e0e0e0;
+    border: 2px solid #e0e0e0;
     border-right: 0px;
     border-top: 0px;
+   
+
+
+    
+
+    &[title]:not([title=""]){
+      font-size: 0px;
+      
+
+    }
+
+  
+
+    &[title="1"] {
+      background-color: gray !important;
+
+    }
+    &[title="2"] {
+      background-color: green !important;
+      
+    }
+
+    &[title="3"] {
+      background-color: black !important;
+      
+    }
+    &[title="4"] {
+      background-color: yellow !important;
+      
+    }
   }
 }
-
-
-
-
-
-
-
-
 
 // Personell Details Component
 
@@ -217,20 +259,19 @@
     grid-row: 1 span 1;
     display: grid;
     grid-template-columns: subgrid;
-  
 
     #optionA {
       grid-column: -4;
-      grid-row:1;
+      grid-row: 1;
     }
 
     #optionB {
       grid-column: -3;
-      grid-row:1;
+      grid-row: 1;
     }
     #optionC {
       grid-column: -1;
-      grid-row:1;
+      grid-row: 1;
     }
   }
 }
@@ -240,11 +281,6 @@
   font-style: bold;
   font-size: 18px;
 }
-
-
-
-
-
 
 // Right modal Components
 

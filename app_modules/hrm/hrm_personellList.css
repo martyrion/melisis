@@ -118,8 +118,8 @@
 #dataTable.tabulator div.tabulator-row {
   margin: 0px;
   padding-left: 0px !important;
-  display: -ms-grid !important;
-  display: grid !important;
+  display: -ms-grid;
+  display: grid;
   -ms-grid-columns: (minmax(60px, 1fr))[10];
       grid-template-columns: repeat(10, minmax(60px, 1fr));
   -ms-grid-rows: 48px;
@@ -139,38 +139,38 @@
 }
 
 #dataTable.tabulator .rankName {
-  -ms-grid-column: 1 !important;
-  grid-column: 1 !important;
+  -ms-grid-column: 1;
+  grid-column: 1;
 }
 
 #dataTable.tabulator .specialtyName {
-  -ms-grid-column: 2 !important;
-  grid-column: 2 !important;
+  -ms-grid-column: 2;
+  grid-column: 2;
 }
 
 #dataTable.tabulator .first_name {
-  -ms-grid-column: 3 !important;
-  grid-column: 3 !important;
+  -ms-grid-column: 3;
+  grid-column: 3;
 }
 
 #dataTable.tabulator .last_name {
-  -ms-grid-column: 4 !important;
-  grid-column: 4 !important;
+  -ms-grid-column: 4;
+  grid-column: 4;
 }
 
 #dataTable.tabulator .gender {
-  -ms-grid-column: 6 !important;
-  grid-column: 6 !important;
+  -ms-grid-column: 6;
+  grid-column: 6;
 }
 
 #dataTable.tabulator .mobileNumber {
-  -ms-grid-column: 8 !important;
-  grid-column: 8 !important;
+  -ms-grid-column: 8;
+  grid-column: 8;
 }
 
 #dataTable.tabulator .details {
-  -ms-grid-column: 10 !important;
-      grid-column-start: 10 !important;
+  -ms-grid-column: 10;
+      grid-column-start: 10;
   color: grey;
 }
 
@@ -215,14 +215,19 @@
   grid-column: 4;
 }
 
+#dataTable.tabulator.absence {
+  grid-column: 1/-1;
+  grid-row: 3/-1;
+}
+
 #dataTable.tabulator.absence .tabulator-headers,
 #dataTable.tabulator.absence div.tabulator-row {
   margin: 0px;
-  padding-left: 0px !important;
-  display: -ms-grid !important;
-  display: grid !important;
-  -ms-grid-columns: 120px 120px 120px 120px (1fr)[12];
-      grid-template-columns: 120px 120px 120px 120px repeat(12, 1fr);
+  padding-left: 0px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 120px 12px 120px 12px 120px 12px 120px (1fr)[12] !important;
+      grid-template-columns: 120px 12px 120px 12px 120px 12px 120px repeat(12, 1fr) !important;
   -ms-grid-rows: 48px;
       grid-template-rows: 48px;
   -webkit-column-gap: 0px;
@@ -234,6 +239,30 @@
   margin-left: 200px;
 }
 
+#dataTable.tabulator.absence .rankName {
+  -ms-grid-column: 1;
+  grid-column: 1;
+}
+
+#dataTable.tabulator.absence .specialtyName {
+  -ms-grid-column: 3;
+  grid-column: 3;
+}
+
+#dataTable.tabulator.absence .first_name {
+  -ms-grid-column: 5;
+  grid-column: 5;
+}
+
+#dataTable.tabulator.absence .last_name {
+  -ms-grid-column: 7;
+  grid-column: 7;
+}
+
+#dataTable.tabulator.absence .tabulator-cell.dates {
+  width: 100% !important;
+}
+
 #dataTable.tabulator.absence .dates {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -243,9 +272,29 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  border: 1px  solid #e0e0e0;
+  border: 2px solid #e0e0e0;
   border-right: 0px;
   border-top: 0px;
+}
+
+#dataTable.tabulator.absence .dates[title]:not([title=""]) {
+  font-size: 0px;
+}
+
+#dataTable.tabulator.absence .dates[title="1"] {
+  background-color: gray !important;
+}
+
+#dataTable.tabulator.absence .dates[title="2"] {
+  background-color: green !important;
+}
+
+#dataTable.tabulator.absence .dates[title="3"] {
+  background-color: black !important;
+}
+
+#dataTable.tabulator.absence .dates[title="4"] {
+  background-color: yellow !important;
 }
 
 #details-wrapper {
