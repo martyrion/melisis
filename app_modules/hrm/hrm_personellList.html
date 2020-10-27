@@ -298,15 +298,55 @@
           table.hideColumn("details");
           tableEl.classList.add("alt");
           tableEl.classList.remove("no-visibility");
+          tableEl.classList.remove("absence");
+          toggleAbsenceColumns("hide");
         } else if (type === "expand") {
           table.showColumn("gender");
           table.showColumn("mobileNumber");
           table.showColumn("details");
           tableEl.classList.remove("alt");
           tableEl.classList.remove("no-visibility");
+          tableEl.classList.remove("absence");
+          toggleAbsenceColumns("hide");
         } else if (type === "hide") {
           tableEl.classList.remove("alt");
           tableEl.classList.add("no-visibility");
+          toggleAbsenceColumns("hide");
+        } else if (type==="absence"){
+          tableEl.classList.remove("alt");
+          tableEl.classList.remove("no-visibility");
+          tableEl.classList.add("absence");
+          toggleAbsenceColumns("show");
+        }
+      }
+
+      function toggleAbsenceColumns (type){
+        if(type==="show"){
+        table.showColumn("absence1");
+        table.showColumn("absence2");
+        table.showColumn("absence3");
+        table.showColumn("absence4");
+        table.showColumn("absence5");
+        table.showColumn("absence6");
+        table.showColumn("absence7");
+        table.showColumn("absence8");
+        table.showColumn("absence9");
+        table.showColumn("absence10");
+        table.showColumn("absence11");
+        table.showColumn("absence12");
+        } else if (type==="hide"){
+        table.hideColumn("absence1");
+        table.hideColumn("absence2");
+        table.hideColumn("absence3");
+        table.hideColumn("absence4");
+        table.hideColumn("absence5");
+        table.hideColumn("absence6");
+        table.hideColumn("absence7");
+        table.hideColumn("absence8");
+        table.hideColumn("absence9");
+        table.hideColumn("absence10");
+        table.hideColumn("absence11");
+        table.hideColumn("absence12");
         }
       }
 
@@ -396,18 +436,23 @@
             cssClass: "details",
             headerSort: false,
           },
-          { title: "", field: "absence1", },
-          { title: "", field: "absence2", },
-          { title: "", field: "absence3", },
-          { title: "", field: "absence4", },
-          { title: "", field: "absence5", },
-          { title: "", field: "absence6", },
-          { title: "", field: "absence7", },
-          { title: "", field: "absence8", },
-          { title: "", field: "absence9", },
-          { title: "", field: "absence10", },
-          { title: "", field: "absence11", },
-          { title: "", field: "absence12", },
+          {title:"Dates",
+          
+          columns:[ { title: "", field: "absence1",visible: false,cssClass: "dates", },
+          { title: "", field: "absence2",visible: false,cssClass: "dates", },
+          { title: "", field: "absence3",visible: false,cssClass: "dates", },
+          { title: "", field: "absence4",visible: false, cssClass: "dates",},
+          { title: "", field: "absence5",visible: false,cssClass: "dates", },
+          { title: "", field: "absence6",visible: false,cssClass: "dates", },
+          { title: "", field: "absence7",visible: false,cssClass: "dates", },
+          { title: "", field: "absence8",visible: false, cssClass: "dates",},
+          { title: "", field: "absence9",visible: false,cssClass: "dates", },
+          { title: "", field: "absence10",visible: false, cssClass: "dates",},
+          { title: "", field: "absence11",visible: false,cssClass: "dates", },
+          { title: "", field: "absence12",visible: false,cssClass: "dates", },],
+        
+        }
+         
         ],
         groupHeader: function (value, count, data, group) {
           //value - the value all members of this group share
