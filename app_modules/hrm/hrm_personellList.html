@@ -44,7 +44,9 @@
       <sub-modules-hrm class="submodules-nav"></sub-modules-hrm>
       <section id="mainSection" class="main">
         <!-- Top line items -->
+      
         <span id="module-title" class="title">Κατάλογος Προσωπικού</span>
+        <span class="date-advance">Advance Date</span>
         <span id="printBtn" class="material-icons btn" onclick="printTable()"
           >print</span
         >
@@ -73,10 +75,10 @@
         <div id="dataTable" class="dataTable"></div>
         <div id="details-wrapper" class="submodule-wrapper no-visibility">
           <div class="header-row">
-          <span id="optionA">Γενικά</span>
-          <span id="optionB">Άπουσίες</span>
-          <span id="optionC">Θέσεις</span>
-        </div>
+            <span id="optionA">Γενικά</span>
+            <span id="optionB">Άπουσίες</span>
+            <span id="optionC">Θέσεις</span>
+          </div>
         </div>
       </section>
       <section class="footer">
@@ -142,6 +144,9 @@
       var checkBoxRanks = [];
       var checkBoxGender = [];
       var activeSubmodule = "sub-first";
+      var JSONstartDate = new Date(2020, 6, 1);
+      // var displayDate = ;
+   
 
 
       // var myModal = new Modal ("modal-middle-medium","hello");
@@ -232,7 +237,7 @@
         overlay.classList.toggle("no-visibility");
         // table.print(false, true);
       }
-      
+
       // Set print Title
       function printTitle() {
         return "<h1>Κατάλογος προσωπικού</h1>";
@@ -260,15 +265,24 @@
         }
       };
 
-      var selectDate = function (e, cell){
+      var selectDate = function (e, cell) {
         var rowValue = cell.getData(); // get data of whole row;
         var name = rowValue.first_name;
         var surname = rowValue.last_name;
         var dateId = cell.getField();
         var cell = cell.getValue();
-       
-        alert("You have clicked on "+name+" "+surname+", on date: "+dateId+". On this date the absence reason is: "+cell);
-      }
+
+        alert(
+          "You have clicked on " +
+            name +
+            " " +
+            surname +
+            ", on date: " +
+            dateId +
+            ". On this date the absence reason is: " +
+            cell
+        );
+      };
 
       // Filter main table data (called from filter-table row checkboxes)
       var selectFilter = function (e, cell) {
@@ -323,7 +337,7 @@
           tableEl.classList.remove("alt");
           tableEl.classList.add("no-visibility");
           toggleAbsenceColumns("hide");
-        } else if (type==="absence"){
+        } else if (type === "absence") {
           tableEl.classList.remove("alt");
           tableEl.classList.remove("no-visibility");
           tableEl.classList.add("absence");
@@ -334,33 +348,33 @@
         }
       }
 
-      function toggleAbsenceColumns (type){
-        if(type==="show"){
-        table.showColumn("absence1");
-        table.showColumn("absence2");
-        table.showColumn("absence3");
-        table.showColumn("absence4");
-        table.showColumn("absence5");
-        table.showColumn("absence6");
-        table.showColumn("absence7");
-        table.showColumn("absence8");
-        table.showColumn("absence9");
-        table.showColumn("absence10");
-        table.showColumn("absence11");
-        table.showColumn("absence12");
-        } else if (type==="hide"){
-        table.hideColumn("absence1");
-        table.hideColumn("absence2");
-        table.hideColumn("absence3");
-        table.hideColumn("absence4");
-        table.hideColumn("absence5");
-        table.hideColumn("absence6");
-        table.hideColumn("absence7");
-        table.hideColumn("absence8");
-        table.hideColumn("absence9");
-        table.hideColumn("absence10");
-        table.hideColumn("absence11");
-        table.hideColumn("absence12");
+      function toggleAbsenceColumns(type) {
+        if (type === "show") {
+          table.showColumn("absence1");
+          table.showColumn("absence2");
+          table.showColumn("absence3");
+          table.showColumn("absence4");
+          table.showColumn("absence5");
+          table.showColumn("absence6");
+          table.showColumn("absence7");
+          table.showColumn("absence8");
+          table.showColumn("absence9");
+          table.showColumn("absence10");
+          table.showColumn("absence11");
+          table.showColumn("absence12");
+        } else if (type === "hide") {
+          table.hideColumn("absence1");
+          table.hideColumn("absence2");
+          table.hideColumn("absence3");
+          table.hideColumn("absence4");
+          table.hideColumn("absence5");
+          table.hideColumn("absence6");
+          table.hideColumn("absence7");
+          table.hideColumn("absence8");
+          table.hideColumn("absence9");
+          table.hideColumn("absence10");
+          table.hideColumn("absence11");
+          table.hideColumn("absence12");
         }
       }
 
@@ -375,6 +389,39 @@
           "submodule-wrapper no-visibility";
         document.getElementById(wrapperId).classList.remove("no-visibility");
       };
+
+      // Populate date Array
+
+      var getDates = function (startDate, span) {
+        var absenceDateList = [],
+          currentDate = startDate,
+          addDays = function (days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+          };
+          var i = 0;
+        for (i=0;i<span; i++) {
+          absenceDateList.push(currentDate);
+          currentDate = addDays.call(currentDate, 1);
+        }
+        return absenceDateList;
+      };
+
+      // Usage
+      var absenceDateList = getDates(JSONstartDate, 30);
+      absenceDateList.forEach(function (date) {
+      });
+
+
+      // Title Formatter functino for absence columns
+
+       function titleFormatter(e, cell){
+        
+        var partA = "<span class='day-name'>"+absenceDateList[0].toLocaleString('el-EL', {weekday:"short"});
+        var partB = "<span class='day-and-month'>"+absenceDateList[0].toLocaleString('el-EL', {day: 'numeric', month: 'short' })+"</span></span>"
+        return partA+"-"+partB;
+      }
 
       //======================
       //  TABLES
@@ -396,7 +443,7 @@
             title: "Bαθμός",
             field: "rankName",
             cssClass: "rankName",
-                 },
+          },
           {
             title: "rankId",
             field: "rankId",
@@ -409,7 +456,6 @@
             cssClass: "specialtyName",
             headerHozAlign: "left",
             // hozAlign: "center",
-       
           },
           {
             title: "specialtyId",
@@ -422,58 +468,136 @@
             title: "Όνομα",
             field: "first_name",
             cssClass: "first_name",
-      
           },
           {
             title: "Επώνυμο",
             field: "last_name",
             cssClass: "last_name",
-       
           },
           {
             title: "Φύλο",
             field: "gender",
             cssClass: "gender",
-      
           },
 
           {
             title: "Τηλέφωνο",
             field: "mobileNumber",
-           cssClass: "mobileNumber",
-        
+            cssClass: "mobileNumber",
           },
 
           {
             title: "",
             field: "details",
-       
-
-            formatter: function (cell, formatterParams) {
-              return "<span class='material-icons'>more_horiz</span>";
-            },
             hozAlign: "right",
             cssClass: "details",
             headerSort: false,
           },
-          {title:"Dates",
-          cssClas:"date-title",
-          columns:[ 
-          { title: "", field: "absence1",visible: false,cssClass: "dates",cellClick: selectDate,},
-          { title: "", field: "absence2",visible: false,cssClass: "dates",cellClick: selectDate, },
-          { title: "", field: "absence3",visible: false,cssClass: "dates",cellClick: selectDate, },
-          { title: "", field: "absence4",visible: false, cssClass: "dates",cellClick: selectDate,},
-          { title: "", field: "absence5",visible: false,cssClass: "dates", cellClick: selectDate,},
-          { title: "", field: "absence6",visible: false,cssClass: "dates",cellClick: selectDate, },
-          { title: "", field: "absence7",visible: false,cssClass: "dates",cellClick: selectDate, },
-          { title: "", field: "absence8",visible: false, cssClass: "dates",cellClick: selectDate,},
-          { title: "", field: "absence9",visible: false,cssClass: "dates",cellClick: selectDate, },
-          { title: "", field: "absence10",visible: false, cssClass: "dates",cellClick: selectDate,},
-          { title: "", field: "absence11",visible: false,cssClass: "dates",cellClick: selectDate,},
-          { title: "", field: "absence12",visible: false,cssClass: "dates",cellClick: selectDate,},],
-        
-        }
-         
+          // {title:"Dates",
+          // cssClas:"date-title",
+          // columns:[
+          {
+            title: "",
+            field: "absence1",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+            titleFormatter: titleFormatter,
+      
+          },
+          {
+            title:"" ,
+            field: "absence2",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[2].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence3",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[3].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence4",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[4].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence5",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[5].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence6",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[6].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence7",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[7].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence8",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[8].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence9",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[9].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence10",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          {
+            title: absenceDateList[10].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence11",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+            titleFormatter: function (){return "<span class='dateNumber' style='color:blue'>5</span><span>-June</span><br>hi</br>"}
+          },
+          {
+            title: absenceDateList[11].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            field: "absence12",
+            visible: false,
+            cssClass: "dates",
+            cellClick: selectDate,
+            headerSort: false,
+          },
+          // ],
+
+          // }
         ],
         groupHeader: function (value, count, data, group) {
           //value - the value all members of this group share
@@ -483,9 +607,6 @@
           return value + " :" + "<span>" + count + " εγγραφές" + "</span>";
         },
       });
-
-
-      
 
       // Create a table with the some columns of first, as rows -- to use as grouping selection
       var groupsTable = new Tabulator("#groups-table", {

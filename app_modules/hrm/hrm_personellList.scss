@@ -241,6 +241,14 @@
   }
 }
 
+.day-name{
+display: flex;
+font-size: 14px;
+text-align: center;
+height: 100%;
+padding-bottom: 12px !important;
+}
+
 // Personell Details Component
 
 #details-wrapper {
