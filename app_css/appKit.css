@@ -314,7 +314,7 @@
   right: 0px !important;
 }
 
-input[type="text"],
+input,
 textarea {
   outline: none;
   border-radius: 4px;
@@ -323,17 +323,21 @@ textarea {
   transition: all 0.2s ease-in-out;
 }
 
-input[type="text"]:hover,
+input:hover,
 textarea:hover {
   border: 1px solid #262626;
 }
 
-input[type="text"]:focus,
+input:focus,
 textarea:focus {
   -webkit-box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
   border: 1px solid #7445a6;
   border-radius: 4px;
+}
+
+.grey-icon {
+  color: #bdbdbd !important;
 }
 
 .grey-icon {

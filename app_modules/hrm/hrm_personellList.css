@@ -30,8 +30,56 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  justify-self: center;
+}
+
+#advance-date {
+  padding: 12px;
+  -ms-grid-column: 7;
+  grid-column: 7/7;
+  -ms-grid-row: 1;
+  grid-row: 1/1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-self: start;
+}
+
+#retreat-date {
+  -ms-grid-column: 7;
+  grid-column: 7/7;
+  -ms-grid-row: 1;
+  grid-row: 1/1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-self: start;
+}
+
+#date-indicator {
+  margin-left: 12px;
+  -ms-grid-column: 6;
+  grid-column: 6/6;
+  -ms-grid-row: 1;
+  grid-row: 1/1;
+  margin: 6px 0px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-align: center;
   justify-self: end;
-  margin-right: 40px;
+  font-family: 'ubuntu';
+  color: #a6a6a6;
 }
 
 #filters-btn {

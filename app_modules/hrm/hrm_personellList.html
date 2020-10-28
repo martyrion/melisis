@@ -46,7 +46,9 @@
         <!-- Top line items -->
       
         <span id="module-title" class="title">Κατάλογος Προσωπικού</span>
-        <span class="date-advance">Advance Date</span>
+               <input id="date-indicator" type="date" value="2018-07-22"> 
+        <span id="retreat-date" class="material-icons btn">chevron_left</span>
+        <span id="advance-date" class="material-icons btn">chevron_right</span>
         <span id="printBtn" class="material-icons btn" onclick="printTable()"
           >print</span
         >
@@ -80,6 +82,7 @@
             <span id="optionC">Θέσεις</span>
           </div>
         </div>
+        <div id='leafltet'></div>
       </section>
       <section class="footer">
         <div id="row-count"></div>
@@ -135,6 +138,7 @@
       var detailsWrapper = document.getElementById("details-wrapper");
       var tableEl = document.getElementById("dataTable");
       var moduleTitle = document.getElementById("module-title");
+      var dateIndicator = document.getElementById('date-indicator');
 
       // Init Vars
       var groupArray = [];
@@ -148,6 +152,7 @@
       // var displayDate = ;
    
 
+      
 
       // var myModal = new Modal ("modal-middle-medium","hello");
       window.onload = function () {
@@ -413,6 +418,10 @@
       absenceDateList.forEach(function (date) {
       });
 
+
+      //set initial absence date
+      var firstDate = absenceDateList[0].toLocaleString('el-EL', {weekday:'short',day: 'numeric', month: 'short' });
+      dateIndicator.innerHTML = firstDate;
 
       // Title Formatter functino for absence columns
 
