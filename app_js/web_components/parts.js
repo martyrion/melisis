@@ -36,7 +36,7 @@ class SubModulesHRM extends HTMLElement {
   <a id="sub-fourth" class="submodule-button btn" onclick="navigation('sub-fourth', 'hide','Στατιστικά','1')">
     <i class="material-icons">bar_chart</i>Στατιστικά
   </a>
-  <a id="sub-fifth" class="submodule-button btn" onclick="navigation('sub-fifth', 'hide','Χάρτης','1')">
+  <a id="sub-fifth" class="submodule-button btn" onclick="navigation('sub-fifth', 'hide','Χάρτης','leaflet')">
     <i class="material-icons">map</i>Χάρτης
   </a>
           `;

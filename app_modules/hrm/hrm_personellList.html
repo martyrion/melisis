@@ -32,6 +32,12 @@
     />
     <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
 
+    <!-- Leaflet references -->
+    <link
+      href="../../app_thirdPartyLibraries/leaflet/leaflet.css"
+      rel="stylesheet"
+    />
+    <script src="../../app_thirdPartyLibraries/leaflet/leaflet.js"></script>
     <!-- LOCAL LINKS (only for this webpage) -->
     <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
     <script src="../../dataFromDB.js"></script>
@@ -44,9 +50,9 @@
       <sub-modules-hrm class="submodules-nav"></sub-modules-hrm>
       <section id="mainSection" class="main">
         <!-- Top line items -->
-      
+
         <span id="module-title" class="title">Κατάλογος Προσωπικού</span>
-               <input id="date-indicator" type="date" value="2018-07-22"> 
+        <input id="date-indicator" type="date" value="2018-07-22" />
         <span id="retreat-date" class="material-icons btn">chevron_left</span>
         <span id="advance-date" class="material-icons btn">chevron_right</span>
         <span id="printBtn" class="material-icons btn" onclick="printTable()"
@@ -82,14 +88,14 @@
             <span id="optionC">Θέσεις</span>
           </div>
           <div id="general-details">
-            <img id="personell-photo" src="../../app_media/young-man.jpg">
+            <img id="personell-photo" src="../../app_media/young-man.jpg" />
             <span id="personell-name">Δημήτρης Φκιαράς</span>
             <span id="personell-update">ενημέρωση 20 Δεκ 2019</span>
           </div>
           <div id="leave-details"></div>
           <div id="position-details"></div>
         </div>
-        <div id='leafltet'></div>
+        <div id="leaflet" class="no-visibility"></div>
       </section>
       <section class="footer">
         <div id="row-count"></div>
@@ -145,7 +151,7 @@
       var detailsWrapper = document.getElementById("details-wrapper");
       var tableEl = document.getElementById("dataTable");
       var moduleTitle = document.getElementById("module-title");
-      var dateIndicator = document.getElementById('date-indicator');
+      var dateIndicator = document.getElementById("date-indicator");
 
       // Init Vars
       var groupArray = [];
@@ -157,9 +163,6 @@
       var activeSubmodule = "sub-first";
       var JSONstartDate = new Date(2020, 6, 1);
       // var displayDate = ;
-   
-
-      
 
       // var myModal = new Modal ("modal-middle-medium","hello");
       window.onload = function () {
@@ -412,8 +415,8 @@
             date.setDate(date.getDate() + days);
             return date;
           };
-          var i = 0;
-        for (i=0;i<span; i++) {
+        var i = 0;
+        for (i = 0; i < span; i++) {
           absenceDateList.push(currentDate);
           currentDate = addDays.call(currentDate, 1);
         }
@@ -422,21 +425,30 @@
 
       // Usage
       var absenceDateList = getDates(JSONstartDate, 30);
-      absenceDateList.forEach(function (date) {
-      });
-
+      absenceDateList.forEach(function (date) {});
 
       //set initial absence date
-      var firstDate = absenceDateList[0].toLocaleString('el-EL', {weekday:'short',day: 'numeric', month: 'short' });
+      var firstDate = absenceDateList[0].toLocaleString("el-EL", {
+        weekday: "short",
+        day: "numeric",
+        month: "short",
+      });
       dateIndicator.innerHTML = firstDate;
 
       // Title Formatter functino for absence columns
 
-       function titleFormatter(e, cell){
-        
-        var partA = "<span class='day-name'>"+absenceDateList[0].toLocaleString('el-EL', {weekday:"short"});
-        var partB = "<span class='day-and-month'>"+absenceDateList[0].toLocaleString('el-EL', {day: 'numeric', month: 'short' })+"</span></span>"
-        return partA+"-"+partB;
+      function titleFormatter(e, cell) {
+        var partA =
+          "<span class='day-name'>" +
+          absenceDateList[0].toLocaleString("el-EL", { weekday: "short" });
+        var partB =
+          "<span class='day-and-month'>" +
+          absenceDateList[0].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }) +
+          "</span></span>";
+        return partA + "-" + partB;
       }
 
       //======================
@@ -520,10 +532,9 @@
             cellClick: selectDate,
             headerSort: false,
             titleFormatter: titleFormatter,
-      
           },
           {
-            title:"" ,
+            title: "",
             field: "absence2",
             visible: false,
             cssClass: "dates",
@@ -531,7 +542,10 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[2].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[2].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence3",
             visible: false,
             cssClass: "dates",
@@ -539,7 +553,10 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[3].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[3].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence4",
             visible: false,
             cssClass: "dates",
@@ -547,7 +564,10 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[4].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[4].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence5",
             visible: false,
             cssClass: "dates",
@@ -555,7 +575,10 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[5].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[5].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence6",
             visible: false,
             cssClass: "dates",
@@ -563,7 +586,10 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[6].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[6].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence7",
             visible: false,
             cssClass: "dates",
@@ -571,7 +597,10 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[7].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[7].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence8",
             visible: false,
             cssClass: "dates",
@@ -579,7 +608,10 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[8].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[8].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence9",
             visible: false,
             cssClass: "dates",
@@ -587,7 +619,10 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[9].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[9].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence10",
             visible: false,
             cssClass: "dates",
@@ -595,16 +630,24 @@
             headerSort: false,
           },
           {
-            title: absenceDateList[10].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[10].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence11",
             visible: false,
             cssClass: "dates",
             cellClick: selectDate,
             headerSort: false,
-            titleFormatter: function (){return "<span class='dateNumber' style='color:blue'>5</span><span>-June</span><br>hi</br>"}
+            titleFormatter: function () {
+              return "<span class='dateNumber' style='color:blue'>5</span><span>-June</span><br>hi</br>";
+            },
           },
           {
-            title: absenceDateList[11].toLocaleString('el-EL', {day: 'numeric', month: 'short' }),
+            title: absenceDateList[11].toLocaleString("el-EL", {
+              day: "numeric",
+              month: "short",
+            }),
             field: "absence12",
             visible: false,
             cssClass: "dates",
@@ -726,6 +769,20 @@
             table.getRows("all").length;
         },
       });
+
+      //======================
+      //  MAP
+      //======================
+
+      var mymap = L.map("leaflet").setView([34.505, 33.00], 9);
+      L.tileLayer("../../app_gis/os_map/{z}/os_{x}_{y}_{z}.png",
+        {
+          maxZoom: 18,
+          id: "mapbox/streets-v11",
+          tileSize: 512,
+          zoomOffset: -1,
+        }
+      ).addTo(mymap);
     </script>
   </body>
 </html>
