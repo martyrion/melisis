@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
     <title>MELISIS</title>
 
     <!-- GLOBAL LINKS -->
-    <link rel="stylesheet" href="../../app_css/backgroundSVG.css" type="text/css" />
-    <link rel="stylesheet" href="../../app_css/materialIconFont.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="../../app_css/backgroundSVG.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../../app_css/materialIconFont.css"
+      type="text/css"
+    />
     <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
     <!--          Custom JS functions -->
     <script src="../../app_js/customFunctions.js"></script>
     <!--          Web components -->
-    <script src="../../app_js/web_components/parts.js" type="text/javascript" defer></script>
+    <script
+      src="../../app_js/web_components/parts.js"
+      type="text/javascript"
+      defer
+    ></script>
     <!--          Tabulator references-->
-    <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
+    <link
+      href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css"
+      rel="stylesheet"
+    />
     <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
 
     <!-- Leaflet references -->
-    <link href="../../app_thirdPartyLibraries/leaflet/leaflet.css" rel="stylesheet" />
+    <link
+      href="../../app_thirdPartyLibraries/leaflet/leaflet.css"
+      rel="stylesheet"
+    />
     <script src="../../app_thirdPartyLibraries/leaflet/leaflet.js"></script>
     <!-- LOCAL LINKS (only for this webpage) -->
     <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
@@ -38,13 +55,29 @@
         <input id="date-indicator" type="date" value="2018-07-22" />
         <span id="retreat-date" class="material-icons btn">chevron_left</span>
         <span id="advance-date" class="material-icons btn">chevron_right</span>
-        <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
-        <span id="filters-btn" class="material-icons btn"
-          onclick="toggleModal('modal-filters-container')">filter_list</span>
+        <span id="printBtn" class="material-icons btn" onclick="printTable()"
+          >print</span
+        >
+        <span
+          id="filters-btn"
+          class="material-icons btn"
+          onclick="toggleModal('modal-filters-container')"
+          >filter_list</span
+        >
 
         <div id="filters-indicator" class="no-visibility"></div>
-        <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
-        <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
+        <input
+          type="text"
+          id="search-box"
+          placeholder="όνομα ή επώνυμο"
+          oninput="alterSearchBox()"
+        />
+        <span
+          id="searchbox-btn"
+          class="material-icons btn grey-icon"
+          onclick="clearSearchBox()"
+          >search</span
+        >
         <btn id="addBtn" class="mainContentAdd btn">Προσθήκη</btn>
         <!-- ----------------------------------------------->
         <div id="dataTable" class="dataTable"></div>
@@ -62,8 +95,9 @@
           <div id="leave-details"></div>
           <div id="position-details"></div>
         </div>
-       <div id='map-wrapper'>
-        <div id="leaflet"></div></div>
+        <div id="map-wrapper" class="submodule-wrapper no-visibility">
+          <div id="leaflet"></div>
+        </div>
       </section>
       <section class="footer">
         <div id="row-count"></div>
@@ -76,7 +110,12 @@
     <!-- Right Modal Window -->
     <div id="modal-filters-container" class="modal-right no-visibility">
       <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
-      <span onclick="toggleModal('modal-filters-container')" id="closeRightModalBtn" class="material-icons">close</span>
+      <span
+        onclick="toggleModal('modal-filters-container')"
+        id="closeRightModalBtn"
+        class="material-icons"
+        >close</span
+      >
       <div id="groups-table"></div>
       <span id="second-title" class="rightModalTitle">Φίλτρα</span>
       <div id="filters-table"></div>
@@ -90,7 +129,9 @@
 
     <!-- Personell Details -->
     <div id="personell-modal" class="modal-personell-details no-visibility">
-      <span onclick="toggleModal('personell-modal')" class="material-icons">close</span>
+      <span onclick="toggleModal('personell-modal')" class="material-icons"
+        >close</span
+      >
       <span id="details"></span>
     </div>
 
@@ -250,13 +291,13 @@
 
         alert(
           "You have clicked on " +
-          name +
-          " " +
-          surname +
-          ", on date: " +
-          dateId +
-          ". On this date the absence reason is: " +
-          cell
+            name +
+            " " +
+            surname +
+            ", on date: " +
+            dateId +
+            ". On this date the absence reason is: " +
+            cell
         );
       };
 
@@ -361,9 +402,12 @@
         activeSubmodule = subModule;
         document.getElementById(activeSubmodule).classList.add("active");
         moduleTitle.innerHTML = title;
-        document.querySelector(".submodule-wrapper").className +=
-          "submodule-wrapper no-visibility";
-        // document.getElementById(wrapperId).style.display='inline';
+        var nodes = document.querySelectorAll(".submodule-wrapper");
+        nodes.forEach(function (node) {
+          node.classList.add("no-visibility");
+        });
+        document.getElementById(wrapperId).classList.remove("no-visibility");
+        myMap._onResize();
       };
 
       // Populate date Array
@@ -386,7 +430,7 @@
 
       // Usage
       var absenceDateList = getDates(JSONstartDate, 30);
-      absenceDateList.forEach(function (date) { });
+      absenceDateList.forEach(function (date) {});
 
       //set initial absence date
       var firstDate = absenceDateList[0].toLocaleString("el-EL", {
@@ -735,10 +779,12 @@
       //  MAP
       //======================
 
-      var mymap = L.map("leaflet").setView([34.505, 33.00], 9);
-      L.tileLayer("../../app_gis/os_map/{z}/os_{x}_{y}_{z}.png", { attribution: '420 sq', maxZoom: 18, minZoom: 6 }
-      ).addTo(mymap);
+      var myMap = L.map("leaflet").setView([34.505, 33.0], 9);
+      L.tileLayer("../../app_gis/os_map/{z}/os_{x}_{y}_{z}.png", {
+        attribution: "420 sq",
+        maxZoom: 18,
+        minZoom: 6,
+      }).addTo(myMap);
     </script>
   </body>
-
 </html>
