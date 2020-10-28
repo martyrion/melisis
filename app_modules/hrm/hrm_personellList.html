@@ -62,7 +62,7 @@
           <div id="leave-details"></div>
           <div id="position-details"></div>
         </div>
-       <div id='map-wrapper' style='display:none'>
+       <div id='map-wrapper'>
         <div id="leaflet"></div></div>
       </section>
       <section class="footer">
@@ -363,7 +363,7 @@
         moduleTitle.innerHTML = title;
         document.querySelector(".submodule-wrapper").className +=
           "submodule-wrapper no-visibility";
-        document.getElementById(wrapperId).style.display='block';
+        // document.getElementById(wrapperId).style.display='inline';
       };
 
       // Populate date Array
