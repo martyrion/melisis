@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="128px" height="257px" viewBox="0 0 128 257" enable-background="new 0 0 128 257" xml:space="preserve">
+<rect x="13" y="229" fill="#fff" stroke="#000" width="110" height="27"/>
+<rect width="128" height="233"/>
+<g>
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="188.1846" x2="60.9336" y2="188.1846">
+		<stop  offset="5.618000e-003" style="stop-color:#FBC926"/>
+		<stop  offset="0.2528" style="stop-color:#FFFBCC"/>
+		<stop  offset="0.3045" style="stop-color:#F8F0BB"/>
+		<stop  offset="0.4072" style="stop-color:#E7D28E"/>
+		<stop  offset="0.55" style="stop-color:#CCA246"/>
+		<stop  offset="0.5955" style="stop-color:#C3922E"/>
+		<stop  offset="0.8708" style="stop-color:#EED688"/>
+		<stop  offset="1" style="stop-color:#FFFBCC"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M9.4,197.2L0,189.8v-11.6l12.5,10.2l13.9-8.2c1.3-0.8,3-0.8,4.3-0.1l0,0l15.7,8.4l6.6-4.8l7.9,5
+		l-11.6,8.6c-1.4,1-3.2,1.1-4.6,0.3l0,0l-16-8.6l-14.4,8.5c-0.7,0.4-1.5,0.6-2.2,0.6l0,0C11.2,198.1,10.2,197.8,9.4,197.2L9.4,197.2
+		z"/>
+</g>
+<g>
+	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="45.9634" y1="173.7363" x2="127.8252" y2="173.7363">
+		<stop  offset="5.618000e-003" style="stop-color:#FBC926"/>
+		<stop  offset="0.2528" style="stop-color:#FFFBCC"/>
+		<stop  offset="0.3045" style="stop-color:#F8F0BB"/>
+		<stop  offset="0.4072" style="stop-color:#E7D28E"/>
+		<stop  offset="0.55" style="stop-color:#CCA246"/>
+		<stop  offset="0.5955" style="stop-color:#C3922E"/>
+		<stop  offset="0.8708" style="stop-color:#EED688"/>
+		<stop  offset="1" style="stop-color:#FFFBCC"/>
+	</linearGradient>
+	<path fill="url(#SVGID_2_)" d="M77,197.5l-28.9-18c-1.3-0.8-2.1-2.2-2.1-3.7l0,0v-22c0-1.2,0.5-2.3,1.3-3.1l0,0
+		c0.8-0.8,1.9-1.3,3.1-1.3l0,0h23.4c1.2,0,2.3,0.5,3.1,1.3l0,0c0.8,0.8,1.3,1.9,1.3,3.1l0,0v21.7c0,1.5-0.8,2.9-2.1,3.7l0,0
+		l-4.9,3.2l-8.2-5.1l6.4-4.3v-14.9H54.7v15.2l24.6,15.3l14.2-8.4c1.3-0.8,3-0.8,4.3-0.1l0,0l15.7,8.4l14.3-10.1V189l-11.3,8.3
+		c-1.4,1-3.2,1.1-4.6,0.3l0,0l-16-8.6l-14.4,8.5c-0.7,0.4-1.5,0.6-2.2,0.6l0,0C78.5,198.1,77.7,197.9,77,197.5L77,197.5z"/>
+</g>
+</svg>
