@@ -779,12 +779,33 @@
       //  MAP
       //======================
 
+
+
+
       var myMap = L.map("leaflet").setView([34.505, 33.0], 9);
       L.tileLayer("../../app_gis/os_map/{z}/os_{x}_{y}_{z}.png", {
         attribution: "420 sq",
         maxZoom: 18,
         minZoom: 6,
       }).addTo(myMap);
+
+      var personellMarkers = theDataset;
+
+//Loop through the markers array
+for (var i=0; i<personellMarkers.length; i++) {
+    
+    var lon = personellMarkers[i].longidute;
+    var lat = personellMarkers[i].lattitude;
+    
+    var popupText = personellMarkers[i].first_name;
+    
+     var markerLocation = new L.LatLng(lat, lon);
+     var marker = new L.Marker(markerLocation);
+     myMap.addLayer(marker);
+ 
+     marker.bindPopup(popupText);
+ 
+ }
     </script>
   </body>
 </html>
