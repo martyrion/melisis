@@ -445,18 +445,19 @@ padding-bottom: 12px !important;
 
 
 #presence-bar{
-  grid-column: 1/5;
+  grid-column: 1/6;
   grid-row: 1/8;
-  background-color: grey;
+  margin-left: -24px;
+  margin-right: -15px;
 }
 
 #presence-pie{
-  grid-column: 5/8;
+  grid-column: 6/9;
   grid-row: 1/8;
 }
 
 #long-leaves{
-  grid-column: 1/5;
+  grid-column: 1/6;
   grid-row: 8/-1;
   background-color: blue;
 }
