@@ -23,6 +23,10 @@
   <script src="../../app_thirdPartyLibraries/leaflet/leaflet.js"></script>
   <link href="../../app_thirdPartyLibraries/Leaflet.IconMaterial-master/dist/leaflet.icon-material.css" rel="stylesheet" type="text/css"/>
   <script src="../../app_thirdPartyLibraries/Leaflet.IconMaterial-master/dist/leaflet.icon-material.js"></script>
+
+  <!--          Charts.js reference -->
+  <script src="../../app_thirdPartyLibraries/Chart.js-2.9.4/dist/Chart.js"></script>
+
   <!-- LOCAL LINKS (only for this webpage) -->
   <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
   <script src="../../dataFromDB.js"></script>
@@ -96,7 +100,7 @@
         <div id="leaflet"></div>
       </div>
       <div id="stats-wrapper" class="submodule-wrapper no-visibility">
-        <div id="presence-graph">HI</div>
+        <canvas id="presence-graph"></canvas>
       </div>
     </section>
     <section class="footer">
@@ -152,12 +156,14 @@
    var selectedNameHolder = document.getElementById("personell-name");
    var selectedLastHolder = document.getElementById("personell-last");
   var selectedPhotoHolder = document.getElementById("personell-photo");
-
-
     var selectedRowData = [];
     var selectedName ;
     var selectedSurname ;
 
+
+    // Chart
+
+    var presenceGraph = document.getElementById("presence-graph");
 
     // Init Vars
     var groupArray = [];
@@ -855,6 +861,25 @@ var femaleIcon = L.IconMaterial.icon({
     })
 
     var present = theDataset.length - present;
+
+    var myDoughnutChart = new Chart(presenceGraph, {
+    type: 'doughnut',
+    data: [30,70],
+    options: {
+    responsive: true,
+				legend: {
+					position: 'top',
+				},
+				title: {
+					display: false,
+					text: 'Chart.js Doughnut Chart'
+				},
+				animation: {
+					animateScale: true,
+					animateRotate: true
+        }
+      }
+});
   </script>
 </body>
 
