@@ -18,9 +18,11 @@
   <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
   <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
 
-  <!-- Leaflet references -->
+  <!--          Leaflet references -->
   <link href="../../app_thirdPartyLibraries/leaflet/leaflet.css" rel="stylesheet" />
   <script src="../../app_thirdPartyLibraries/leaflet/leaflet.js"></script>
+  <link href="../../app_thirdPartyLibraries/Leaflet.IconMaterial-master/dist/leaflet.icon-material.css" rel="stylesheet" type="text/css"/>
+  <script src="../../app_thirdPartyLibraries/Leaflet.IconMaterial-master/dist/leaflet.icon-material.js"></script>
   <!-- LOCAL LINKS (only for this webpage) -->
   <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
   <script src="../../dataFromDB.js"></script>
@@ -736,7 +738,26 @@
     //======================
     //  MAP
     //======================
-    
+  
+// Create a custom icon
+var femaleIcon = L.IconMaterial.icon({
+    icon: 'face',            // Name of Material icon
+    iconColor: '#ffffff',              // Material icon color (could be rgba, hex, html name...)
+    markerColor: '#7545a6',  // Marker fill color
+    outlineColor: 'black',            // Marker outline color
+    outlineWidth: 1,                   // Marker outline width 
+    iconSize: [32, 42]                 // Width and height of the icon
+  })
+
+  var maleIcon = L.IconMaterial.icon({
+    icon: 'face',            // Name of Material icon
+    iconColor: '#ffffff',              // Material icon color (could be rgba, hex, html name...)
+    markerColor: 'black',  // Marker fill color
+    outlineColor: 'black',            // Marker outline color
+    outlineWidth: 1,                   // Marker outline width 
+    iconSize: [32, 42]                 // Width and height of the icon
+  })
+
   var personellGroup = new L.layerGroup();
   
     var myMap = L.map("leaflet").setView([34.505, 33.0], 9);
@@ -752,13 +773,20 @@
       var filteredData = table.getData(true);
       personellGroup.clearLayers();
 
+
       for (var i = 0; i < filteredData.length; i++) {
+        var gender = filteredData[i].gender;
+        if(gender==="Άρρεν"){
+          var icon = maleIcon;
+        }else{
+          var icon = femaleIcon;
+        }
         var lon = filteredData[i].longitude;
         var lat = filteredData[i].lattitude;
         var name = filteredData[i].first_name;
         var surname = filteredData[i].last_name;
         var popup = name + "&nbsp" + surname;
-        var marker = new L.Marker([lat, lon]); 
+        var marker = new L.Marker([lat, lon],{icon: icon}); 
         marker.bindPopup(popup);
         personellGroup.addLayer(marker);
       }
