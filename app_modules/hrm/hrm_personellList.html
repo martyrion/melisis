@@ -793,6 +793,15 @@ var femaleIcon = L.IconMaterial.icon({
       
     }
     personellGroup.addTo(myMap);
+
+
+
+    // Dashboard
+    var absent = theDataset.filter(function(item){
+      return item.absence1 > 5;
+    })
+
+    var present = theDataset.length - present;
   </script>
 </body>
 
