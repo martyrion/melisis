@@ -11,7 +11,7 @@ var theDataset = [
       specialtyName: "Ι",
       mobileNumber: 99216732,
       org: 360,
-      lattitude: '34.3',
+      lattitude: 33.3,
       longitude: 32.3,
       absence1: 4,
       absence2: 10,

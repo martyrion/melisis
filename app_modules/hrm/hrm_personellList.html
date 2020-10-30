@@ -1,811 +1,771 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
-    <title>MELISIS</title>
 
-    <!-- GLOBAL LINKS -->
-    <link
-      rel="stylesheet"
-      href="../../app_css/backgroundSVG.css"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../app_css/materialIconFont.css"
-      type="text/css"
-    />
-    <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
-    <!--          Custom JS functions -->
-    <script src="../../app_js/customFunctions.js"></script>
-    <!--          Web components -->
-    <script
-      src="../../app_js/web_components/parts.js"
-      type="text/javascript"
-      defer
-    ></script>
-    <!--          Tabulator references-->
-    <link
-      href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css"
-      rel="stylesheet"
-    />
-    <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+  <title>MELISIS</title>
 
-    <!-- Leaflet references -->
-    <link
-      href="../../app_thirdPartyLibraries/leaflet/leaflet.css"
-      rel="stylesheet"
-    />
-    <script src="../../app_thirdPartyLibraries/leaflet/leaflet.js"></script>
-    <!-- LOCAL LINKS (only for this webpage) -->
-    <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
-    <script src="../../dataFromDB.js"></script>
-  </head>
+  <!-- GLOBAL LINKS -->
+  <link rel="stylesheet" href="../../app_css/backgroundSVG.css" type="text/css" />
+  <link rel="stylesheet" href="../../app_css/materialIconFont.css" type="text/css" />
+  <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
+  <!--          Custom JS functions -->
+  <script src="../../app_js/customFunctions.js"></script>
+  <!--          Web components -->
+  <script src="../../app_js/web_components/parts.js" type="text/javascript" defer></script>
+  <!--          Tabulator references-->
+  <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
+  <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
 
-  <body>
-    <div class="wrapper">
-      <!-- Contains moduleNav , subModuleNav, main, footer, extraContent-->
-      <modules-nav class="modules-nav"></modules-nav>
-      <sub-modules-hrm class="submodules-nav"></sub-modules-hrm>
-      <section id="mainSection" class="main">
-        <!-- Top line items -->
+  <!-- Leaflet references -->
+  <link href="../../app_thirdPartyLibraries/leaflet/leaflet.css" rel="stylesheet" />
+  <script src="../../app_thirdPartyLibraries/leaflet/leaflet.js"></script>
+  <!-- LOCAL LINKS (only for this webpage) -->
+  <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
+  <script src="../../dataFromDB.js"></script>
+</head>
 
-        <span id="module-title" class="title">Κατάλογος Προσωπικού</span>
-        <input id="date-indicator" type="date" value="2018-07-22" />
-        <span id="retreat-date" class="material-icons btn">chevron_left</span>
-        <span id="advance-date" class="material-icons btn">chevron_right</span>
-        <span id="printBtn" class="material-icons btn" onclick="printTable()"
-          >print</span
-        >
-        <span
-          id="filters-btn"
-          class="material-icons btn"
-          onclick="toggleModal('modal-filters-container')"
-          >filter_list</span
-        >
+<body>
+  <div class="wrapper">
+    <!-- Contains moduleNav , subModuleNav, main, footer, extraContent-->
+    <modules-nav class="modules-nav"></modules-nav>
+    <sub-modules-hrm class="submodules-nav"></sub-modules-hrm>
+    <section id="mainSection" class="main">
+      <!-- Top line items -->
 
-        <div id="filters-indicator" class="no-visibility"></div>
-        <input
-          type="text"
-          id="search-box"
-          placeholder="όνομα ή επώνυμο"
-          oninput="alterSearchBox()"
-        />
-        <span
-          id="searchbox-btn"
-          class="material-icons btn grey-icon"
-          onclick="clearSearchBox()"
-          >search</span
-        >
-        <btn id="addBtn" class="mainContentAdd btn">Προσθήκη</btn>
-        <!-- ----------------------------------------------->
-        <div id="dataTable" class="dataTable"></div>
-        <div id="details-wrapper" class="submodule-wrapper no-visibility">
-          <div class="header-row">
-            <span id="optionA">Γενικά</span>
-            <span id="optionB">Άπουσίες</span>
-            <span id="optionC">Θέσεις</span>
-          </div>
-          <div id="general-details">
-            <img id="personell-photo" src="../../app_media/young-man.jpg" />
-            <span id="personell-name">Δημήτρης Φκιαράς</span>
-            <span id="personell-update">ενημέρωση 20 Δεκ 2019</span>
-          </div>
-          <div id="leave-details"></div>
-          <div id="position-details"></div>
+      <span id="module-title" class="title">Κατάλογος Προσωπικού</span>
+      <input id="date-indicator" type="date" value="2018-07-22" />
+      <span id="retreat-date" class="material-icons btn">chevron_left</span>
+      <span id="advance-date" class="material-icons btn">chevron_right</span>
+      <span id="printBtn" class="material-icons btn" onclick="printTable()">print</span>
+      <span id="filters-btn" class="material-icons btn"
+        onclick="toggleModal('modal-filters-container')">filter_list</span>
+
+      <div id="filters-indicator" class="no-visibility"></div>
+      <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" oninput="alterSearchBox()" />
+      <span id="searchbox-btn" class="material-icons btn grey-icon" onclick="clearSearchBox()">search</span>
+      <btn id="addBtn" class="mainContentAdd btn" onclick="updateMarkers();">Προσθήκη</btn>
+      <!-- ----------------------------------------------->
+      <div id="dataTable" class="dataTable"></div>
+      <div id="details-wrapper" class="submodule-wrapper no-visibility">
+        <div class="header-row">
+          <span id="optionA">Γενικά</span>
+          <span id="optionB">Άπουσίες</span>
+          <span id="optionC">Θέσεις</span>
         </div>
-        <div id="map-wrapper" class="submodule-wrapper no-visibility">
-          <div id="leaflet"></div>
+        <div id="general-details">
+          <img id="personell-photo" src="../../app_media/young-man.jpg" />
+          <span id="personell-name">Δημήτρης Φκιαράς</span>
+          <span id="personell-update">ενημέρωση 20 Δεκ 2019</span>
         </div>
-      </section>
-      <section class="footer">
-        <div id="row-count"></div>
-      </section>
-      <section class="extraContent">
-        Extra information in case of HD display
-      </section>
-    </div>
+        <div id="leave-details"></div>
+        <div id="position-details"></div>
+      </div>
+      <div id="map-wrapper" class="submodule-wrapper no-visibility">
+        <div id="leaflet"></div>
+      </div>
+    </section>
+    <section class="footer">
+      <div id="row-count"></div>
+    </section>
+    <section class="extraContent">
+      Extra information in case of HD display
+    </section>
+  </div>
 
-    <!-- Right Modal Window -->
-    <div id="modal-filters-container" class="modal-right no-visibility">
-      <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
-      <span
-        onclick="toggleModal('modal-filters-container')"
-        id="closeRightModalBtn"
-        class="material-icons"
-        >close</span
-      >
-      <div id="groups-table"></div>
-      <span id="second-title" class="rightModalTitle">Φίλτρα</span>
-      <div id="filters-table"></div>
-    </div>
-    <!-- Print dialoge Modal -->
-    <div id="modal-print-info" class="modal-middle-medium no-visibility">
-      <span id="first-title">Διαμόρφωση εκτύπωσης</span>
-    </div>
+  <!-- Right Modal Window -->
+  <div id="modal-filters-container" class="modal-right no-visibility">
+    <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
+    <span onclick="toggleModal('modal-filters-container')" id="closeRightModalBtn" class="material-icons">close</span>
+    <div id="groups-table"></div>
+    <span id="second-title" class="rightModalTitle">Φίλτρα</span>
+    <div id="filters-table"></div>
+  </div>
+  <!-- Print dialoge Modal -->
+  <div id="modal-print-info" class="modal-middle-medium no-visibility">
+    <span id="first-title">Διαμόρφωση εκτύπωσης</span>
+  </div>
 
-    <div id="modal-overlay" class="modal-overlay no-visibility"></div>
+  <div id="modal-overlay" class="modal-overlay no-visibility"></div>
 
-    <!-- Personell Details -->
-    <div id="personell-modal" class="modal-personell-details no-visibility">
-      <span onclick="toggleModal('personell-modal')" class="material-icons"
-        >close</span
-      >
-      <span id="details"></span>
-    </div>
+  <!-- Personell Details -->
+  <div id="personell-modal" class="modal-personell-details no-visibility">
+    <span onclick="toggleModal('personell-modal')" class="material-icons">close</span>
+    <span id="details"></span>
+  </div>
 
-    <script>
-      //======================
-      //  GLOBAL VARS
-      //======================
+  <script>
+    //======================
+    //  GLOBAL VARS
+    //======================
 
-      // Elements
-      var theSearchbox = document.getElementById("search-box"); // searchbox element
-      var clearSearchBoxBtn = document.getElementById("searchbox-btn"); // searchbox clear button
-      var filterModalcontainer = document.getElementById(
-        "modal-filters-container"
-      ); // filter modal window cont
-      var middleModal = document.getElementById("modal-print-info");
-      var overlay = document.getElementById("modal-overlay");
-      var filtersIndicator = document.getElementById("filters-indicator");
-      var rowCount = document.getElementById("row-count");
-      var detailsWrapper = document.getElementById("details-wrapper");
-      var tableEl = document.getElementById("dataTable");
-      var moduleTitle = document.getElementById("module-title");
-      var dateIndicator = document.getElementById("date-indicator");
+    // Elements
+    var theSearchbox = document.getElementById("search-box"); // searchbox element
+    var clearSearchBoxBtn = document.getElementById("searchbox-btn"); // searchbox clear button
+    var filterModalcontainer = document.getElementById(
+      "modal-filters-container"
+    ); // filter modal window cont
+    var middleModal = document.getElementById("modal-print-info");
+    var overlay = document.getElementById("modal-overlay");
+    var filtersIndicator = document.getElementById("filters-indicator");
+    var rowCount = document.getElementById("row-count");
+    var detailsWrapper = document.getElementById("details-wrapper");
+    var tableEl = document.getElementById("dataTable");
+    var moduleTitle = document.getElementById("module-title");
+    var dateIndicator = document.getElementById("date-indicator");
 
-      // Init Vars
-      var groupArray = [];
-      var searchBoxString = "";
-      var checkboxFilters = [];
-      var checkboxFilter = {};
-      var checkBoxRanks = [];
-      var checkBoxGender = [];
-      var activeSubmodule = "sub-first";
-      var JSONstartDate = new Date(2020, 6, 1);
-      // var displayDate = ;
+    // Init Vars
+    var groupArray = [];
+    var searchBoxString = "";
+    var checkboxFilters = [];
+    var checkboxFilter = {};
+    var checkBoxRanks = [];
+    var checkBoxGender = [];
+    var activeSubmodule = "sub-first";
+    var JSONstartDate = new Date(2020, 6, 1);
+    // var displayDate = ;
 
-      // var myModal = new Modal ("modal-middle-medium","hello");
-      window.onload = function () {
-        document.getElementById("mod-first").classList.add("active");
-        document.getElementById(activeSubmodule).classList.add("active");
-      };
+    // var myModal = new Modal ("modal-middle-medium","hello");
+    window.onload = function () {
+      document.getElementById("mod-first").classList.add("active");
+      document.getElementById(activeSubmodule).classList.add("active");
+    };
 
-      //======================
-      //  FUNCTIONS
-      //======================
+    //======================
+    //  FUNCTIONS
+    //======================
 
-      // - setFilters to table
-      // - search table by name, surname & highlight match
-      // - clear filters
-      // - toggle right modal
+    // - setFilters to table (called when searchbox is updated and also when checkbox is selected in filters)
+    function setTableFilters() {
+      //extract arrays from checkboxFilters Array
+      checkBoxRanks = checkboxFilters.filter((x) => x.field === "rankName");
+      checkBoxGender = checkboxFilters.filter((x) => x.field === "gender");
+      table.clearFilter();
+      table.setFilter([
+        [
+          { field: "first_name", type: "like", value: searchBoxString }, //
+          { field: "last_name", type: "like", value: searchBoxString }, //
+        ],
+        checkBoxRanks,
+        checkBoxGender,
+      ]);
+      // Highlight appropriately
+      highlight(searchBoxString, "[tabulator-field='first_name']");
+      highlight(searchBoxString, "[tabulator-field='last_name']");
 
-      // - setFilters to table (called when searchbox is updated and also when checkbox is selected in filters)
-      function setTableFilters() {
-        //extract arrays from checkboxFilters Array
-        checkBoxRanks = checkboxFilters.filter((x) => x.field === "rankName");
-        checkBoxGender = checkboxFilters.filter((x) => x.field === "gender");
-        table.clearFilter();
-        table.setFilter([
-          [
-            { field: "first_name", type: "like", value: searchBoxString }, //
-            { field: "last_name", type: "like", value: searchBoxString }, //
-          ],
-          checkBoxRanks,
-          checkBoxGender,
-        ]);
-        // Highlight appropriately
-        highlight(searchBoxString, "[tabulator-field='first_name']");
-        highlight(searchBoxString, "[tabulator-field='last_name']");
+      // Toggle visibility of filters-indicator
+      if (table.getFilters().length > 1) {
+        filtersIndicator.classList.remove("no-visibility");
+      } else {
+        filtersIndicator.classList.add("no-visibility");
+      }
 
-        // Toggle visibility of filters-indicator
-        if (table.getFilters().length > 1) {
-          filtersIndicator.classList.remove("no-visibility");
-        } else {
-          filtersIndicator.classList.add("no-visibility");
-        }
+      //update map markers
+      updateMarkers();
 
+      // Set total rows epxression
+      rowCount.innerHTML =
+        table.getRows("active").length +
+        " από " +
+        table.getRows("all").length;
+    }
+
+    // Search the main table (first and last name)
+    function alterSearchBox() {
+      searchBoxString = theSearchbox.value; // searchbox string
+
+      // if nothing is inside searchbox change "X" to "lense"
+      if (searchBoxString == "") {
+        clearSearchBoxBtn.innerHTML = "search"; // id hardcoded
+        clearSearchBoxBtn.classList.add("grey-icon");
+        clearSearchBoxBtn.classList.remove("btn");
+      } else {
+        clearSearchBoxBtn.innerHTML = "close"; // id hardcoded
+        clearSearchBoxBtn.classList.remove("grey-icon");
+        clearSearchBoxBtn.classList.add("btn");
+      }
+
+      //Set filters of table
+      setTableFilters();
+    }
+
+    // Perform searchbox alteration function with empty string
+    function clearSearchBox() {
+      theSearchbox.value = "";
+      alterSearchBox();
+    }
+
+    // Toggle  modal
+    function toggleModal(modalEl) {
+      var theModal = document.getElementById(modalEl);
+      theModal.classList.toggle("no-visibility");
+      overlay.classList.toggle("no-visibility");
+      if ((modelEl = "modal-filters-container")) {
+        rowCount.classList.toggle("moved");
+      }
+    }
+
+    // Print Table
+    function printTable() {
+      middleModal.classList.toggle("no-visibility");
+      overlay.classList.toggle("no-visibility");
+      // table.print(false, true);
+    }
+
+    // Set print Title
+    function printTitle() {
+      return "<h1>Κατάλογος προσωπικού</h1>";
+    }
+
+    // Group main table data (called from group-table row checkboxes)
+    var selectGrouping = function (e, cell) {
+      var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
+      var checkbox = row.firstChild;
+      var checkbox = checkbox.firstChild; // checkbox element is two levels down from row
+      var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
+      var field = rowValue.groupingField; // get groupingField of row object
+      addRemoveValue(groupArray, field); // add or remove the selected field from the array
+      table.setGroupBy(groupArray);
+      var state = checkbox.innerHTML; // get the inner html for the clicked item
+
+      if (state === "check_box") {
+        // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
+        checkbox.innerHTML = "check_box_outline_blank";
+        checkbox.classList.remove("active-checkbox");
+      } else {
+        // the opposite
+        checkbox.innerHTML = "check_box";
+        checkbox.classList.add("active-checkbox");
+      }
+    };
+
+    var selectDate = function (e, cell) {
+      var rowValue = cell.getData(); // get data of whole row;
+      var name = rowValue.first_name;
+      var surname = rowValue.last_name;
+      var dateId = cell.getField();
+      var cell = cell.getValue();
+
+      alert(
+        "You have clicked on " +
+        name +
+        " " +
+        surname +
+        ", on date: " +
+        dateId +
+        ". On this date the absence reason is: " +
+        cell
+      );
+    };
+
+    // Filter main table data (called from filter-table row checkboxes)
+    var selectFilter = function (e, cell) {
+      var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
+      var checkbox = row.firstChild;
+      var checkbox = checkbox.firstChild; // checkbox element is two levels down from row
+      var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
+      var field = rowValue.filterField; // get filterField of row object
+      var value = rowValue.filterLabel;
+      checkboxFilter = { field: field, type: "=", value: value };
+
+      var state = checkbox.innerHTML; // get the inner html for the clicked item
+
+      if (state === "check_box") {
+        // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
+        checkbox.innerHTML = "check_box_outline_blank";
+        checkbox.classList.remove("active-checkbox");
+        var index = checkboxFilters.findIndex(
+          (x) => x.value === value && x.field === field
+        ); // index of object when conditions meet
+        checkboxFilters.splice(index, 1); // remove object
+      } else {
+        // the opposite
+        checkbox.innerHTML = "check_box";
+        checkbox.classList.add("active-checkbox");
+        checkboxFilters.push(checkboxFilter); // add object
+      }
+
+      //Set filters of table
+      setTableFilters();
+    };
+
+    // Squeeze or Expand parameters (main table)
+    function mainTableAdjust(type) {
+      if (type === "squeeze") {
+        table.hideColumn("gender");
+        table.hideColumn("mobileNumber");
+        table.hideColumn("details");
+        tableEl.classList.add("alt");
+        tableEl.classList.remove("no-visibility");
+        tableEl.classList.remove("absence");
+        toggleAbsenceColumns("hide");
+      } else if (type === "expand") {
+        table.showColumn("gender");
+        table.showColumn("mobileNumber");
+        table.showColumn("details");
+        tableEl.classList.remove("alt");
+        tableEl.classList.remove("no-visibility");
+        tableEl.classList.remove("absence");
+        toggleAbsenceColumns("hide");
+      } else if (type === "hide") {
+        tableEl.classList.remove("alt");
+        tableEl.classList.add("no-visibility");
+        toggleAbsenceColumns("hide");
+      } else if (type === "absence") {
+        tableEl.classList.remove("alt");
+        tableEl.classList.remove("no-visibility");
+        tableEl.classList.add("absence");
+        toggleAbsenceColumns("show");
+        table.hideColumn("gender");
+        table.hideColumn("mobileNumber");
+        table.hideColumn("details");
+      }
+    }
+
+    function toggleAbsenceColumns(type) {
+      if (type === "show") {
+        table.showColumn("absence1");
+        table.showColumn("absence2");
+        table.showColumn("absence3");
+        table.showColumn("absence4");
+        table.showColumn("absence5");
+        table.showColumn("absence6");
+        table.showColumn("absence7");
+        table.showColumn("absence8");
+        table.showColumn("absence9");
+        table.showColumn("absence10");
+        table.showColumn("absence11");
+        table.showColumn("absence12");
+      } else if (type === "hide") {
+        table.hideColumn("absence1");
+        table.hideColumn("absence2");
+        table.hideColumn("absence3");
+        table.hideColumn("absence4");
+        table.hideColumn("absence5");
+        table.hideColumn("absence6");
+        table.hideColumn("absence7");
+        table.hideColumn("absence8");
+        table.hideColumn("absence9");
+        table.hideColumn("absence10");
+        table.hideColumn("absence11");
+        table.hideColumn("absence12");
+      }
+    }
+
+    // Navigate to sub-module
+    var navigation = function (subModule, type, title, wrapperId) {
+      mainTableAdjust(type);
+      document.getElementById(activeSubmodule).classList.remove("active");
+      activeSubmodule = subModule;
+      document.getElementById(activeSubmodule).classList.add("active");
+      moduleTitle.innerHTML = title;
+      var nodes = document.querySelectorAll(".submodule-wrapper");
+      nodes.forEach(function (node) {
+        node.classList.add("no-visibility");
+      });
+      document.getElementById(wrapperId).classList.remove("no-visibility");
+      myMap._onResize();
+    };
+
+    // Populate date Array
+
+    var getDates = function (startDate, span) {
+      var absenceDateList = [],
+        currentDate = startDate,
+        addDays = function (days) {
+          var date = new Date(this.valueOf());
+          date.setDate(date.getDate() + days);
+          return date;
+        };
+      var i = 0;
+      for (i = 0; i < span; i++) {
+        absenceDateList.push(currentDate);
+        currentDate = addDays.call(currentDate, 1);
+      }
+      return absenceDateList;
+    };
+
+    // Usage
+    var absenceDateList = getDates(JSONstartDate, 30);
+    absenceDateList.forEach(function (date) { });
+
+    //set initial absence date
+    var firstDate = absenceDateList[0].toLocaleString("el-EL", {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+    });
+    dateIndicator.innerHTML = firstDate;
+
+    // Title Formatter functino for absence columns
+
+    function titleFormatter(e, cell) {
+      var partA =
+        "<span class='day-name'>" +
+        absenceDateList[0].toLocaleString("el-EL", { weekday: "short" });
+      var partB =
+        "<span class='day-and-month'>" +
+        absenceDateList[0].toLocaleString("el-EL", {
+          day: "numeric",
+          month: "short",
+        }) +
+        "</span></span>";
+      return partA + "-" + partB;
+    }
+
+    //======================
+    //  TABLES
+    //======================
+
+    // Create main table
+    var table = new Tabulator("#dataTable", {
+      data: theDataset,
+      resizableColumns: false,
+      tooltips: true,
+      printAsHtml: true, //enable html table printing
+      printHeader: printTitle(), // set header content on printed table
+      // layout: "fitColumns",
+      selectable: 1,
+
+      columns: [
+        { title: "id", field: "id", cssClass: "id", visible: false },
+        {
+          title: "Bαθμός",
+          field: "rankName",
+          cssClass: "rankName",
+        },
+        {
+          title: "rankId",
+          field: "rankId",
+          cssClass: "rankId",
+          visible: false,
+        },
+        {
+          title: "Ειδικότητα",
+          field: "specialtyName",
+          cssClass: "specialtyName",
+          headerHozAlign: "left",
+          // hozAlign: "center",
+        },
+        {
+          title: "specialtyId",
+          field: "specialtyId",
+          cssClass: "specialtyId",
+          visible: false,
+        },
+
+        {
+          title: "Όνομα",
+          field: "first_name",
+          cssClass: "first_name",
+        },
+        {
+          title: "Επώνυμο",
+          field: "last_name",
+          cssClass: "last_name",
+        },
+        {
+          title: "Φύλο",
+          field: "gender",
+          cssClass: "gender",
+        },
+
+        {
+          title: "Τηλέφωνο",
+          field: "mobileNumber",
+          cssClass: "mobileNumber",
+        },
+
+        {
+          title: "",
+          field: "details",
+          hozAlign: "right",
+          cssClass: "details",
+          headerSort: false,
+        },
+        // {title:"Dates",
+        // cssClas:"date-title",
+        // columns:[
+        {
+          title: "",
+          field: "absence1",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+          titleFormatter: titleFormatter,
+        },
+        {
+          title: "",
+          field: "absence2",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[2].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence3",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[3].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence4",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[4].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence5",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[5].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence6",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[6].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence7",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[7].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence8",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[8].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence9",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[9].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence10",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        {
+          title: absenceDateList[10].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence11",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+          titleFormatter: function () {
+            return "<span class='dateNumber' style='color:blue'>5</span><span>-June</span><br>hi</br>";
+          },
+        },
+        {
+          title: absenceDateList[11].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          }),
+          field: "absence12",
+          visible: false,
+          cssClass: "dates",
+          cellClick: selectDate,
+          headerSort: false,
+        },
+        // ],
+
+        // }
+      ],
+      groupHeader: function (value, count, data, group) {
+        //value - the value all members of this group share
+        //count - the number of rows in this group
+        //data - an array of all the row data objects in this group
+        //group - the group component for the group
+        return value + " :" + "<span>" + count + " εγγραφές" + "</span>";
+      },
+    });
+
+    // Create a table with the some columns of first, as rows -- to use as grouping selection
+    var groupsTable = new Tabulator("#groups-table", {
+      data: [
+        {
+          id: 1,
+          groupingTitle: "Βαθμός",
+          groupingField: "rankName",
+        },
+        {
+          id: 2,
+          groupingTitle: "Φύλο",
+          groupingField: "gender",
+        },
+      ],
+      resizableColumns: false,
+      columns: [
+        {
+          title: "",
+          field: "selected",
+          formatter: function (cell, formatterParams) {
+            return "<span class='material-icons rightModaltableBtn'>check_box_outline_blank</span>"; // present a checkbox
+          },
+
+          width: 50,
+          cellClick: selectGrouping,
+        },
+        {
+          title: "",
+          field: "groupingTitle",
+          width: 150,
+        },
+      ],
+    });
+
+    // Create a table with filters
+    var filtersTable = new Tabulator("#filters-table", {
+      data: [
+        {
+          id: 1,
+          filterLabel: "Επγός",
+          filterField: "rankName",
+          filterHeader: "Βαθμός",
+        },
+        {
+          id: 2,
+          filterLabel: "Σγός",
+          filterField: "rankName",
+          filterHeader: "Βαθμός",
+        },
+        {
+          id: 3,
+          filterLabel: "Υπσγός",
+          filterField: "rankName",
+          filterHeader: "Βαθμός",
+        },
+        {
+          id: 4,
+          filterLabel: "Άρρεν",
+          filterField: "gender",
+          filterHeader: "Φύλο",
+        },
+        {
+          id: 5,
+          filterLabel: "Θήλυ",
+          filterField: "gender",
+          filterHeader: "Φύλο",
+        },
+      ],
+      resizableColumns: false,
+      groupBy: "filterHeader",
+      columns: [
+        {
+          title: "",
+          field: "selected",
+          formatter: function (cell, formatterParams) {
+            return "<span class='material-icons filter-checkbox'>check_box_outline_blank</span>"; // present a checkbox
+          },
+
+          width: 50,
+          cellClick: selectFilter,
+        },
+        {
+          title: "",
+          field: "filterLabel",
+          width: 150,
+        },
+      ],
+      groupHeader: function (value, count, data, group) {
+        //value - the value all members of this group share
+        //count - the number of rows in this group
+        //data - an array of all the row data objects in this group
+        //group - the group component for the group
+        return value;
+      },
+      tableBuilt: function () {
         // Set total rows epxression
         rowCount.innerHTML =
           table.getRows("active").length +
           " από " +
           table.getRows("all").length;
-      }
+      },
+    });
 
-      // Search the main table (first and last name)
-      function alterSearchBox() {
-        searchBoxString = theSearchbox.value; // searchbox string
-
-        // if nothing is inside searchbox change "X" to "lense"
-        if (searchBoxString == "") {
-          clearSearchBoxBtn.innerHTML = "search"; // id hardcoded
-          clearSearchBoxBtn.classList.add("grey-icon");
-          clearSearchBoxBtn.classList.remove("btn");
-        } else {
-          clearSearchBoxBtn.innerHTML = "close"; // id hardcoded
-          clearSearchBoxBtn.classList.remove("grey-icon");
-          clearSearchBoxBtn.classList.add("btn");
-        }
-
-        //Set filters of table
-        setTableFilters();
-      }
-
-      // Perform searchbox alteration function with empty string
-      function clearSearchBox() {
-        theSearchbox.value = "";
-        alterSearchBox();
-      }
-
-      // Toggle  modal
-      function toggleModal(modalEl) {
-        var theModal = document.getElementById(modalEl);
-        theModal.classList.toggle("no-visibility");
-        overlay.classList.toggle("no-visibility");
-        if ((modelEl = "modal-filters-container")) {
-          rowCount.classList.toggle("moved");
-        }
-      }
-
-      // Print Table
-      function printTable() {
-        middleModal.classList.toggle("no-visibility");
-        overlay.classList.toggle("no-visibility");
-        // table.print(false, true);
-      }
-
-      // Set print Title
-      function printTitle() {
-        return "<h1>Κατάλογος προσωπικού</h1>";
-      }
-
-      // Group main table data (called from group-table row checkboxes)
-      var selectGrouping = function (e, cell) {
-        var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
-        var checkbox = row.firstChild;
-        var checkbox = checkbox.firstChild; // checkbox element is two levels down from row
-        var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
-        var field = rowValue.groupingField; // get groupingField of row object
-        addRemoveValue(groupArray, field); // add or remove the selected field from the array
-        table.setGroupBy(groupArray);
-        var state = checkbox.innerHTML; // get the inner html for the clicked item
-
-        if (state === "check_box") {
-          // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
-          checkbox.innerHTML = "check_box_outline_blank";
-          checkbox.classList.remove("active-checkbox");
-        } else {
-          // the opposite
-          checkbox.innerHTML = "check_box";
-          checkbox.classList.add("active-checkbox");
-        }
-      };
-
-      var selectDate = function (e, cell) {
-        var rowValue = cell.getData(); // get data of whole row;
-        var name = rowValue.first_name;
-        var surname = rowValue.last_name;
-        var dateId = cell.getField();
-        var cell = cell.getValue();
-
-        alert(
-          "You have clicked on " +
-            name +
-            " " +
-            surname +
-            ", on date: " +
-            dateId +
-            ". On this date the absence reason is: " +
-            cell
-        );
-      };
-
-      // Filter main table data (called from filter-table row checkboxes)
-      var selectFilter = function (e, cell) {
-        var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
-        var checkbox = row.firstChild;
-        var checkbox = checkbox.firstChild; // checkbox element is two levels down from row
-        var rowValue = cell.getData(); //get the data of the whole row - in this case the checkbox has no value so i get groupingTitle and groupingNField
-        var field = rowValue.filterField; // get filterField of row object
-        var value = rowValue.filterLabel;
-        checkboxFilter = { field: field, type: "=", value: value };
-
-        var state = checkbox.innerHTML; // get the inner html for the clicked item
-
-        if (state === "check_box") {
-          // if innerHTML was check_box, then replace with check_box_outline_blank and remove css class .active
-          checkbox.innerHTML = "check_box_outline_blank";
-          checkbox.classList.remove("active-checkbox");
-          var index = checkboxFilters.findIndex(
-            (x) => x.value === value && x.field === field
-          ); // index of object when conditions meet
-          checkboxFilters.splice(index, 1); // remove object
-        } else {
-          // the opposite
-          checkbox.innerHTML = "check_box";
-          checkbox.classList.add("active-checkbox");
-          checkboxFilters.push(checkboxFilter); // add object
-        }
-
-        //Set filters of table
-        setTableFilters();
-      };
-
-      // Squeeze or Expand parameters (main table)
-      function mainTableAdjust(type) {
-        if (type === "squeeze") {
-          table.hideColumn("gender");
-          table.hideColumn("mobileNumber");
-          table.hideColumn("details");
-          tableEl.classList.add("alt");
-          tableEl.classList.remove("no-visibility");
-          tableEl.classList.remove("absence");
-          toggleAbsenceColumns("hide");
-        } else if (type === "expand") {
-          table.showColumn("gender");
-          table.showColumn("mobileNumber");
-          table.showColumn("details");
-          tableEl.classList.remove("alt");
-          tableEl.classList.remove("no-visibility");
-          tableEl.classList.remove("absence");
-          toggleAbsenceColumns("hide");
-        } else if (type === "hide") {
-          tableEl.classList.remove("alt");
-          tableEl.classList.add("no-visibility");
-          toggleAbsenceColumns("hide");
-        } else if (type === "absence") {
-          tableEl.classList.remove("alt");
-          tableEl.classList.remove("no-visibility");
-          tableEl.classList.add("absence");
-          toggleAbsenceColumns("show");
-          table.hideColumn("gender");
-          table.hideColumn("mobileNumber");
-          table.hideColumn("details");
-        }
-      }
-
-      function toggleAbsenceColumns(type) {
-        if (type === "show") {
-          table.showColumn("absence1");
-          table.showColumn("absence2");
-          table.showColumn("absence3");
-          table.showColumn("absence4");
-          table.showColumn("absence5");
-          table.showColumn("absence6");
-          table.showColumn("absence7");
-          table.showColumn("absence8");
-          table.showColumn("absence9");
-          table.showColumn("absence10");
-          table.showColumn("absence11");
-          table.showColumn("absence12");
-        } else if (type === "hide") {
-          table.hideColumn("absence1");
-          table.hideColumn("absence2");
-          table.hideColumn("absence3");
-          table.hideColumn("absence4");
-          table.hideColumn("absence5");
-          table.hideColumn("absence6");
-          table.hideColumn("absence7");
-          table.hideColumn("absence8");
-          table.hideColumn("absence9");
-          table.hideColumn("absence10");
-          table.hideColumn("absence11");
-          table.hideColumn("absence12");
-        }
-      }
-
-      // Navigate to sub-module
-      var navigation = function (subModule, type, title, wrapperId) {
-        mainTableAdjust(type);
-        document.getElementById(activeSubmodule).classList.remove("active");
-        activeSubmodule = subModule;
-        document.getElementById(activeSubmodule).classList.add("active");
-        moduleTitle.innerHTML = title;
-        var nodes = document.querySelectorAll(".submodule-wrapper");
-        nodes.forEach(function (node) {
-          node.classList.add("no-visibility");
-        });
-        document.getElementById(wrapperId).classList.remove("no-visibility");
-        myMap._onResize();
-      };
-
-      // Populate date Array
-
-      var getDates = function (startDate, span) {
-        var absenceDateList = [],
-          currentDate = startDate,
-          addDays = function (days) {
-            var date = new Date(this.valueOf());
-            date.setDate(date.getDate() + days);
-            return date;
-          };
-        var i = 0;
-        for (i = 0; i < span; i++) {
-          absenceDateList.push(currentDate);
-          currentDate = addDays.call(currentDate, 1);
-        }
-        return absenceDateList;
-      };
-
-      // Usage
-      var absenceDateList = getDates(JSONstartDate, 30);
-      absenceDateList.forEach(function (date) {});
-
-      //set initial absence date
-      var firstDate = absenceDateList[0].toLocaleString("el-EL", {
-        weekday: "short",
-        day: "numeric",
-        month: "short",
-      });
-      dateIndicator.innerHTML = firstDate;
-
-      // Title Formatter functino for absence columns
-
-      function titleFormatter(e, cell) {
-        var partA =
-          "<span class='day-name'>" +
-          absenceDateList[0].toLocaleString("el-EL", { weekday: "short" });
-        var partB =
-          "<span class='day-and-month'>" +
-          absenceDateList[0].toLocaleString("el-EL", {
-            day: "numeric",
-            month: "short",
-          }) +
-          "</span></span>";
-        return partA + "-" + partB;
-      }
-
-      //======================
-      //  TABLES
-      //======================
-
-      // Create main table
-      var table = new Tabulator("#dataTable", {
-        data: theDataset,
-        resizableColumns: false,
-        tooltips: true,
-        printAsHtml: true, //enable html table printing
-        printHeader: printTitle(), // set header content on printed table
-        // layout: "fitColumns",
-        selectable: 1,
-
-        columns: [
-          { title: "id", field: "id", cssClass: "id", visible: false },
-          {
-            title: "Bαθμός",
-            field: "rankName",
-            cssClass: "rankName",
-          },
-          {
-            title: "rankId",
-            field: "rankId",
-            cssClass: "rankId",
-            visible: false,
-          },
-          {
-            title: "Ειδικότητα",
-            field: "specialtyName",
-            cssClass: "specialtyName",
-            headerHozAlign: "left",
-            // hozAlign: "center",
-          },
-          {
-            title: "specialtyId",
-            field: "specialtyId",
-            cssClass: "specialtyId",
-            visible: false,
-          },
-
-          {
-            title: "Όνομα",
-            field: "first_name",
-            cssClass: "first_name",
-          },
-          {
-            title: "Επώνυμο",
-            field: "last_name",
-            cssClass: "last_name",
-          },
-          {
-            title: "Φύλο",
-            field: "gender",
-            cssClass: "gender",
-          },
-
-          {
-            title: "Τηλέφωνο",
-            field: "mobileNumber",
-            cssClass: "mobileNumber",
-          },
-
-          {
-            title: "",
-            field: "details",
-            hozAlign: "right",
-            cssClass: "details",
-            headerSort: false,
-          },
-          // {title:"Dates",
-          // cssClas:"date-title",
-          // columns:[
-          {
-            title: "",
-            field: "absence1",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-            titleFormatter: titleFormatter,
-          },
-          {
-            title: "",
-            field: "absence2",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[2].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence3",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[3].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence4",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[4].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence5",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[5].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence6",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[6].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence7",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[7].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence8",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[8].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence9",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[9].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence10",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[10].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence11",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-            titleFormatter: function () {
-              return "<span class='dateNumber' style='color:blue'>5</span><span>-June</span><br>hi</br>";
-            },
-          },
-          {
-            title: absenceDateList[11].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence12",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          // ],
-
-          // }
-        ],
-        groupHeader: function (value, count, data, group) {
-          //value - the value all members of this group share
-          //count - the number of rows in this group
-          //data - an array of all the row data objects in this group
-          //group - the group component for the group
-          return value + " :" + "<span>" + count + " εγγραφές" + "</span>";
-        },
-      });
-
-      // Create a table with the some columns of first, as rows -- to use as grouping selection
-      var groupsTable = new Tabulator("#groups-table", {
-        data: [
-          {
-            id: 1,
-            groupingTitle: "Βαθμός",
-            groupingField: "rankName",
-          },
-          {
-            id: 2,
-            groupingTitle: "Φύλο",
-            groupingField: "gender",
-          },
-        ],
-        resizableColumns: false,
-        columns: [
-          {
-            title: "",
-            field: "selected",
-            formatter: function (cell, formatterParams) {
-              return "<span class='material-icons rightModaltableBtn'>check_box_outline_blank</span>"; // present a checkbox
-            },
-
-            width: 50,
-            cellClick: selectGrouping,
-          },
-          {
-            title: "",
-            field: "groupingTitle",
-            width: 150,
-          },
-        ],
-      });
-
-      // Create a table with filters
-      var filtersTable = new Tabulator("#filters-table", {
-        data: [
-          {
-            id: 1,
-            filterLabel: "Επγός",
-            filterField: "rankName",
-            filterHeader: "Βαθμός",
-          },
-          {
-            id: 2,
-            filterLabel: "Σγός",
-            filterField: "rankName",
-            filterHeader: "Βαθμός",
-          },
-          {
-            id: 3,
-            filterLabel: "Υπσγός",
-            filterField: "rankName",
-            filterHeader: "Βαθμός",
-          },
-          {
-            id: 4,
-            filterLabel: "Male",
-            filterField: "gender",
-            filterHeader: "Φύλο",
-          },
-          {
-            id: 5,
-            filterLabel: "Female",
-            filterField: "gender",
-            filterHeader: "Φύλο",
-          },
-        ],
-        resizableColumns: false,
-        groupBy: "filterHeader",
-        columns: [
-          {
-            title: "",
-            field: "selected",
-            formatter: function (cell, formatterParams) {
-              return "<span class='material-icons filter-checkbox'>check_box_outline_blank</span>"; // present a checkbox
-            },
-
-            width: 50,
-            cellClick: selectFilter,
-          },
-          {
-            title: "",
-            field: "filterLabel",
-            width: 150,
-          },
-        ],
-        groupHeader: function (value, count, data, group) {
-          //value - the value all members of this group share
-          //count - the number of rows in this group
-          //data - an array of all the row data objects in this group
-          //group - the group component for the group
-          return value;
-        },
-        tableBuilt: function () {
-          // Set total rows epxression
-          rowCount.innerHTML =
-            table.getRows("active").length +
-            " από " +
-            table.getRows("all").length;
-        },
-      });
-
-      //======================
-      //  MAP
-      //======================
-
-
-
-
-      var myMap = L.map("leaflet").setView([34.505, 33.0], 9);
-      L.tileLayer("../../app_gis/os_map/{z}/os_{x}_{y}_{z}.png", {
-        attribution: "420 sq",
-        maxZoom: 18,
-        minZoom: 6,
-      }).addTo(myMap);
-
-      var personellMarkers = theDataset;
-
-//Loop through the markers array
-for (var i=0; i<personellMarkers.length; i++) {
+    //======================
+    //  MAP
+    //======================
     
-    var lon = personellMarkers[i].longidute;
-    var lat = personellMarkers[i].lattitude;
-    
-    var popupText = personellMarkers[i].first_name;
-    
-     var markerLocation = new L.LatLng(lat, lon);
-     var marker = new L.Marker(markerLocation);
-     myMap.addLayer(marker);
- 
-     marker.bindPopup(popupText);
- 
- }
-    </script>
-  </body>
+  var personellGroup = new L.layerGroup();
+  
+    var myMap = L.map("leaflet").setView([34.505, 33.0], 9);
+    L.tileLayer("../../app_gis/os_map/{z}/os_{x}_{y}_{z}.png", {
+      attribution: "Savvas",
+      maxZoom: 18,
+      minZoom: 6,
+    }).addTo(myMap);
+   
+   
+    //Loop through the markers array
+    function updateMarkers() {
+      var filteredData = table.getData(true);
+      personellGroup.clearLayers();
+
+      for (var i = 0; i < filteredData.length; i++) {
+        var lon = filteredData[i].longitude;
+        var lat = filteredData[i].lattitude;
+        var name = filteredData[i].first_name;
+        var surname = filteredData[i].last_name;
+        var popup = name + "&nbsp" + surname;
+        var marker = new L.Marker([lat, lon]); 
+        marker.bindPopup(popup);
+        personellGroup.addLayer(marker);
+      }
+      
+    }
+    personellGroup.addTo(myMap);
+  </script>
+</body>
+
 </html>
