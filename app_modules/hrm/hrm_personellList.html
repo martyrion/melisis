@@ -116,6 +116,16 @@
     var tableEl = document.getElementById("dataTable");
     var moduleTitle = document.getElementById("module-title");
     var dateIndicator = document.getElementById("date-indicator");
+   
+   // Active (selected) data
+   var selectedNameHolder = document.getElementById("personell-name");
+    var selectedPhotoHolder = document.getElementById("personell-photo");
+
+
+    var selectedRowData = [];
+    var selectedName ;
+    var selectedSurname ;
+
 
     // Init Vars
     var groupArray = [];
@@ -429,6 +439,17 @@
       printHeader: printTitle(), // set header content on printed table
       // layout: "fitColumns",
       selectable: 1,
+      rowSelected:function(row){
+    //row - row component for the selected row
+      selectedRowData = row.getData();
+      selectedName = selectedRowData.first_name;
+      selectedSurname = selectedRowData.last_name;
+      selectedAsma = selectedRowData.asma;
+      selectedNameHolder.innerHTML = selectedName+"&nbsp"+selectedSurname;
+      selectedPhotoHolder.setAttribute("src","../../app_media/happy-cheerful-young-woman-wearing-260nw-613759379.jpg");
+
+ 
+    },
 
       columns: [
         { title: "id", field: "id", cssClass: "id", visible: false },
