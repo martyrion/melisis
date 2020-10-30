@@ -57,9 +57,37 @@
           <span id="optionC">Θέσεις</span>
         </div>
         <div id="general-details">
-          <img id="personell-photo" src="../../app_media/young-man.jpg" />
-          <span id="personell-name">Δημήτρης Φκιαράς</span>
-          <span id="personell-update">ενημέρωση 20 Δεκ 2019</span>
+          <img id="personell-photo" src="" />
+          <span id="personell-name"></span>
+          <span id="personell-lastname"></span>
+          <span id="personell-update"></span>
+          <span id="personell-asma"></span>
+          <span id="personell-rank-name"></span>
+          <img id="personell-rank-insignia" src="../../app_media/ranks/Hellenic_Air_Force_OF-3.svg" />
+          <span id="personell-specialty"></span>
+          <span id="personell-submission"></span>
+          <span id="personell-freeClassA"></span>
+          <span id="personell-freeClassB"></span>
+          <span id="personell-id"></span>
+          <span id="personell-id-issue"></span>
+          <span id="personell-id-expiry"></span>
+          <span id="personell-passport"></span>
+          <span id="personell-passport-issue"></span>
+          <span id="personell-passport-expiry"></span>
+          <span id="personell-social-security"></span>
+          <span id="personell-mobile-no"></span>
+          <span id="personell-landline-no"></span>
+          <span id="personell-work-no"></span>
+          <span id="personell-email"></span>
+          <span id="personell-city"></span>
+          <span id="personell-village"></span>
+          <span id="personell-road"></span>
+          <span id="personell-address-no"></span>
+          <span id="personell-postCode"></span>
+          <span id="personell-closest-relative-name"></span>
+          <span id="personell-closest-relative-relation"></span>
+          <span id="personell-closest-relative-phone"></span>
+          <span id="personell-dob"></span>
         </div>
         <div id="leave-details"></div>
         <div id="position-details"></div>
@@ -117,9 +145,10 @@
     var moduleTitle = document.getElementById("module-title");
     var dateIndicator = document.getElementById("date-indicator");
    
-   // Active (selected) data
+   // Active (selected) data holders
    var selectedNameHolder = document.getElementById("personell-name");
-    var selectedPhotoHolder = document.getElementById("personell-photo");
+   var selectedLastHolder = document.getElementById("personell-last");
+  var selectedPhotoHolder = document.getElementById("personell-photo");
 
 
     var selectedRowData = [];

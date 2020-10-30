@@ -16,7 +16,7 @@
       grid-template-areas: "topNav topNav topNav" "leftNav main  ." "leftNav footer  .";
   -webkit-column-gap: 36px;
           column-gap: 36px;
-  opacity: 0.9;
+  opacity: 0.95;
   background-color: #fafafa;
   font-family: "ubuntu";
   -webkit-box-shadow: 8px 8px 8px 8px rgba(0, 0, 0, 0.1);
