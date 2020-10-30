@@ -541,7 +541,12 @@
 }
 
 #presence-graph {
-  grid-column: 1 span 4;
-  grid-row: 1/-1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-column: 1/5;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 7;
+  grid-row: 1/8;
+  margin: 12px;
 }
 /*# sourceMappingURL=hrm_personellList.css.map */
