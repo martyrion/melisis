@@ -144,7 +144,9 @@
           <div id="leaflet"></div>
         </div>
         <div id="stats-wrapper" class="submodule-wrapper no-visibility">
-          <div id="presence-graph"></div>
+          <div id="presence-bar"></div>
+          <div id="presence-pie"></div>
+          <div id="long-leaves"></div>
         </div>
       </section>
       <section class="footer">
@@ -213,7 +215,7 @@
 
       // Chart
 
-      var presenceGraph = document.getElementById("presence-graph");
+      var presenceGraph = document.getElementById("presence-pie");
 
       // Init Vars
       var groupArray = [];
@@ -916,7 +918,7 @@ am4core.useTheme(am4themes_animated);
 // Themes end
 
 // Create chart instance
-var chart = am4core.create("presence-graph", am4charts.PieChart);
+var chart = am4core.create("presence-pie", am4charts.PieChart);
 
 // Set data
 var selected;
@@ -962,6 +964,9 @@ pieSeries.slices.template.propertyFields.fill = "color";
 pieSeries.slices.template.propertyFields.isActive = "pulled";
 pieSeries.slices.template.strokeWidth = 0;
 pieSeries.labels.template.disabled = true;
+pieSeries.slices.template.events.on("hit", function(ev) {
+  console.log("clicked on ", ev.target);
+}, this);
 
 function generateChartData() {
   var chartData = [];

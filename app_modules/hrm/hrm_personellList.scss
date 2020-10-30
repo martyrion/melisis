@@ -438,12 +438,25 @@ padding-bottom: 12px !important;
   display: grid;
   grid-template-columns: subgrid;
   grid-template-rows: subgrid;
+  column-gap: 12px;
+  row-gap: 12px;
   
 }
 
 
-#presence-graph{
+#presence-bar{
   grid-column: 1/5;
   grid-row: 1/8;
-  margin: 12px;
+  background-color: grey;
+}
+
+#presence-pie{
+  grid-column: 5/8;
+  grid-row: 1/8;
+}
+
+#long-leaves{
+  grid-column: 1/5;
+  grid-row: 8/-1;
+  background-color: blue;
 }

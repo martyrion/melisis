@@ -538,15 +538,35 @@
       grid-template-columns: subgrid;
   -ms-grid-rows: subgrid;
       grid-template-rows: subgrid;
+  -webkit-column-gap: 12px;
+          column-gap: 12px;
+  row-gap: 12px;
 }
 
-#presence-graph {
+#presence-bar {
   -ms-grid-column: 1;
   -ms-grid-column-span: 4;
   grid-column: 1/5;
   -ms-grid-row: 1;
   -ms-grid-row-span: 7;
   grid-row: 1/8;
-  margin: 12px;
+  background-color: grey;
+}
+
+#presence-pie {
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 3;
+  grid-column: 5/8;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 7;
+  grid-row: 1/8;
+}
+
+#long-leaves {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-column: 1/5;
+  grid-row: 8/-1;
+  background-color: blue;
 }
 /*# sourceMappingURL=hrm_personellList.css.map */
