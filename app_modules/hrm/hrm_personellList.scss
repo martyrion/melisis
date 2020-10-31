@@ -455,12 +455,14 @@ padding-bottom: 12px !important;
   
 }
 
-#presence-pie{
+#presence-date{
   grid-column: 6/8;
   grid-row: 1/8;
   // box-shadow: $borderBoxSubtle;
   border: 0.5px solid #e0e0e0;
 }
+
+
 
 #long-leaves{
   grid-column: 1/8;
@@ -469,9 +471,9 @@ padding-bottom: 12px !important;
   border: 0.5px solid #e0e0e0;
 }
 
-#presence-grouping{
-  grid-column: 8/-1;
-  grid-row: 1/-1;
-  // box-shadow: $borderBoxSubtle;
-  border: 0.5px solid #e0e0e0;
-}
+// #presence-grouping{
+//   grid-column: 8/-1;
+//   grid-row: 1/-1;
+//   // box-shadow: $borderBoxSubtle;
+//   border: 0.5px solid #e0e0e0;
+// }
