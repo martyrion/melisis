@@ -1,3 +1,10 @@
+// Variables
+
+$borderBoxSubtle : 4px 4px 4px 4px rgba(0, 0, 0, 0.05);
+
+
+
+
 // 1. Top line
 
 #filters-indicator {
@@ -47,15 +54,9 @@
 }
 
 #date-indicator{
-  margin-left:12px;
   grid-column: 6/6;
   grid-row: 1/1;
   margin: 6px 0px;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-self: end;
   font-family: 'ubuntu';
   color: #a6a6a6 ;
 }
@@ -447,17 +448,30 @@ padding-bottom: 12px !important;
 #presence-bar{
   grid-column: 1/6;
   grid-row: 1/8;
-  margin-left: -24px;
-  margin-right: -15px;
+  margin-left: 0;
+  margin-right: 0px;
+  // box-shadow: $borderBoxSubtle;
+  border: 0.5px solid #e0e0e0;
+  
 }
 
 #presence-pie{
-  grid-column: 6/9;
+  grid-column: 6/8;
   grid-row: 1/8;
+  // box-shadow: $borderBoxSubtle;
+  border: 0.5px solid #e0e0e0;
 }
 
 #long-leaves{
-  grid-column: 1/6;
+  grid-column: 1/8;
   grid-row: 8/-1;
-  background-color: blue;
+  // box-shadow: $borderBoxSubtle;
+  border: 0.5px solid #e0e0e0;
+}
+
+#presence-grouping{
+  grid-column: 8/-1;
+  grid-row: 1/-1;
+  // box-shadow: $borderBoxSubtle;
+  border: 0.5px solid #e0e0e0;
 }
