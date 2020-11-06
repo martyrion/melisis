@@ -46,10 +46,10 @@
     <script src="../../app_thirdPartyLibraries/Leaflet.IconMaterial-master/dist/leaflet.icon-material.js"></script>
 
     <!-- Resources -->
-<script src="../../app_thirdPartyLibraries/amcharts4-master/dist/script/core.js"></script>
-<script src="../../app_thirdPartyLibraries/amcharts4-master/dist/script/charts.js"></script>
-<script src="../../app_thirdPartyLibraries/amcharts4-master/dist/script/themes/animated.js"></script>
-<script src="../../app_thirdPartyLibraries/amcharts4-master/dist/script/lang/el_GR.js"></script>
+    <script src="../../app_thirdPartyLibraries/amcharts4-master/dist/script/core.js"></script>
+    <script src="../../app_thirdPartyLibraries/amcharts4-master/dist/script/charts.js"></script>
+    <script src="../../app_thirdPartyLibraries/amcharts4-master/dist/script/themes/animated.js"></script>
+    <script src="../../app_thirdPartyLibraries/amcharts4-master/dist/script/lang/el_GR.js"></script>
     <!-- LOCAL LINKS (only for this webpage) -->
     <link rel="stylesheet" href="hrm_personellList.css" type="text/css" />
     <script src="../../dataFromDB.js"></script>
@@ -63,34 +63,52 @@
       <section id="mainSection" class="main">
         <!-- Top line items -->
 
-        <span id="module-title" class="title">Κατάλογος Προσωπικού</span>
-        <input id="date-indicator" type="date" value="2018-07-22" />
-        <span id="retreat-date" class="material-icons btn">chevron_left</span>
-        <span id="advance-date" class="material-icons btn">chevron_right</span>
-        <span id="printBtn" class="material-icons btn" onclick="printTable()"
+        <span id="module-title" class="top-line title"
+          >Κατάλογος Προσωπικού</span
+        >
+        <input
+          id="date-indicator"
+          type="date"
+          value="2018-07-22"
+          class="top-line"
+        />
+        <span id="retreat-date" class="top-line material-icons btn"
+          >chevron_left</span
+        >
+        <span id="advance-date" class="top-line material-icons btn"
+          >chevron_right</span
+        >
+        <span
+          id="print-btn"
+          class="top-line material-icons btn"
+          onclick="printTable()"
           >print</span
         >
         <span
           id="filters-btn"
-          class="material-icons btn"
+          class="top-line material-icons btn"
           onclick="toggleModal('modal-filters-container')"
           >filter_list</span
         >
 
-        <div id="filters-indicator" class="no-visibility"></div>
+        <div id="filters-indicator" class="top-line no-visibility"></div>
         <input
           type="text"
           id="search-box"
           placeholder="όνομα ή επώνυμο"
-          oninput="alterSearchBox()"
+          class="top-line"
+          oninput=" change_search_string()"
         />
         <span
           id="searchbox-btn"
-          class="material-icons btn grey-icon"
-          onclick="clearSearchBox()"
+          class="top-line material-icons btn"
+          onclick="clearSearchBox(el_from_id('search-box'))"
           >search</span
         >
-        <btn id="addBtn" class="mainContentAdd btn" onclick="updateMarkers();"
+        <btn
+          id="addBtn"
+          class="top-line mainContentAdd btn"
+          onclick="update_map_markers();"
           >Προσθήκη</btn
         >
         <!-- ----------------------------------------------->
@@ -191,16 +209,15 @@
       //======================
       //  GLOBAL VARS
       //======================
+      const primary_columns = [];
+      const secondary_columns = [];
+      const absence_columns_array = ["absence1","absence2","absence3","absence4", "absence5","absence6","absence7","absence8","absence9","absence10","absence11","absence12",]
 
-      // Elements
-      var theSearchbox = document.getElementById("search-box"); // searchbox element
-      var clearSearchBoxBtn = document.getElementById("searchbox-btn"); // searchbox clear button
       var filterModalcontainer = document.getElementById(
         "modal-filters-container"
       ); // filter modal window cont
       var middleModal = document.getElementById("modal-print-info");
       var overlay = document.getElementById("modal-overlay");
-      var filtersIndicator = document.getElementById("filters-indicator");
       var rowCount = document.getElementById("row-count");
       var detailsWrapper = document.getElementById("details-wrapper");
       var tableEl = document.getElementById("dataTable");
@@ -216,18 +233,14 @@
       var selectedSurname;
 
       // Chart
-
       var presenceGraph = document.getElementById("presence-pie");
 
       // Init Vars
       var groupArray = [];
-      var searchBoxString = "";
-      var checkboxFilters = [];
+      let checkboxFilters = [];
       var checkboxFilter = {};
-      var checkBoxRanks = [];
-      var checkBoxGender = [];
-      var activeSubmodule = "sub-first";
-      var JSONstartDate = new Date(2020, 6, 1);
+      const activeSubmodule = "sub-first";
+      const JSONstartDate = new Date(2020, 6, 1);
       // var displayDate = ;
 
       // var myModal = new Modal ("modal-middle-medium","hello");
@@ -238,67 +251,75 @@
 
       //======================
       //  FUNCTIONS
-      //======================
-
-      // - setFilters to table (called when searchbox is updated and also when checkbox is selected in filters)
-      function setTableFilters() {
-        //extract arrays from checkboxFilters Array
-        checkBoxRanks = checkboxFilters.filter((x) => x.field === "rankName");
-        checkBoxGender = checkboxFilters.filter((x) => x.field === "gender");
+      //=====================
+      el_from_id = (id) => document.getElementById(id);
+      colorize = (el, color) => (el.style.color = color);
+      set_material_icon = (el, name) => (el.innerHTML = name);
+      color_and_icon = (el, color, icon) => {
+        set_material_icon(el, icon);
+        colorize(el, color);
+      };
+      make_visible = (el) => {
+        el.classList.remove("no-visibility");
+      };
+      make_invisible = (el) => {
+        el.classList.add("no-visibility");
+      };
+      get_array_column = (array, column) => {
+        return array.filter((item) => item.field === column);
+      };
+      toggle_searchbox_icon = () => {
+        let string = el_from_id("search-box").value;
+        let el = el_from_id("searchbox-btn");
+        if (string == "") {
+          color_and_icon(el, "#bdbdbd", "search");
+        } else {
+          color_and_icon(el, "#7545a6", "close");
+        }
+      };
+      change_search_string = () => {
+        toggle_searchbox_icon();
+        update_table();
+      };
+      clearSearchBox = (el) => {
+        el.value = "";
+        toggle_searchbox_icon();
+        update_table();
+      };
+      update_table_filters = (array, search_string) => {
         table.clearFilter();
         table.setFilter([
           [
-            { field: "first_name", type: "like", value: searchBoxString }, //
-            { field: "last_name", type: "like", value: searchBoxString }, //
+            { field: "first_name", type: "like", value: search_string }, //
+            { field: "last_name", type: "like", value: search_string }, //
           ],
-          checkBoxRanks,
-          checkBoxGender,
+          get_array_column(array, "rankName"),
+          get_array_column(array, "gender"),
         ]);
-        // Highlight appropriately
-        highlight(searchBoxString, "[tabulator-field='first_name']");
-        highlight(searchBoxString, "[tabulator-field='last_name']");
-
-        // Toggle visibility of filters-indicator
-        if (table.getFilters().length > 1) {
-          filtersIndicator.classList.remove("no-visibility");
-        } else {
-          filtersIndicator.classList.add("no-visibility");
-        }
-
-        //update map markers
-        updateMarkers();
-
-        // Set total rows epxression
-        rowCount.innerHTML =
+      }
+      update_foundCount = () =>
+        (el_from_id("row-count").innerHTML =
           table.getRows("active").length +
           " από " +
-          table.getRows("all").length;
-      }
-
-      // Search the main table (first and last name)
-      function alterSearchBox() {
-        searchBoxString = theSearchbox.value; // searchbox string
-
-        // if nothing is inside searchbox change "X" to "lense"
-        if (searchBoxString == "") {
-          clearSearchBoxBtn.innerHTML = "search"; // id hardcoded
-          clearSearchBoxBtn.classList.add("grey-icon");
-          clearSearchBoxBtn.classList.remove("btn");
+          table.getRows("all").length);
+      update_filter_indicator = () => {
+        let el = el_from_id("filters-indicator");
+        if (table.getFilters().length > 1) {
+          make_visible(el);
         } else {
-          clearSearchBoxBtn.innerHTML = "close"; // id hardcoded
-          clearSearchBoxBtn.classList.remove("grey-icon");
-          clearSearchBoxBtn.classList.add("btn");
+          make_invisible(el);
         }
+      };
 
-        //Set filters of table
-        setTableFilters();
-      }
-
-      // Perform searchbox alteration function with empty string
-      function clearSearchBox() {
-        theSearchbox.value = "";
-        alterSearchBox();
-      }
+      update_table = () => {
+        let search_string = el_from_id("search-box").value;
+        update_table_filters(checkboxFilters, search_string);
+        highlight(search_string, "[tabulator-field='first_name']");
+        highlight(search_string, "[tabulator-field='last_name']");
+        update_filter_indicator();
+        update_foundCount();
+        update_map_markers();
+      };
 
       // Toggle  modal
       function toggleModal(modalEl) {
@@ -391,11 +412,11 @@
         }
 
         //Set filters of table
-        setTableFilters();
+        update_table();
       };
 
       // Squeeze or Expand parameters (main table)
-      function mainTableAdjust(type) {
+      mainTableAdjust = (type) => {
         if (type === "squeeze") {
           table.hideColumn("gender");
           table.hideColumn("mobileNumber");
@@ -427,33 +448,11 @@
         }
       }
 
-      function toggleAbsenceColumns(type) {
+      toggleAbsenceColumns = (type) => {
         if (type === "show") {
-          table.showColumn("absence1");
-          table.showColumn("absence2");
-          table.showColumn("absence3");
-          table.showColumn("absence4");
-          table.showColumn("absence5");
-          table.showColumn("absence6");
-          table.showColumn("absence7");
-          table.showColumn("absence8");
-          table.showColumn("absence9");
-          table.showColumn("absence10");
-          table.showColumn("absence11");
-          table.showColumn("absence12");
+          absence_columns_array.map(item =>  table.showColumn(item));
         } else if (type === "hide") {
-          table.hideColumn("absence1");
-          table.hideColumn("absence2");
-          table.hideColumn("absence3");
-          table.hideColumn("absence4");
-          table.hideColumn("absence5");
-          table.hideColumn("absence6");
-          table.hideColumn("absence7");
-          table.hideColumn("absence8");
-          table.hideColumn("absence9");
-          table.hideColumn("absence10");
-          table.hideColumn("absence11");
-          table.hideColumn("absence12");
+          absence_columns_array.map(item =>  table.hideColumn(item));
         }
       }
 
@@ -854,6 +853,8 @@
       //  MAP
       //======================
 
+
+    
       // Create a custom icon
       var femaleIcon = L.IconMaterial.icon({
         icon: "face", // Name of Material icon
@@ -883,7 +884,7 @@
       }).addTo(myMap);
 
       //Loop through the markers array
-      function updateMarkers() {
+      function update_map_markers() {
         var filteredData = table.getData(true);
         personellGroup.clearLayers();
 
@@ -906,273 +907,264 @@
       }
       personellGroup.addTo(myMap);
 
+
+      
       // Dashboard
       var absent = 6;
 
       var present = 13;
 
-
-
-
       var series1targetOld = "zero";
       var series1targetNew = "zero";
-am4core.ready(function() {
+      am4core.ready(function () {
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
 
-// Themes begin
-am4core.useTheme(am4themes_animated);
-// Themes end
+        var chart = am4core.create("presence-bar", am4charts.XYChart);
+        chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 
-var chart = am4core.create("presence-bar", am4charts.XYChart);
-chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+        chart.data = [
+          {
+            date: new Date(2020, 3, 10),
+            value1: 8,
+            value2: 12,
+          },
+          {
+            date: new Date(2020, 3, 11),
+            value1: 2,
+            value2: 18,
+          },
+          {
+            date: new Date(2020, 3, 12),
+            value1: 1,
+            value2: 19,
+          },
+          {
+            date: new Date(2020, 3, 13),
+            value1: 6,
+            value2: 14,
+          },
+          {
+            date: new Date(2020, 3, 14),
+            value1: 7,
+            value2: 13,
+          },
+          {
+            date: new Date(2020, 3, 15),
+            value1: 13,
+            value2: 7,
+          },
+          {
+            date: new Date(2020, 3, 16),
+            value1: 11,
+            value2: 9,
+          },
+          {
+            date: new Date(2020, 3, 17),
+            value1: 6,
+            value2: 14,
+          },
+          {
+            date: new Date(2020, 3, 18),
+            value1: 7,
+            value2: 13,
+          },
+          {
+            date: new Date(2020, 3, 19),
+            value1: 5,
+            value2: 15,
+          },
+          {
+            date: new Date(2020, 3, 20),
+            value1: 6,
+            value2: 14,
+          },
+          {
+            date: new Date(2020, 3, 21),
+            value1: 8,
+            value2: 12,
+          },
+        ];
 
-chart.data = [
-  {
-    date: new Date(2020, 3, 10),
-    value1: 8,
-    value2: 12,
-  },
-  {
-    date: new Date(2020, 3, 11),
-    value1: 2,
-    value2: 18,
-  },
-  {
-    date: new Date(2020, 3, 12),
-    value1: 1,
-    value2: 19,
-  },
-  {
-    date: new Date(2020, 3, 13),
-    value1: 6,
-    value2: 14,
+        // chart.colors.step = 2;
+        // chart.padding(30, 30, 10, 30);
+        // chart.legend = new am4charts.Legend();
 
-  },
-  {
-    date: new Date(2020, 3, 14),
-    value1: 7,
-    value2: 13,
-  },
-  {
-    date: new Date(2020, 3, 15),
-    value1: 13,
-    value2: 7,
-  },
-  {
-    date: new Date(2020, 3, 16),
-    value1: 11,
-    value2: 9,
-  },
-  {
-    date: new Date(2020, 3, 17),
-    value1: 6,
-    value2: 14,
-  },
-  {
-    date: new Date(2020, 3, 18),
-    value1: 7,
-    value2: 13,
-  },
-  {
-    date: new Date(2020, 3, 19),
-    value1: 5,
-    value2: 15,
+        chart.language.locale = am4lang_el_GR;
 
-  },
-  {
-    date: new Date(2020, 3, 20),
-    value1: 6,
-    value2: 14,
-  },
-  {
-    date: new Date(2020, 3, 21),
-    value1: 8,
-    value2: 12,
-  }
-];
+        var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
+        var label = dateAxis.renderer.labels.template;
+        label.fontSize = 12;
+        label.rotation = -30;
+        dateAxis.startLocation = 0;
+        dateAxis.endLocation = 0;
 
-// chart.colors.step = 2;
-// chart.padding(30, 30, 10, 30);
-// chart.legend = new am4charts.Legend();
+        var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+        valueAxis.min = 0;
+        valueAxis.max = 100;
+        valueAxis.strictMinMax = true;
+        valueAxis.calculateTotals = true;
+        valueAxis.renderer.minWidth = 50;
 
-chart.language.locale = am4lang_el_GR;
+        var series1 = chart.series.push(new am4charts.ColumnSeries());
 
+        series1.columns.template.width = am4core.percent(80);
+        series1.columns.template.tooltipText =
+          "{name}: {valueY.totalPercent.formatNumber('#.00')}%";
+        series1.name = "Απόντες";
+        series1.dataFields.dateX = "date";
+        series1.dataFields.valueY = "value1";
+        series1.dataFields.valueYShow = "totalPercent";
+        series1.stacked = true;
+        series1.columns.template.fill = "#7445a6";
+        series1.columns.template.stroke = "none";
+        series1.tooltip.pointerOrientation = "vertical";
+        series1.columns.template.events.on(
+          "hit",
+          function (ev) {
+            if (series1targetOld === "zero") {
+              series1targetOld = ev.target;
+              series1targetNew = ev.target;
+              ev.target.column.fill = "black";
+            } else {
+              series1targetNew = ev.target;
+              series1targetOld.column.fill = "#7445a6";
+              series1targetNew.column.fill = "black";
+              series1targetOld = ev.target;
+            }
+            // alert(ev.target.dataItem.categoryX);
+          },
+          this
+        );
 
-var dateAxis = chart.xAxes.push(new am4charts.DateAxis());
-var label = dateAxis.renderer.labels.template;
-label.fontSize= 12;
-label.rotation=-30;
-dateAxis.startLocation = 0;
-dateAxis.endLocation = 0;
+        var bullet1 = series1.bullets.push(new am4charts.LabelBullet());
+        bullet1.interactionsEnabled = false;
+        bullet1.label.text = "{valueY}";
+        bullet1.label.fill = am4core.color("#ffffff");
+        bullet1.locationY = 0.5;
 
+        var series2 = chart.series.push(new am4charts.ColumnSeries());
+        series2.columns.template.width = am4core.percent(60);
+        series2.columns.template.tooltipText =
+          "{name}: {valueY.totalPercent.formatNumber('#.00')}%";
+        series2.name = "Παρόντες";
+        series2.dataFields.dateX = "date";
+        series2.dataFields.valueY = "value2";
+        series2.dataFields.valueYShow = "totalPercent";
+        series2.stacked = true;
+        series2.columns.template.fill = "#a6a6a6";
+        series2.columns.template.stroke = "none";
+        series2.tooltip.pointerOrientation = "vertical";
 
+        var bullet2 = series2.bullets.push(new am4charts.LabelBullet());
+        bullet2.interactionsEnabled = false;
+        bullet2.label.text = "{valueY}";
+        bullet2.locationY = 0.5;
+        bullet2.label.fill = am4core.color("#ffffff");
 
-
-
-
-
-
-var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-valueAxis.min = 0;
-valueAxis.max = 100;
-valueAxis.strictMinMax = true;
-valueAxis.calculateTotals = true;
-valueAxis.renderer.minWidth = 50;
-
-
-var series1 = chart.series.push(new am4charts.ColumnSeries());
-
-
-
-series1.columns.template.width = am4core.percent(80);
-series1.columns.template.tooltipText =
-  "{name}: {valueY.totalPercent.formatNumber('#.00')}%";
-series1.name = "Απόντες";
-series1.dataFields.dateX = "date";
-series1.dataFields.valueY = "value1";
-series1.dataFields.valueYShow = "totalPercent";
-series1.stacked = true;
-series1.columns.template.fill = "#7445a6";
-series1.columns.template.stroke = "none";
-series1.tooltip.pointerOrientation = "vertical";
-series1.columns.template.events.on("hit", function(ev) {
-  if (series1targetOld === "zero"){
-     series1targetOld = ev.target;
-     series1targetNew = ev.target;
-     ev.target.column.fill =  "black";   
-  }else{
-    series1targetNew = ev.target;
-    series1targetOld.column.fill = "#7445a6";
-    series1targetNew.column.fill = "black";
-    series1targetOld = ev.target;  
-  }
-  // alert(ev.target.dataItem.categoryX);
-}, this);
-
-var bullet1 = series1.bullets.push(new am4charts.LabelBullet());
-bullet1.interactionsEnabled = false;
-bullet1.label.text = "{valueY}";
-bullet1.label.fill = am4core.color("#ffffff");
-bullet1.locationY = 0.5;
-
-var series2 = chart.series.push(new am4charts.ColumnSeries());
-series2.columns.template.width = am4core.percent(60);
-series2.columns.template.tooltipText =
-  "{name}: {valueY.totalPercent.formatNumber('#.00')}%";
-series2.name = "Παρόντες";
-series2.dataFields.dateX = "date";
-series2.dataFields.valueY = "value2";
-series2.dataFields.valueYShow = "totalPercent";
-series2.stacked = true;
-series2.columns.template.fill = "#a6a6a6";
-series2.columns.template.stroke = "none";
-series2.tooltip.pointerOrientation = "vertical";
-
-var bullet2 = series2.bullets.push(new am4charts.LabelBullet());
-bullet2.interactionsEnabled = false;
-bullet2.label.text = "{valueY}";
-bullet2.locationY = 0.5;
-bullet2.label.fill = am4core.color("#ffffff");
-
-
-// chart.scrollbarX = new am4core.Scrollbar();
-
-});
-
-
-// Chart
-
-      am4core.ready(function() {
-
-// Themes begin
-am4core.useTheme(am4themes_animated);
-// Themes end
-
-// Create chart instance
-var chart = am4core.create("presence-pie", am4charts.PieChart);
-
-// Set data
-var selected;
-var types = [{
-  type: "Παρόντες",
-  percent: present,
-  color: '#7445a6',
-  // subs: [{
-  //   type: "Oil",
-  //   percent: 15,
-  // }, {
-  //   type: "Coal",
-  //   percent: 35
-  // }, {
-  //   type: "Nuclear",
-  //   percent: 20,
-    
-  // }]
-}, {
-  type: "Απόντες",
-  percent: absent,
-  color: 'grey',
-  // subs: [{
-  //   type: "Hydro",
-  //   percent: 15
-  // }, {
-  //   type: "Wind",
-  //   percent: 10
-  // }, {
-  //   type: "Other",
-  //   percent: 5
-  // }]
-}];
-
-// Add data
-chart.data = generateChartData();
-
-// Add and configure Series
-var pieSeries = chart.series.push(new am4charts.PieSeries());
-pieSeries.dataFields.value = "percent";
-pieSeries.dataFields.category = "type";
-pieSeries.slices.template.propertyFields.fill = "color";
-pieSeries.slices.template.propertyFields.isActive = "pulled";
-pieSeries.slices.template.strokeWidth = 0;
-pieSeries.labels.template.disabled = true;
-chart.logo.disabled = true;
-pieSeries.slices.template.events.on("hit", function(ev) {
-  console.log("clicked on ", ev.target);
-}, this);
-
-function generateChartData() {
-  var chartData = [];
-  for (var i = 0; i < types.length; i++) {
-    if (i == selected) {
-      for (var x = 0; x < types[i].subs.length; x++) {
-        chartData.push({
-          type: types[i].subs[x].type,
-          percent: types[i].subs[x].percent,
-          color: types[i].color,
-          pulled: true
-        });
-      }
-    } else {
-      chartData.push({
-        type: types[i].type,
-        percent: types[i].percent,
-        color: types[i].color,
-        id: i
+        // chart.scrollbarX = new am4core.Scrollbar();
       });
-    }
-  }
-  return chartData;
-}
 
-pieSeries.slices.template.events.on("hit", function(event) {
-  if (event.target.dataItem.dataContext.id != undefined) {
-    selected = event.target.dataItem.dataContext.id;
-  } else {
-    selected = undefined;
-  }
-  chart.data = generateChartData();
-});
+      // Chart
 
-}); // end am4core.ready()
+      am4core.ready(function () {
+        // Themes begin
+        am4core.useTheme(am4themes_animated);
+        // Themes end
+
+        // Create chart instance
+        var chart = am4core.create("presence-pie", am4charts.PieChart);
+
+        // Set data
+        var selected;
+        var types = [
+          {
+            type: "Παρόντες",
+            percent: present,
+            color: "#7445a6",
+            // subs: [{
+            //   type: "Oil",
+            //   percent: 15,
+            // }, {
+            //   type: "Coal",
+            //   percent: 35
+            // }, {
+            //   type: "Nuclear",
+            //   percent: 20,
+
+            // }]
+          },
+          {
+            type: "Απόντες",
+            percent: absent,
+            color: "grey",
+            // subs: [{
+            //   type: "Hydro",
+            //   percent: 15
+            // }, {
+            //   type: "Wind",
+            //   percent: 10
+            // }, {
+            //   type: "Other",
+            //   percent: 5
+            // }]
+          },
+        ];
+
+        // Add data
+        chart.data = generateChartData();
+
+        // Add and configure Series
+        var pieSeries = chart.series.push(new am4charts.PieSeries());
+        pieSeries.dataFields.value = "percent";
+        pieSeries.dataFields.category = "type";
+        pieSeries.slices.template.propertyFields.fill = "color";
+        pieSeries.slices.template.propertyFields.isActive = "pulled";
+        pieSeries.slices.template.strokeWidth = 0;
+        pieSeries.labels.template.disabled = true;
+        chart.logo.disabled = true;
+        pieSeries.slices.template.events.on(
+          "hit",
+          function (ev) {
+            console.log("clicked on ", ev.target);
+          },
+          this
+        );
+
+        function generateChartData() {
+          var chartData = [];
+          for (var i = 0; i < types.length; i++) {
+            if (i == selected) {
+              for (var x = 0; x < types[i].subs.length; x++) {
+                chartData.push({
+                  type: types[i].subs[x].type,
+                  percent: types[i].subs[x].percent,
+                  color: types[i].color,
+                  pulled: true,
+                });
+              }
+            } else {
+              chartData.push({
+                type: types[i].type,
+                percent: types[i].percent,
+                color: types[i].color,
+                id: i,
+              });
+            }
+          }
+          return chartData;
+        }
+
+        pieSeries.slices.template.events.on("hit", function (event) {
+          if (event.target.dataItem.dataContext.id != undefined) {
+            selected = event.target.dataItem.dataContext.id;
+          } else {
+            selected = undefined;
+          }
+          chart.data = generateChartData();
+        });
+      }); // end am4core.ready()
     </script>
   </body>
 </html>

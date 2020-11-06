@@ -18,7 +18,7 @@
   background-color: red;
 }
 
-#printBtn {
+#print-btn {
   padding: 6px;
   -ms-grid-column: 7;
   grid-column: 7/7;
