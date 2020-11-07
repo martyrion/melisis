@@ -147,13 +147,13 @@
   margin-top: 18px;
 }
 
-#dataTable.tabulator {
+#dataTable-wrapper.tabulator {
   grid-column: 1/-1;
   grid-row: 3/-1;
 }
 
-#dataTable.tabulator .tabulator-headers,
-#dataTable.tabulator div.tabulator-row {
+#dataTable-wrapper.tabulator .tabulator-headers,
+#dataTable-wrapper.tabulator div.tabulator-row {
   margin: 0px;
   padding-left: 0px !important;
   display: -ms-grid;
@@ -166,61 +166,61 @@
           column-gap: 12px;
 }
 
-#dataTable.tabulator .tabulator-headers .details > span,
-#dataTable.tabulator div.tabulator-row .details > span {
+#dataTable-wrapper.tabulator .tabulator-headers .details > span,
+#dataTable-wrapper.tabulator div.tabulator-row .details > span {
   display: none;
 }
 
-#dataTable.tabulator .tabulator-headers.tabulator-selected .details > span,
-#dataTable.tabulator div.tabulator-row.tabulator-selected .details > span {
+#dataTable-wrapper.tabulator .tabulator-headers.tabulator-selected .details > span,
+#dataTable-wrapper.tabulator div.tabulator-row.tabulator-selected .details > span {
   display: block;
 }
 
-#dataTable.tabulator .rankName {
+#dataTable-wrapper.tabulator .rankName {
   -ms-grid-column: 1;
   grid-column: 1;
 }
 
-#dataTable.tabulator .specialtyName {
+#dataTable-wrapper.tabulator .specialtyName {
   -ms-grid-column: 2;
   grid-column: 2;
 }
 
-#dataTable.tabulator .first_name {
+#dataTable-wrapper.tabulator .first_name {
   -ms-grid-column: 3;
   grid-column: 3;
 }
 
-#dataTable.tabulator .last_name {
+#dataTable-wrapper.tabulator .last_name {
   -ms-grid-column: 4;
   grid-column: 4;
 }
 
-#dataTable.tabulator .gender {
+#dataTable-wrapper.tabulator .gender {
   -ms-grid-column: 6;
   grid-column: 6;
 }
 
-#dataTable.tabulator .mobileNumber {
+#dataTable-wrapper.tabulator .mobileNumber {
   -ms-grid-column: 8;
   grid-column: 8;
 }
 
-#dataTable.tabulator .details {
+#dataTable-wrapper.tabulator .details {
   -ms-grid-column: 10;
       grid-column-start: 10;
   color: grey;
 }
 
-#dataTable.tabulator.alt {
+#dataTable-wrapper.tabulator.alt {
   -ms-grid-column: 1;
   -ms-grid-column-span: 4;
   grid-column: 1/5;
   grid-row: 3/-1;
 }
 
-#dataTable.tabulator.alt .tabulator-headers,
-#dataTable.tabulator.alt div.tabulator-row {
+#dataTable-wrapper.tabulator.alt .tabulator-headers,
+#dataTable-wrapper.tabulator.alt div.tabulator-row {
   margin: 0px;
   padding-left: 0px !important;
   display: -ms-grid;
@@ -233,33 +233,33 @@
           column-gap: 12px;
 }
 
-#dataTable.tabulator.alt .rankName {
+#dataTable-wrapper.tabulator.alt .rankName {
   -ms-grid-column: 1;
   grid-column: 1;
 }
 
-#dataTable.tabulator.alt .specialtyName {
+#dataTable-wrapper.tabulator.alt .specialtyName {
   -ms-grid-column: 2;
   grid-column: 2;
 }
 
-#dataTable.tabulator.alt .first_name {
+#dataTable-wrapper.tabulator.alt .first_name {
   -ms-grid-column: 3;
   grid-column: 3;
 }
 
-#dataTable.tabulator.alt .last_name {
+#dataTable-wrapper.tabulator.alt .last_name {
   -ms-grid-column: 4;
   grid-column: 4;
 }
 
-#dataTable.tabulator.absence {
+#dataTable-wrapper.tabulator.absence {
   grid-column: 1/-1;
   grid-row: 3/-1;
 }
 
-#dataTable.tabulator.absence .tabulator-headers,
-#dataTable.tabulator.absence div.tabulator-row {
+#dataTable-wrapper.tabulator.absence .tabulator-headers,
+#dataTable-wrapper.tabulator.absence div.tabulator-row {
   margin: 0px;
   padding-left: 0px;
   display: -ms-grid;
@@ -272,36 +272,36 @@
           column-gap: 0px;
 }
 
-#dataTable.tabulator.absence .tabulator-col.tabulator-col-group.dates {
+#dataTable-wrapper.tabulator.absence .tabulator-col.tabulator-col-group.dates {
   grid-column: 5/-1;
   margin-left: 200px;
 }
 
-#dataTable.tabulator.absence .rankName {
+#dataTable-wrapper.tabulator.absence .rankName {
   -ms-grid-column: 1;
   grid-column: 1;
 }
 
-#dataTable.tabulator.absence .specialtyName {
+#dataTable-wrapper.tabulator.absence .specialtyName {
   -ms-grid-column: 3;
   grid-column: 3;
 }
 
-#dataTable.tabulator.absence .first_name {
+#dataTable-wrapper.tabulator.absence .first_name {
   -ms-grid-column: 5;
   grid-column: 5;
 }
 
-#dataTable.tabulator.absence .last_name {
+#dataTable-wrapper.tabulator.absence .last_name {
   -ms-grid-column: 7;
   grid-column: 7;
 }
 
-#dataTable.tabulator.absence .tabulator-cell.dates {
+#dataTable-wrapper.tabulator.absence .tabulator-cell.dates {
   width: 100% !important;
 }
 
-#dataTable.tabulator.absence .dates {
+#dataTable-wrapper.tabulator.absence .dates {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -315,23 +315,23 @@
   border-top: 0px;
 }
 
-#dataTable.tabulator.absence .dates[title]:not([title=""]) {
+#dataTable-wrapper.tabulator.absence .dates[title]:not([title=""]) {
   font-size: 0px;
 }
 
-#dataTable.tabulator.absence .dates[title="1"] {
+#dataTable-wrapper.tabulator.absence .dates[title="1"] {
   background-color: gray !important;
 }
 
-#dataTable.tabulator.absence .dates[title="2"] {
+#dataTable-wrapper.tabulator.absence .dates[title="2"] {
   background-color: green !important;
 }
 
-#dataTable.tabulator.absence .dates[title="3"] {
+#dataTable-wrapper.tabulator.absence .dates[title="3"] {
   background-color: black !important;
 }
 
-#dataTable.tabulator.absence .dates[title="4"] {
+#dataTable-wrapper.tabulator.absence .dates[title="4"] {
   background-color: yellow !important;
 }
 

@@ -113,7 +113,7 @@ $borderBoxSubtle : 4px 4px 4px 4px rgba(0, 0, 0, 0.05);
 
 // 2. Tabulator specific for this layout
 
-#dataTable.tabulator {
+#dataTable-wrapper.tabulator {
   grid-column: 1/-1;
   grid-row: 3/-1;
 
@@ -168,7 +168,7 @@ $borderBoxSubtle : 4px 4px 4px 4px rgba(0, 0, 0, 0.05);
 }
 
 // 3. Tabulator squeezed
-#dataTable.tabulator.alt {
+#dataTable-wrapper.tabulator.alt {
   grid-column: 1/5;
   grid-row: 3/-1;
 
@@ -199,7 +199,7 @@ $borderBoxSubtle : 4px 4px 4px 4px rgba(0, 0, 0, 0.05);
 }
 
 // 4. Absence sheet Tabulator
-#dataTable.tabulator.absence {
+#dataTable-wrapper.tabulator.absence {
   grid-column: 1/-1;
   grid-row: 3/-1;
 

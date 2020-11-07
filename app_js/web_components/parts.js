@@ -24,19 +24,19 @@ customElements.define('modules-nav', ModuleNav);
 class SubModulesHRM extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-    <a id="sub-first" class="submodule-button btn" onclick="navigation('sub-first', 'expand','Κατάλογος Προσωπικού','1')">
+    <a id="sub-list" class="submodule-button btn" onclick="navigation()">
     <i class="material-icons">list</i>Κατάλογος
   </a>
-  <a id="sub-second" class="submodule-button btn" onclick="navigation('sub-second', 'squeeze','Λεπτομέρειες Προσωπικού','details-wrapper')">
+  <a id="sub-details" class="submodule-button btn" onclick="navigation()">
     <i class="material-icons">info</i>Λεπτ/ρειες
   </a>
-  <a id="sub-third" class="submodule-button btn" onclick="navigation('sub-third', 'absence','Απουσιολόγιο','1')">
+  <a id="sub-absence" class="submodule-button btn" onclick="navigation()">
     <i class="material-icons">person_remove_alt_1</i>Απόντες
   </a>
-  <a id="sub-fourth" class="submodule-button btn" onclick="navigation('sub-fourth', 'hide','Στατιστικά','stats-wrapper')">
+  <a id="sub-stats" class="submodule-button btn" onclick="navigation()">
     <i class="material-icons">bar_chart</i>Στατιστικά
   </a>
-  <a id="sub-fifth" class="submodule-button btn" onclick="navigation('sub-fifth', 'hide','Χάρτης','map-wrapper')">
+  <a id="sub-map" class="submodule-button btn" onclick="navigation()">
     <i class="material-icons">map</i>Χάρτης
   </a>
           `;
