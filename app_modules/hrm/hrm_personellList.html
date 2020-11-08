@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
     <title>MELISIS</title>
 
     <!-- GLOBAL LINKS -->
-    <link rel="stylesheet" href="../../app_css/backgroundSVG.css" type="text/css" />
-    <link rel="stylesheet" href="../../app_css/materialIconFont.css" type="text/css" />
+    <link
+      rel="stylesheet"
+      href="../../app_css/backgroundSVG.css"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      href="../../app_css/materialIconFont.css"
+      type="text/css"
+    />
     <link rel="stylesheet" href="../../app_css/appKit.css" type="text/css" />
     <!--          Custom JS functions -->
     <script src="../../app_js/customFunctions.js"></script>
     <!--          Web components -->
-    <script src="../../app_js/web_components/parts.js" type="text/javascript" defer></script>
+    <script
+      src="../../app_js/web_components/parts.js"
+      type="text/javascript"
+      defer
+    ></script>
     <!--          Tabulator references-->
-    <link href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css" rel="stylesheet" />
+    <link
+      href="../../app_thirdPartyLibraries/tabulator-master/dist/css/tabulator_melisis.css"
+      rel="stylesheet"
+    />
     <script src="../../app_thirdPartyLibraries/tabulator-master/dist/js/tabulator.js"></script>
 
     <!--          Leaflet references -->
-    <link href="../../app_thirdPartyLibraries/leaflet/leaflet.css" rel="stylesheet" />
+    <link
+      href="../../app_thirdPartyLibraries/leaflet/leaflet.css"
+      rel="stylesheet"
+    />
     <script src="../../app_thirdPartyLibraries/leaflet/leaflet.js"></script>
-    <link href="../../app_thirdPartyLibraries/Leaflet.IconMaterial-master/dist/leaflet.icon-material.css"
-      rel="stylesheet" type="text/css" />
+    <link
+      href="../../app_thirdPartyLibraries/Leaflet.IconMaterial-master/dist/leaflet.icon-material.css"
+      rel="stylesheet"
+      type="text/css"
+    />
     <script src="../../app_thirdPartyLibraries/Leaflet.IconMaterial-master/dist/leaflet.icon-material.js"></script>
 
     <!-- Resources -->
@@ -43,20 +63,54 @@
       <section id="mainSection" class="main">
         <!-- Top line items -->
 
-        <span id="module-title" class="top-line title">Κατάλογος Προσωπικού</span>
-        <input id="date-indicator" type="date" value="2018-07-22" class="top-line" />
-        <span id="retreat-date" class="top-line material-icons btn">chevron_left</span>
-        <span id="advance-date" class="top-line material-icons btn">chevron_right</span>
-        <span id="print-btn" class="top-line material-icons btn" onclick="printTable()">print</span>
-        <span id="filters-btn" class="top-line material-icons btn"
-          onclick="toggleModal('modal-filters-container')">filter_list</span>
+        <span id="module-title" class="top-line title"
+          >Κατάλογος Προσωπικού</span
+        >
+        <input
+          id="date-indicator"
+          type="date"
+          value="2018-07-22"
+          class="top-line"
+        />
+        <span id="retreat-date" class="top-line material-icons btn"
+          >chevron_left</span
+        >
+        <span id="advance-date" class="top-line material-icons btn"
+          >chevron_right</span
+        >
+        <span
+          id="print-btn"
+          class="top-line material-icons btn"
+          onclick="printTable()"
+          >print</span
+        >
+        <span
+          id="filters-btn"
+          class="top-line material-icons btn"
+          onclick="toggleModal('modal-filters-container')"
+          >filter_list</span
+        >
 
         <div id="filters-indicator" class="top-line no-visibility"></div>
-        <input type="text" id="search-box" placeholder="όνομα ή επώνυμο" class="top-line"
-          oninput=" change_search_string()" />
-        <span id="searchbox-btn" class="top-line material-icons btn"
-          onclick="clearSearchBox(el_from_id('search-box'))">search</span>
-        <btn id="addBtn" class="top-line mainContentAdd btn" onclick="update_map_markers();">Προσθήκη</btn>
+        <input
+          type="text"
+          id="search-box"
+          placeholder="όνομα ή επώνυμο"
+          class="top-line"
+          oninput=" change_search_string()"
+        />
+        <span
+          id="searchbox-btn"
+          class="top-line material-icons btn"
+          onclick="clearSearchBox(el_from_id('search-box'))"
+          >search</span
+        >
+        <btn
+          id="addBtn"
+          class="top-line mainContentAdd btn"
+          onclick="update_map_markers();"
+          >Προσθήκη</btn
+        >
         <!-- ----------------------------------------------->
         <div id="dataTable-wrapper" class="submodule-wrapper"></div>
         <div id="details-wrapper" class="submodule-wrapper">
@@ -72,7 +126,10 @@
             <span id="personell-update"></span>
             <span id="personell-asma"></span>
             <span id="personell-rank-name"></span>
-            <img id="personell-rank-insignia" src="../../app_media/ranks/Hellenic_Air_Force_OF-3.svg" />
+            <img
+              id="personell-rank-insignia"
+              src="../../app_media/ranks/Hellenic_Air_Force_OF-3.svg"
+            />
             <span id="personell-specialty"></span>
             <span id="personell-submission"></span>
             <span id="personell-freeClassA"></span>
@@ -123,7 +180,12 @@
     <!-- Right Modal Window -->
     <div id="modal-filters-container" class="modal-right no-visibility">
       <span id="first-title" class="rightModalTitle">Oμαδοποίηση</span>
-      <span onclick="toggleModal('modal-filters-container')" id="closeRightModalBtn" class="material-icons">close</span>
+      <span
+        onclick="toggleModal('modal-filters-container')"
+        id="closeRightModalBtn"
+        class="material-icons"
+        >close</span
+      >
       <div id="groups-table"></div>
       <span id="second-title" class="rightModalTitle">Φίλτρα</span>
       <div id="filters-table"></div>
@@ -137,7 +199,9 @@
 
     <!-- Personell Details -->
     <div id="personell-modal" class="modal-personell-details no-visibility">
-      <span onclick="toggleModal('personell-modal')" class="material-icons">close</span>
+      <span onclick="toggleModal('personell-modal')" class="material-icons"
+        >close</span
+      >
       <span id="details"></span>
     </div>
 
@@ -161,15 +225,19 @@
         "absence11",
         "absence12",
       ];
-      const wrapper_ids = ["dataTable-wrapper","details-wrapper", "map-wrapper", "stats-wrapper"];
+      const wrapper_ids = [
+        "dataTable-wrapper",
+        "details-wrapper",
+        "map-wrapper",
+        "stats-wrapper",
+      ];
       const summodules = [
-        {submodule: "sub-list", wrapper: "dataTable-wrapper"},
-        {submodule: "sub-details", wrapper: "dataTable-wrapper"},
-        {submodule: "sub-absence", wrapper: "dataTable-wrapper"},
-        {submodule: "sub-stats", wrapper: "stats-wrapper"},
-        {submodule: "sub-map", wrapper: "map-wrapper"},
-      ]
-      
+        { submodule: "sub-list", wrapper: "dataTable-wrapper" },
+        { submodule: "sub-details", wrapper: "dataTable-wrapper" },
+        { submodule: "sub-absence", wrapper: "dataTable-wrapper" },
+        { submodule: "sub-stats", wrapper: "stats-wrapper" },
+        { submodule: "sub-map", wrapper: "map-wrapper" },
+      ];
 
       var filterModalcontainer = document.getElementById(
         "modal-filters-container"
@@ -198,43 +266,31 @@
       var checkboxFilter = {};
       const JSONstartDate = new Date(2020, 6, 1);
 
-
       // var myModal = new Modal ("modal-middle-medium","hello");
-          //======================
+      //======================
       //  PAGE INITIALISATION
       //======================
-      window.onload = () => make_active(el_from_id_array(['mod-first','sub-list']));
-     
+      window.onload = () => init();
 
       //======================
       //  FUNCTIONS
       //======================
-      el_from_id = (id) => document.getElementById(id)
-      el_from_id_array = the_array => the_array.map( item => el_from_id(item))
-      colorize = (el, color) => (el.style.color = color);
-      set_material_icon = (el, name) => (el.innerHTML = name);
-      color_and_icon = (el, color, icon) => {
+      // const map = fn => array => array.map(fn) // Generic. Applies fn to array.
+      const el_from_id = (id) => document.getElementById(id);
+      const colorize = (el, color) => (el.style.color = color);
+      const set_material_icon = (el, name) => (el.innerHTML = name);
+      const color_and_icon = (el, color, icon) => {
         set_material_icon(el, icon);
         colorize(el, color);
       };
-      make_visible = (el) => {
-        el.map((item) => item.classList.remove("no-visibility"));
-      };
-      make_invisible = (el) => {
-        el.map((item) => item.classList.add("no-visibility"));
-      };
-      make_inactive = (the_array) => {
-        the_array.map( x => x.classList.remove("active"));
-      };
-      make_active = (the_array) => {
-        the_array.map( x => x.classList.add("active"));
-      };
-
-
-      get_array_column = (array, column) => {
+      const make_active = (x) => x.classList.add("active");
+      const make_visible = (el) => el.classList.remove("no-visibility");
+      const make_invisible = (el) => el.classList.add("no-visibility");
+      const make_inactive = (the_array) => el.classList.remove("active");
+      const get_array_column = (array, column) => {
         return array.filter((item) => item.field === column);
       };
-      toggle_searchbox_icon = () => {
+      const toggle_searchbox_icon = () => {
         let string = el_from_id("search-box").value;
         let el = el_from_id("searchbox-btn");
         if (string == "") {
@@ -243,16 +299,16 @@
           color_and_icon(el, "#7545a6", "close");
         }
       };
-      change_search_string = () => {
+      const change_search_string = () => {
         toggle_searchbox_icon();
         update_table();
       };
-      clearSearchBox = (el) => {
+       clearSearchBox = (el) => {
         el.value = "";
         toggle_searchbox_icon();
         update_table();
       };
-      update_table_filters = (array, search_string) => {
+      const update_table_filters = (array, search_string) => {
         table.clearFilter();
         table.setFilter([
           [
@@ -263,12 +319,12 @@
           get_array_column(array, "gender"),
         ]);
       };
-      update_foundCount = () =>
+      const update_foundCount = () =>
         (el_from_id("row-count").innerHTML =
           table.getRows("active").length +
           " από " +
           table.getRows("all").length);
-      update_filter_indicator = () => {
+      const update_filter_indicator = () => {
         let el = el_from_id("filters-indicator");
         if (table.getFilters().length > 1) {
           make_visible(el);
@@ -276,7 +332,7 @@
           make_invisible(el);
         }
       };
-      update_table = () => {
+      const update_table = () => {
         let search_string = el_from_id("search-box").value;
         update_table_filters(checkboxFilters, search_string);
         highlight(search_string, "[tabulator-field='first_name']");
@@ -285,17 +341,24 @@
         update_foundCount();
         update_map_markers();
       };
-      toggle_columns_visibility = (type, tableName, column_names) => {
+      const toggle_columns_visibility = (type, tableName, column_names) => {
         if (type === "show") {
           column_names.map((item) => tableName.showColumn(item));
         } else if (type === "hide") {
           column_names.map((item) => tableName.hideColumn(item));
         }
       };
-      show_wrapper_hide_others = (wrapper) => {
-        make_invisible(wrapper_array);
-        make_visible(el_from_id(wrapper));
+      const wrapper_elements = wrapper_ids.map(el_from_id);
+      const wrappers_invisible = () => wrapper_elements.map(make_invisible);
+    
+      
+      const init = () => {
+        let default_active = ['mod-first','sub-list'].map(el_from_id);
+        wrappers_invisible();
+        make_visible(el_from_id('dataTable-wrapper'));
+        default_active.map(make_active);
       }
+     
 
 
       // Toggle  modal
@@ -304,7 +367,7 @@
         theModal.classList.toggle("no-visibility");
         overlay.classList.toggle("no-visibility");
         if ((modelEl = "modal-filters-container")) {
-          el_from_id('row-count').classList.toggle("moved");
+          el_from_id("row-count").classList.toggle("moved");
         }
       }
 
@@ -351,13 +414,13 @@
 
         alert(
           "You have clicked on " +
-          name +
-          " " +
-          surname +
-          ", on date: " +
-          dateId +
-          ". On this date the absence reason is: " +
-          cell
+            name +
+            " " +
+            surname +
+            ", on date: " +
+            dateId +
+            ". On this date the absence reason is: " +
+            cell
         );
       };
 
@@ -392,8 +455,6 @@
         update_table();
       };
 
-
-    
       // Squeeze or Expand parameters (main table)
       main_table_format = (type) => {
         if (type === "squeeze") {
@@ -421,19 +482,10 @@
         }
       };
 
-      
       // Navigate to sub-module
-      navigation = (subModule, title) => {
-        main_table_format(type);
-        document.getElementById(activeSubmodule).classList.remove("active");
-        activeSubmodule = subModule;
-        document.getElementById(activeSubmodule).classList.add("active");
-        moduleTitle.innerHTML = title;
-        var nodes = document.querySelectorAll(".submodule-wrapper");
-        nodes.forEach(function (node) {
-          node.classList.add("no-visibility");
-        });
-        document.getElementById(wrapperId).classList.remove("no-visibility");
+      navigation = (submodule) => {
+       
+        // main_table_format(type);
         myMap._onResize();
       };
 
@@ -457,7 +509,7 @@
 
       // Usage
       var absenceDateList = getDates(JSONstartDate, 30);
-      absenceDateList.forEach(function (date) { });
+      absenceDateList.forEach(function (date) {});
 
       //set initial absence date
       var firstDate = absenceDateList[0].toLocaleString("el-EL", {
@@ -808,7 +860,7 @@
         },
         tableBuilt: function () {
           // Set total rows epxression
-          el_from_id('row-count').innerHTML =
+          el_from_id("row-count").innerHTML =
             table.getRows("active").length +
             " από " +
             table.getRows("all").length;
@@ -1129,5 +1181,4 @@
       }); // end am4core.ready()
     </script>
   </body>
-
 </html>
