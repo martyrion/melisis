@@ -75,5 +75,4 @@ var Modal = function (type, content) {
   // create here another div as container....
   // give it class&id
 
-
 }
