@@ -225,16 +225,16 @@
         "absence11",
         "absence12",
       ];
-      const wrapper_ids = [
+      const wrappers = [
         "dataTable-wrapper",
         "details-wrapper",
         "map-wrapper",
         "stats-wrapper",
       ];
-      const summodules = [
-        { submodule: "sub-list", wrapper: "dataTable-wrapper" },
-        { submodule: "sub-details", wrapper: "dataTable-wrapper" },
-        { submodule: "sub-absence", wrapper: "dataTable-wrapper" },
+      const submodules_array = [
+        { submodule: "sub-list", wrapper: "dataTable-wrapper", mainTable: "normal" },
+        { submodule: "sub-details", wrapper: "dataTable-wrapper", mainTable: "squeeze"  },
+        { submodule: "sub-absence", wrapper: "dataTable-wrapper", mainTable: "absence" },
         { submodule: "sub-stats", wrapper: "stats-wrapper" },
         { submodule: "sub-map", wrapper: "map-wrapper" },
       ];
@@ -270,7 +270,10 @@
       //======================
       //  PAGE INITIALISATION
       //======================
-      window.onload = () => init();
+      window.onload = () => {
+        change_visible('dataTable-wrapper');
+        (['mod-first','sub-list'].map(el_from_id)).map(make_active);
+      };
 
       //======================
       //  FUNCTIONS
@@ -283,10 +286,10 @@
         set_material_icon(el, icon);
         colorize(el, color);
       };
-      const make_active = (x) => x.classList.add("active");
+      const make_active = (el) => el.classList.add("active");
       const make_visible = (el) => el.classList.remove("no-visibility");
       const make_invisible = (el) => el.classList.add("no-visibility");
-      const make_inactive = (the_array) => el.classList.remove("active");
+      const make_inactive = (el) => el.classList.remove("active");
       const get_array_column = (array, column) => {
         return array.filter((item) => item.field === column);
       };
@@ -348,18 +351,11 @@
           column_names.map((item) => tableName.hideColumn(item));
         }
       };
-      const wrapper_elements = wrapper_ids.map(el_from_id);
-      const wrappers_invisible = () => wrapper_elements.map(make_invisible);
-    
-      
-      const init = () => {
-        let default_active = ['mod-first','sub-list'].map(el_from_id);
-        wrappers_invisible();
-        make_visible(el_from_id('dataTable-wrapper'));
-        default_active.map(make_active);
+      const change_visible = (visible) => {
+        (wrappers.map(el_from_id)).map(make_invisible);
+        make_visible(el_from_id(visible));
       }
-     
-
+    
 
       // Toggle  modal
       function toggleModal(modalEl) {
@@ -370,19 +366,16 @@
           el_from_id("row-count").classList.toggle("moved");
         }
       }
-
       // Print Table
       function printTable() {
         middleModal.classList.toggle("no-visibility");
         overlay.classList.toggle("no-visibility");
         // table.print(false, true);
       }
-
-      // Set print Title
+// Set print Title
       function printTitle() {
         return "<h1>Κατάλογος προσωπικού</h1>";
       }
-
       // Group main table data (called from group-table row checkboxes)
       var selectGrouping = function (e, cell) {
         var row = cell.getRow().getElement(true); //return the position of the row in the filtered/sorted data;
@@ -483,14 +476,19 @@
       };
 
       // Navigate to sub-module
-      navigation = (submodule) => {
-       
-        // main_table_format(type);
+      navigation = (id) => {
+        let submodules = document.querySelectorAll("a.submodule-button");
+        submodules.forEach(make_inactive);
+        make_active( el_from_id(id));
+        let obj = submodules_array.filter((x) => x.submodule === id);
+        change_visible(obj[0].wrapper);
+        if(obj[0].mainTable){
+        main_table_format(obj[0].mainTable);
+        }
         myMap._onResize();
       };
 
       // Populate date Array
-
       var getDates = function (startDate, span) {
         var absenceDateList = [],
           currentDate = startDate,

@@ -24,19 +24,19 @@ customElements.define('modules-nav', ModuleNav);
 class SubModulesHRM extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-    <a id="sub-list" class="submodule-button btn" onclick="navigation()">
+    <a id="sub-list" class="submodule-button btn" onclick="navigation(this.id)">
     <i class="material-icons">list</i>Κατάλογος
   </a>
-  <a id="sub-details" class="submodule-button btn" onclick="navigation()">
+  <a id="sub-details" class="submodule-button btn" onclick="navigation(this.id)">
     <i class="material-icons">info</i>Λεπτ/ρειες
   </a>
-  <a id="sub-absence" class="submodule-button btn" onclick="navigation()">
+  <a id="sub-absence" class="submodule-button btn" onclick="navigation(this.id)">
     <i class="material-icons">person_remove_alt_1</i>Απόντες
   </a>
-  <a id="sub-stats" class="submodule-button btn" onclick="navigation()">
+  <a id="sub-stats" class="submodule-button btn" onclick="navigation(this.id)">
     <i class="material-icons">bar_chart</i>Στατιστικά
   </a>
-  <a id="sub-map" class="submodule-button btn" onclick="navigation()">
+  <a id="sub-map" class="submodule-button btn" onclick="navigation(this.id)">
     <i class="material-icons">map</i>Χάρτης
   </a>
           `;
