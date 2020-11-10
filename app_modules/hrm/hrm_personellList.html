@@ -209,22 +209,6 @@
       //======================
       //  GLOBAL VARS
       //======================
-      const primary_columns = [];
-      const secondary_columns = ["gender", "mobileNumber", "details"];
-      const absence_columns_array = [
-        "absence1",
-        "absence2",
-        "absence3",
-        "absence4",
-        "absence5",
-        "absence6",
-        "absence7",
-        "absence8",
-        "absence9",
-        "absence10",
-        "absence11",
-        "absence12",
-      ];
       const wrappers = [
         "dataTable-wrapper",
         "details-wrapper",
@@ -232,9 +216,21 @@
         "stats-wrapper",
       ];
       const submodules_array = [
-        { submodule: "sub-list", wrapper: "dataTable-wrapper", mainTable: "normal" },
-        { submodule: "sub-details", wrapper: "dataTable-wrapper", mainTable: "squeeze"  },
-        { submodule: "sub-absence", wrapper: "dataTable-wrapper", mainTable: "absence" },
+        {
+          submodule: "sub-list",
+          wrapper: "dataTable-wrapper",
+          mainTable: "normal",
+        },
+        {
+          submodule: "sub-details",
+          wrapper: "dataTable-wrapper",
+          mainTable: "squeeze",
+        },
+        {
+          submodule: "sub-absence",
+          wrapper: "dataTable-wrapper",
+          mainTable: "absence",
+        },
         { submodule: "sub-stats", wrapper: "stats-wrapper" },
         { submodule: "sub-map", wrapper: "map-wrapper" },
       ];
@@ -245,7 +241,6 @@
       var middleModal = document.getElementById("modal-print-info");
       var overlay = document.getElementById("modal-overlay");
       var detailsWrapper = document.getElementById("details-wrapper");
-      var tableEl = document.getElementById("dataTable-wrapper");
       var moduleTitle = document.getElementById("module-title");
       var dateIndicator = document.getElementById("date-indicator");
 
@@ -271,25 +266,26 @@
       //  PAGE INITIALISATION
       //======================
       window.onload = () => {
-        change_visible('dataTable-wrapper');
-        (['mod-first','sub-list'].map(el_from_id)).map(make_active);
+        change_visible("dataTable-wrapper");
+        ["mod-first", "sub-list"].map(el_from_id).map(make_active);
       };
 
       //======================
       //  FUNCTIONS
       //======================
       // const map = fn => array => array.map(fn) // Generic. Applies fn to array.
-      const el_from_id = (id) => document.getElementById(id);
-      const colorize = (el, color) => (el.style.color = color);
-      const set_material_icon = (el, name) => (el.innerHTML = name);
-      const color_and_icon = (el, color, icon) => {
+
+      let el_from_id = (id) => document.getElementById(id);
+      let colorize = (el, color) => (el.style.color = color);
+      let set_material_icon = (el, name) => (el.innerHTML = name);
+      let color_and_icon = (el, color, icon) => {
         set_material_icon(el, icon);
         colorize(el, color);
       };
-      const make_active = (el) => el.classList.add("active");
-      const make_visible = (el) => el.classList.remove("no-visibility");
-      const make_invisible = (el) => el.classList.add("no-visibility");
-      const make_inactive = (el) => el.classList.remove("active");
+      let make_active = (el) => el.classList.add("active");
+      let make_visible = (el) => el.classList.remove("no-visibility");
+      let make_invisible = (el) => el.classList.add("no-visibility");
+      let make_inactive = (el) => el.classList.remove("active");
       const get_array_column = (array, column) => {
         return array.filter((item) => item.field === column);
       };
@@ -306,7 +302,7 @@
         toggle_searchbox_icon();
         update_table();
       };
-       clearSearchBox = (el) => {
+      clearSearchBox = (el) => {
         el.value = "";
         toggle_searchbox_icon();
         update_table();
@@ -344,18 +340,79 @@
         update_foundCount();
         update_map_markers();
       };
-      const toggle_columns_visibility = (type, tableName, column_names) => {
+      const toggle_columns_visibility = (type, tableVar, column_names) => {
         if (type === "show") {
-          column_names.map((item) => tableName.showColumn(item));
+          column_names.map((item) => tableVar.showColumn(item));
         } else if (type === "hide") {
-          column_names.map((item) => tableName.hideColumn(item));
+          column_names.map((item) => tableVar.hideColumn(item));
         }
       };
       const change_visible = (visible) => {
-        (wrappers.map(el_from_id)).map(make_invisible);
+        wrappers.map(el_from_id).map(make_invisible);
         make_visible(el_from_id(visible));
-      }
-    
+      };
+      const hide_all_columns = (table_var) => {
+        let col_def = table_var.getColumnDefinitions();
+        col_def.forEach((x) => {
+          let field = x.field;
+          table_var.hideColumn(field);
+        });
+      };
+      let table_format = (type, tableVar, tableID) => {
+        hide_all_columns(tableVar);
+
+        const primary_columns = [
+          "rankName",
+          "specialtyName",
+          "first_name",
+          "last_name",
+        ];
+        const secondary_columns = ["gender", "mobileNumber", "details"];
+        const absence_columns = [
+          "absence1",
+          "absence2",
+          "absence3",
+          "absence4",
+          "absence5",
+          "absence6",
+          "absence7",
+          "absence8",
+          "absence9",
+          "absence10",
+          "absence11",
+          "absence12",
+        ];
+        ["squeeze", "absence", "normal"].forEach((x) =>
+          el_from_id(tableID).classList.remove(x)
+        );
+        el_from_id(tableID).classList.add(type); // only "absence and squeeze classes exist, normal doesn't exist"
+        if (type === "absence") {
+          toggle_columns_visibility(
+            "show",
+            tableVar,
+            primary_columns.concat(absence_columns)
+          );
+        } else if (type === "normal") {
+          toggle_columns_visibility(
+            "show",
+            tableVar,
+            primary_columns.concat(secondary_columns)
+          );
+        } else if (type === "squeeze") {
+          toggle_columns_visibility("show", tableVar, primary_columns);
+        }
+      };
+      let navigation = (id) => {
+        let submodules = document.querySelectorAll("a.submodule-button");
+        submodules.forEach(make_inactive);
+        make_active(el_from_id(id));
+        let obj = submodules_array.filter((x) => x.submodule === id);
+        change_visible(obj[0].wrapper); // passing the wrapper of respective sub-module as parameter
+        if (obj[0].mainTable) {
+          table_format(obj[0].mainTable, table, obj[0].wrapper);
+        }
+        myMap._onResize();
+      };
 
       // Toggle  modal
       function toggleModal(modalEl) {
@@ -372,7 +429,7 @@
         overlay.classList.toggle("no-visibility");
         // table.print(false, true);
       }
-// Set print Title
+      // Set print Title
       function printTitle() {
         return "<h1>Κατάλογος προσωπικού</h1>";
       }
@@ -448,46 +505,6 @@
         update_table();
       };
 
-      // Squeeze or Expand parameters (main table)
-      main_table_format = (type) => {
-        if (type === "squeeze") {
-          table.hideColumn("gender");
-          table.hideColumn("mobileNumber");
-          table.hideColumn("details");
-          tableEl.classList.add("alt");
-          tableEl.classList.remove("no-visibility");
-          tableEl.classList.remove("absence");
-          toggleAbsenceColumns("hide");
-        } else if (type === "expand") {
-          toggle_columns_visibility("hide", table, secondary_columns);
-          tableEl.classList.remove("alt");
-          tableEl.classList.remove("absence");
-        } else if (type === "absence") {
-          tableEl.classList.remove("alt");
-          tableEl.classList.add("absence");
-          toggle_columns_visibility("hide", table, secondary_columns);
-          toggle_columns_visibility("show", table, absence_columns_array);
-        } else if (type === "normal") {
-          toggle_columns_visibility("show", table, secondary_columns);
-          toggle_columns_visibility("hide", table, absence_columns_array);
-          tableEl.classList.remove("alt");
-          tableEl.classList.remove("absence");
-        }
-      };
-
-      // Navigate to sub-module
-      navigation = (id) => {
-        let submodules = document.querySelectorAll("a.submodule-button");
-        submodules.forEach(make_inactive);
-        make_active( el_from_id(id));
-        let obj = submodules_array.filter((x) => x.submodule === id);
-        change_visible(obj[0].wrapper);
-        if(obj[0].mainTable){
-        main_table_format(obj[0].mainTable);
-        }
-        myMap._onResize();
-      };
-
       // Populate date Array
       var getDates = function (startDate, span) {
         var absenceDateList = [],
@@ -537,6 +554,89 @@
       //  TABLES
       //======================
 
+      const create_absence_col = (i) => {
+        let absence_col = [];
+        for (j = 1; j < i + 1; j++) {
+          let col_obj = {};
+          col_obj.title = absenceDateList[j].toLocaleString("el-EL", {
+            day: "numeric",
+            month: "short",
+          });
+          col_obj.field = "absence" + j;
+          col_obj.visible = false;
+          col_obj.cssClass = "dates";
+          col_obj.cellClick = selectDate;
+          col_obj.headerSort = false;
+
+          absence_col.push(col_obj);
+        }
+        return absence_col;
+      };
+      const main_table_columns = [
+        { title: "id", field: "id", cssClass: "id", visible: false },
+        {
+          title: "Bαθμός",
+          field: "rankName",
+          cssClass: "rankName",
+          visible: true,
+        },
+        {
+          title: "rankId",
+          field: "rankId",
+          cssClass: "rankId",
+          visible: false,
+        },
+        {
+          title: "Ειδικότητα",
+          field: "specialtyName",
+          cssClass: "specialtyName",
+          headerHozAlign: "left",
+          visible: true,
+          // hozAlign: "center",
+        },
+        {
+          title: "specialtyId",
+          field: "specialtyId",
+          cssClass: "specialtyId",
+          visible: false,
+        },
+
+        {
+          title: "Όνομα",
+          field: "first_name",
+          cssClass: "first_name",
+          visible: true,
+        },
+        {
+          title: "Επώνυμο",
+          field: "last_name",
+          cssClass: "last_name",
+          visible: true,
+        },
+        {
+          title: "Φύλο",
+          field: "gender",
+          cssClass: "gender",
+          visible: true,
+        },
+
+        {
+          title: "Τηλέφωνο",
+          field: "mobileNumber",
+          cssClass: "mobileNumber",
+          visible: true,
+        },
+
+        {
+          title: "",
+          field: "details",
+          hozAlign: "right",
+          cssClass: "details",
+          headerSort: false,
+        },
+      ];
+      let absence_columns = create_absence_col(12);
+
       // Create main table
       var table = new Tabulator("#dataTable-wrapper", {
         data: theDataset,
@@ -559,208 +659,13 @@
             "../../app_media/happy-cheerful-young-woman-wearing-260nw-613759379.jpg"
           );
         },
-
-        columns: [
-          { title: "id", field: "id", cssClass: "id", visible: false },
-          {
-            title: "Bαθμός",
-            field: "rankName",
-            cssClass: "rankName",
-          },
-          {
-            title: "rankId",
-            field: "rankId",
-            cssClass: "rankId",
-            visible: false,
-          },
-          {
-            title: "Ειδικότητα",
-            field: "specialtyName",
-            cssClass: "specialtyName",
-            headerHozAlign: "left",
-            // hozAlign: "center",
-          },
-          {
-            title: "specialtyId",
-            field: "specialtyId",
-            cssClass: "specialtyId",
-            visible: false,
-          },
-
-          {
-            title: "Όνομα",
-            field: "first_name",
-            cssClass: "first_name",
-          },
-          {
-            title: "Επώνυμο",
-            field: "last_name",
-            cssClass: "last_name",
-          },
-          {
-            title: "Φύλο",
-            field: "gender",
-            cssClass: "gender",
-          },
-
-          {
-            title: "Τηλέφωνο",
-            field: "mobileNumber",
-            cssClass: "mobileNumber",
-          },
-
-          {
-            title: "",
-            field: "details",
-            hozAlign: "right",
-            cssClass: "details",
-            headerSort: false,
-          },
-          // {title:"Dates",
-          // cssClas:"date-title",
-          // columns:[
-          {
-            title: "",
-            field: "absence1",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-            titleFormatter: titleFormatter,
-          },
-          {
-            title: "",
-            field: "absence2",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[2].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence3",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[3].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence4",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[4].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence5",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[5].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence6",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[6].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence7",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[7].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence8",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[8].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence9",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[9].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence10",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          {
-            title: absenceDateList[10].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence11",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-            titleFormatter: function () {
-              return "<span class='dateNumber' style='color:blue'>5</span><span>-June</span><br>hi</br>";
-            },
-          },
-          {
-            title: absenceDateList[11].toLocaleString("el-EL", {
-              day: "numeric",
-              month: "short",
-            }),
-            field: "absence12",
-            visible: false,
-            cssClass: "dates",
-            cellClick: selectDate,
-            headerSort: false,
-          },
-          // ],
-
-          // }
-        ],
+        columns: [],
         groupHeader: function (value, count, data, group) {
-          //value - the value all members of this group share
-          //count - the number of rows in this group
-          //data - an array of all the row data objects in this group
-          //group - the group component for the group
+          //value - the value all members of this group share, count - the number of rows in this group, data - an array of all the row data objects in this group, group - the group component for the group
           return value + " :" + "<span>" + count + " εγγραφές" + "</span>";
         },
       });
+      table.setColumns(main_table_columns.concat(absence_columns));
 
       // Create a table with the some columns of first, as rows -- to use as grouping selection
       var groupsTable = new Tabulator("#groups-table", {

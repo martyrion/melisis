@@ -168,7 +168,7 @@ $borderBoxSubtle : 4px 4px 4px 4px rgba(0, 0, 0, 0.05);
 }
 
 // 3. Tabulator squeezed
-#dataTable-wrapper.tabulator.alt {
+#dataTable-wrapper.tabulator.squeeze{
   grid-column: 1/5;
   grid-row: 3/-1;
 

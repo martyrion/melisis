@@ -76,3 +76,5 @@ var Modal = function (type, content) {
   // give it class&id
 
 }
+
+
