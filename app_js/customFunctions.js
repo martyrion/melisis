@@ -10,6 +10,7 @@ function addRemoveValue(theArray, theValue) {
 }
 
 
+
 // Search Table
 function toggleLense(theSearchBoxId) {
   var searchString = document.getElementById(theSearchBoxId).value;
@@ -23,6 +24,7 @@ function toggleLense(theSearchBoxId) {
     theButton.classList.remove("searchLense");
   }
 }
+
 
 
 function clearSearchBox(theTableVar, theField, theOperator, theSearchBoxId) {
